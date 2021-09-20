@@ -10,8 +10,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app",
-    "dev": "cross-env NODE_ENV=development nodemon app"
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",
@@ -45,6 +44,7 @@
     "request": "^2.88.2",
     "sweetalert2": "^10.16.7",
     "toast-notification-alert": "^1.0.5",
-    "toastify-js": "^1.11.0"
+    "toastify-js": "^1.11.0",
+    "unique-string": "^3.0.0"
   }
 }

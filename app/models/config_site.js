@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const ConfigSiteSchema = new mongoose.Schema({
     uid: {
-        type: Number,
+        type: String,
         required: true,
         trim: true
     },

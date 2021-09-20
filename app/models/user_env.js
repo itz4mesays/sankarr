@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 
 const UserEnvSchema = new mongoose.Schema({
     uid: {
-        type: Number,
+        type: String,
         required: true,
         trim: true
     },
@@ -39,8 +39,8 @@ const UserEnvSchema = new mongoose.Schema({
       trim: true,
       default: Date.now()
     }
-}, {collection: 'user'})
+}, {collection: 'user_env'})
 
-const User = mongoose.model('UserEnv', UserEnvSchema)
+const UserEnv = mongoose.model('UserEnv', UserEnvSchema)
 
 module.exports = UserEnv

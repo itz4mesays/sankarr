@@ -1,0 +1,42 @@
+<form class="needs-validation" id="edit-form" method="post" action="/edit/{{ user._id }}">
+    <div class="col-md-6 order-md-2 mb-4">
+
+        </div>
+        <div class="col-md-6 order-md-1">
+            <h4 class="mb-3">Edit Details</h4>
+                <hr class="mb-4">
+                
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                    <label for="profileApiKey">Profileapi Key</label>
+                    <input type="text" class="form-control" id="profileApiKey" placeholder="" value="{{ profileapi_key }}" readonly name="profileapi_key">
+                    
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                    <label for="accessToken">Access Token</label>
+                    <input type="text" class="form-control" id="accessToken" placeholder="" value="{{ userenv.access_token }}" required name="access_token">
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12 mb-3">
+                    <label for="pageToken">Page Token</label>
+                    <input type="text" class="form-control" id="pageToken" placeholder="" value="{{ userenv.page_token }}" required name="page_token">
+                    
+                    </div>
+
+                    <div class="col-md-12 mb-3">
+                    <label for="email"></label>
+                    {{!-- <input type="text" class="form-control" id="email" placeholder="" value="{{user.email}}" readonly> --}}
+                    </div>
+
+                </div>
+
+
+            <hr class="mb-4">
+            <button class="btn btn-primary btn-lg btn-block" type="submit">Save Changes</button>
+
+        </div>
+</form>
