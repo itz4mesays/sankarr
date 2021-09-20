@@ -5,12 +5,13 @@ const passport = require('passport')
 const GoogleStrategy = require( 'passport-google-oauth2').Strategy
 const User = require('../app/models/user')
 
-let ACCESS_PORT = process.env.ACCESS_PORT || process.env.CALLBACK_URL
+// let CALLBACK_URL = process.env.PORT ? 'https://sankarapp.herokuapp.com//google/callback' : process.env.CALLBACK_URL
+// callbackURL: 'http://localhost:5000/google/callback',
 
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    callbackURL: 'http://localhost:5000/google/callback',
+    callbackURL: 'https://sankarapp.herokuapp.com/google/callback',
     passReqToCallback   : true
   },
   function(request, accessToken, refreshToken, profile, done) {
