@@ -22,7 +22,7 @@ module.exports = {
               page_title: 'Logged In',
               user,
               userenv: data,
-              email: req.user.email ?? null
+              email: req.user.email ? req.user.email : null
             })
 
         });  
@@ -43,7 +43,7 @@ module.exports = {
         userenv,
         profileapi_key: userenv.profileapi_key ?? crypto.randomBytes(18).toString('hex'),
         user,
-        email: req.user.email ?? null
+        email: req.user.email ? req.user.email : null
       })
     }).catch(err => res.sendStatus(404))
 
