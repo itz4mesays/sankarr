@@ -63,6 +63,8 @@ app.use(flash())
 
 //Define Routes here..
 const siteRoute = require('./routes/site.router')
+const adminRoute = require('./routes/admin.router')
+
 
 app.get('/auth/google', 
     passport.authenticate('google', { scope: ['email', 'profile'] })
@@ -81,6 +83,7 @@ app.get('/auth/logout', (req, res) => {
 })
 
 app.use('/', siteRoute)
+app.use('/admin', adminRoute)
 
 const PORT = process.env.PORT || 5000
 

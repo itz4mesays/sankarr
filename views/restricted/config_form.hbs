@@ -1,0 +1,90 @@
+<form class="needs-validation" id="config-form" method="post" action="/config-site/{{ id }}">
+
+<div class="row">
+    
+    <div class="col-md-12 order-md-2 mb-4">
+        <h4 class="mb-3">Config Form</h4>
+
+
+        <div class="text-right">
+            <i class="fa fa-plus-square fa-2x" onclick="addRow('dataTable')" title="Click to Add More"></i>
+            {{!-- <input type="button" value="Add Row" onclick="addRow('dataTable')" /> --}}
+        </div>
+       
+        <hr class="mb-3">
+
+        <table id="dataTable" width="100%" border="0">
+            {{!-- <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Req</th>
+                    <th>Response</th>
+                </tr>
+                
+            </thead> --}}
+
+            <tbody>
+                <tr>
+                {{!-- <td><input type="checkbox" name="chk"/></td> --}}
+                <td width="200">
+                    <select name="populated_List[]" class="form-control" required>
+                        <option value="">Select Type</option>
+                        <option value="button">button</option>
+                        <option value="text">text</option>
+                        <option value="image">image</option>
+                        <option value="video">video</option>
+                        <option value="feedback">feedback</option>
+                        <option value="grid">grid</option>
+                        <option value="order">order</option>
+                    </select>
+                </td>
+                <td width="250"><input type="text" name="Reqq[]" class="form-control" placeholder="Req"/></td>
+                <td width="250"><textarea type="text" name="Response[]" class="form-control" placeholder="Response"/></textarea></td>
+                
+            </tr>
+            </tbody>
+            
+        </table>
+
+        
+        
+    </div>
+
+</div>
+
+<div class="col-sm-2">
+    <button class="btn btn-primary btn-md btn-block" type="submit">Submit</button>
+</div>
+</form>
+
+<script>
+    function addRow (tblID) {
+        
+        var table = document.getElementById(tblID);
+
+        var rowCount = table.rows.length;
+        var row = table.insertRow(rowCount);
+
+        var colCount = table.rows[0].cells.length;
+
+        for(var i=0; i<colCount; i++) {
+
+            var newcell	= row.insertCell(i);
+
+            newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+            //alert(newcell.childNodes);
+            switch(newcell.childNodes[0].type) {
+                case "text":
+                        newcell.childNodes[0].value = "";
+                        break;
+                case "checkbox":
+                        newcell.childNodes[0].checked = false;
+                        break;
+                case "select-one":
+                        newcell.childNodes[0].selectedIndex = 0;
+                        break;
+            }
+        }
+
+    }
+</script>

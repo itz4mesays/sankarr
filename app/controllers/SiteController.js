@@ -86,5 +86,18 @@ module.exports = {
       return res.sendStatus(404)
     }
 
+  },
+  config: async (req, res) => {
+
+    User.findOne({ email: req.user.email }).lean().then(user => {
+
+      return res.render('restricted/config_form', {
+        layout: 'main_layout',
+        page_title: 'Config Site',
+        email: req.user.email,
+        id: user._id
+      })
+
+    }).catch(err => res.sendStatus(404))
   }
 }

@@ -8,13 +8,13 @@
     <meta name="author" content="">
     {{!-- <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico"> --}}
 
-    <title>Your App</title>
+    <title>Your App - {{ page_title }}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Custom styles for this template -->
-    <link href="../assets/pricing.css" rel="stylesheet">
+    {{!-- <link href="../assets/pricing.css" rel="stylesheet"> --}}
   </head>
 
   <body>
@@ -26,8 +26,9 @@
       {{#if email }}
 
         <nav class="my-2 my-md-0 mr-md-3">
-        <a class="p-2 text-dark" href="/logged-in">View Profile</a>
-      </nav>
+          <a class="p-2 text-dark" href="/logged-in">View Profile</a>
+          <a class="p-2 text-dark" href="/config-site">Config Site</a>
+        </nav>
             <a class="btn btn-outline-primary" href="/auth/logout">Logout</a>
       {{/if}}
       {{!-- <a class="btn btn-outline-primary" href="#">Sign up</a> --}}
@@ -73,11 +74,6 @@
     <script src="../assets/js/bootstrap.min.js"></script>
     {{!-- <script src="../../assets/js/vendor/holder.min.js"></script> --}}
     <script>
-      Holder.addTheme('thumb', {
-        bg: '#55595c',
-        fg: '#eceeef',
-        text: 'Thumbnail'
-      });
     </script>
   </body>
 </html>

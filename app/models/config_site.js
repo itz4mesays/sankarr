@@ -6,6 +6,11 @@ const ConfigSiteSchema = new mongoose.Schema({
         required: true,
         trim: true
     },
+    rtype: {
+        type: String,
+        required: true,
+        trim: true
+    },
     req: {
         type: String,
         required: true,
@@ -28,8 +33,8 @@ const ConfigSiteSchema = new mongoose.Schema({
       trim: true,
       default: Date.now()
     }
-}, {collection: 'user'})
+}, {collection: 'config_site'})
 
-const User = mongoose.model('ConfigSite', ConfigSiteSchema)
+const ConfigSite = mongoose.model('ConfigSite', ConfigSiteSchema)
 
 module.exports = ConfigSite
