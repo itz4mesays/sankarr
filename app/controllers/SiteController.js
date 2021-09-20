@@ -41,7 +41,7 @@ module.exports = {
         layout: 'main_layout',
         page_title: 'Edit',
         userenv,
-        profileapi_key: userenv.profileapi_key ?? crypto.randomBytes(18).toString('hex'),
+        profileapi_key: userenv.profileapi_key ? userenv.profileapi_key : crypto.randomBytes(18).toString('hex'),
         user,
         email: req.user.email ? req.user.email : null
       })
