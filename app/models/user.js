@@ -17,6 +17,11 @@ const UserSchema = new mongoose.Schema({
       trim: true,
       default: 0
     },
+    role: {
+      type: String,
+      required: true,
+      trim: true
+    },
     site_1: {
         type: Number,
         required: true,

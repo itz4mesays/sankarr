@@ -16,7 +16,7 @@ router.post('/edit/:id', isLoggedIn, async (req, res) => {
     });
 
     if(updateEnv){
-        res.redirect('/logged-in')
+      return res.redirect('/logged-in')
     }
 
     new UserEnv({
@@ -25,7 +25,7 @@ router.post('/edit/:id', isLoggedIn, async (req, res) => {
         access_token: req.body.access_token, 
         page_token: req.body.page_token
       }).save().then((createdUser)=> {
-        res.redirect('/logged-in')
+        return res.redirect('/logged-in')
       }).catch(err => res.send('Unable to create new user env.'))
 })
 

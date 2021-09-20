@@ -5,7 +5,7 @@ const passport = require('passport')
 const GoogleStrategy = require( 'passport-google-oauth2').Strategy
 const User = require('../app/models/user')
 
-// let CALLBACK_URL = process.env.PORT ? 'https://sankarapp.herokuapp.com//google/callback' : process.env.CALLBACK_URL
+// let CALLBACK_URL = process.env.PORT ? 'https://sankarapp.herokuapp.com/google/callback' : process.env.CALLBACK_URL
 // callbackURL: 'http://localhost:5000/google/callback',
 
 passport.use(new GoogleStrategy({
@@ -21,7 +21,8 @@ passport.use(new GoogleStrategy({
         new User({
           name: profile.displayName,
           email: profile.email,
-          last_login: new Date()
+          last_login: new Date(),
+          role: 'User'
         }).save().then((createdUser)=> {
           
           console.log(`User created successfully for ${profile.displayName}`)
