@@ -85,5 +85,7 @@ app.use('/', siteRoute)
 const PORT = process.env.ACCESS_PORT || 5000
 
 server.listen(PORT, () => {
-    console.log(`Server is currently running on PORT ${PORT}`)
+    console.log("Server is currently running on PORT " + PORT);
+
+    // console.log(`Server is currently running on PORT ${PORT}`)
 })
