@@ -18,8 +18,6 @@ require('./config/auth')
 
 connectDB()
 
-// require('./config/passport')(passport)
-
 //sets our app to use the handlebars engine
 app.set('view engine', 'hbs')
 
@@ -63,16 +61,6 @@ app.use(passport.session())
 
 app.use(flash())
 
-//Make Flash Global
-// app.use((req, res, next) => {
-//     res.locals.success_msg = req.flash('success_msg')
-//     res.locals.error_msg = req.flash('error_msg')
-//     res.locals.warning_msg = req.flash('warning_msg')
-//     res.locals.error = req.flash('error')
-//     res.locals.success = req.flash('success')
-//     next()
-// })
-
 //Define Routes here..
 const siteRoute = require('./routes/site.router')
 
@@ -94,14 +82,7 @@ app.get('/auth/logout', (req, res) => {
 
 app.use('/', siteRoute)
 
-// app.use(function (req, res) {
-//     res.status(400).render('site/error', {
-//         layout: "404",
-//         error_msg: 'We are unable to process your request. Please try again',
-//     })
-// })
-
-const PORT = process.env.ACCESS_PORT || 3300
+const PORT = process.env.ACCESS_PORT || 5000
 server.listen(PORT, () => {
     console.log(`Server is currently running on PORT ${PORT}`)
 })
