@@ -108,5 +108,18 @@ $(function() {
         let x = $(this).val()
         console.log(x)
     })
+
+    $('.statusBox').change(function(){
+        id=$(this).attr('data-userid');
+        status = this.checked ? 1 : 0;
+        let fd= new FormData();
+        fd.append('userId', id)
+        fd.append('status', status)
+        fetch('',{
+            method : 'POST',
+            body : fd
+        })
+        console.log(id);
+    })
   })
 </script>
