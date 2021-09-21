@@ -100,26 +100,69 @@
 
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+{{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script> --}}
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 <script type="text/javascript">
-$(function() {
-    $('.toggle-event').change(function() {
-        //let x = $(this).prop('checked')
-        let x = $(this).val()
-        console.log(x)
-    })
-
-    $('.statusBox').change(function(){
+ $('.statusBox').change(function(){
         id=$(this).attr('data-userid');
         status = this.checked ? 1 : 0;
         let fd= new FormData();
-        fd.append('userId', id)
+        fd.append('uid', id)
         fd.append('status', status)
-        fetch('',{
+        let url = window.location.origin + "/admin/update"
+        fetch(url ,{
             method : 'POST',
-            body : fd
+            headers : {
+                'Accept':'application/json',
+                'Content-Type':'application/json'
+            },
+            body : JSON.stringify({
+                'id': id,
+                'status' : status
+            })
+        }).then(res=>res.json()).then(res=>{
+            console.log(res)
+        }).catch(err=>{
+            console.log(err);
         })
-        console.log(id);
+  });
+$(document).ready(function(){
+    //$('.siteBox, .statusBox').change(function() {
+      //  let x = $(this).prop('checked')
+        //let className = $(this).prop('class')
+        //let formName = $(this).prop('name')
+        //let uid = $(this).attr('data-userid')
+        //let x = $(this).val()
+
+     /*   let d = {
+            status: x,
+            name: formName,
+            class_type: className,
+            uid: uid
+        }
+
+        let url = window.location.origin + "/admin/update"
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {d},
+            beforeSend: function () {
+            },
+            success: function (response) {
+                console.log(response)
+            },
+            complete: function () {
+            }
+
+        });
+
+        console.log(d)
     })
-  })
+*/
+   
+})
 </script>

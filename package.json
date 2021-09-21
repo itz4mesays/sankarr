@@ -16,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.4",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.19.0",
     "check-internet-connected": "^2.0.5",
@@ -34,6 +34,7 @@
     "handlebars-helpers": "^0.10.0",
     "handlebars-paginate": "^0.1.0",
     "internet-available": "^1.0.0",
+    "jquery": "^3.6.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.12.7",
     "morgan": "^1.10.0",
