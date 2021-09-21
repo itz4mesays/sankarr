@@ -12,7 +12,8 @@ const session = require('express-session')
 const flash = require('connect-flash')
 const passport = require('passport')
 const MongoStore = require('connect-mongo')
-const Handlebars = require('handlebars');
+const Handlebars = require('handlebars')
+const axios = require('axios')
 
 require('./config/auth')
 

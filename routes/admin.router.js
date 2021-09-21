@@ -6,5 +6,6 @@ const UserEnv = require('../app/models/user_env')
 const ConfigSite = require('../app/models/config_site')
 
 router.get('/list-users', adminLogged, adminController.list_users)
+router.post('/update', adminLogged, adminController.update)
 
 module.exports = router

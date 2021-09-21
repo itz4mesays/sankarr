@@ -30,7 +30,10 @@ module.exports = {
                         data,
                         page_title: 'Dashboard'
                     })
-                })
             })
+        })
   },
+  update: async (req, res) => {
+      console.log(req.body)
+  }
 }

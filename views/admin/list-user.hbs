@@ -100,13 +100,45 @@
 
 </div>
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+{{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.js"></script> --}}
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 <script type="text/javascript">
-$(function() {
-    $('.toggle-event').change(function() {
-        //let x = $(this).prop('checked')
-        let x = $(this).val()
-        console.log(x)
+
+$(document).ready(function(){
+    $('.siteBox, .statusBox').change(function() {
+        let x = $(this).prop('checked')
+        let className = $(this).prop('class')
+        let formName = $(this).prop('name')
+        let uid = $(this).attr('data-userid')
+        //let x = $(this).val()
+
+        let d = {
+            status: x,
+            name: formName,
+            class_type: className,
+            uid: uid
+        }
+
+        let url = window.location.origin + "/admin/update"
+
+        $.ajax({
+            type: 'POST',
+            url: url,
+            data: {d},
+            beforeSend: function () {
+            },
+            success: function (response) {
+                console.log(response)
+            },
+            complete: function () {
+            }
+
+        });
+
+        console.log(d)
     })
-  })
+})
 </script>
