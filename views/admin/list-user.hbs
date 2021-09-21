@@ -43,13 +43,17 @@
                                                <span class="stat">
                                                    <label class="check-1">
                                                     <input 
-                                                        type="checkbox" 
+                                                        type="checkbox"
+                                                        class="statusBox"
                                                         name="user_status" 
                                                         {{#ifCond this.status 0}}
                                                             checked
+                                                            value="0"
                                                         {{else}}
                                                             unchecked
+                                                            value="1"
                                                         {{/ifCond}}
+                                                        data-userid={{ this._id }}
                                                         />
                                                         <div class="inner"></div>
                                                         <div class="bullet"></div>
@@ -61,13 +65,17 @@
                                                 <span class="statt">
                                                    <label class="check-1">
                                                     <input 
+                                                        class="siteBox"
                                                         type="checkbox" 
                                                         name="site_status" 
                                                         {{#ifCond this.site_1 1}}
                                                             checked
+                                                            value="0"
                                                         {{else}}
                                                             unchecked
+                                                            value="1"
                                                         {{/ifCond}}
+                                                        data-userid={{ this._id }}
                                                         />
                                                         <div class="inner"></div>
                                                         <div class="bullet"></div>

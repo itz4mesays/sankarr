@@ -95,6 +95,4 @@ const PORT = process.env.PORT || 5000
 
 server.listen(PORT, () => {
     console.log("Server is currently running on PORT " + PORT);
-
-    // console.log(`Server is currently running on PORT ${PORT}`)
 })
