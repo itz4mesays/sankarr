@@ -74,7 +74,7 @@
 <script>
     let x = $('#profileApiKey').val()
     if(x != ''){
-        let webhookurl = window.location.origin + "/site1/api/v1/" + x + "/webhook"
+        let webhookurl = window.location.origin + "/site1/api/v1/"+x.trim()+"/webhook"
         $('.profile').html(webhookurl)
     }
 </script>
