@@ -52,11 +52,9 @@
             <h4 class="">Records </h4>
         </div>
         <div class="panel-body">  
-            <p style="display: block;" class="outRes"> {{ config_list }}</p>
-            {{!-- <p class="outRes" data-id={{ config_list }}></p>           --}}
             <div class="loading"></div>
 
-            <div id="gridd"></div>
+            <div id="grid"></div>
         </div>
     </div>
 </div>
@@ -106,6 +104,71 @@
 
     //loadingImage()
 
+    let y = $('.outRes').html()
+    
+    if(y != ""){
+
+        let url = window.location.origin + "/user-config"
+        fetch(url ,{
+            method : 'GET',
+            headers : {
+                'Accept':'application/json',
+                'Content-Type':'application/json'
+            },
+        }).then(res=> res.json()).then(res=>{
+
+           var gridData = res.message
+
+            $(document).ready(function () {
+                $("#grid").shieldGrid({
+                    dataSource: {
+                        data: gridData,
+                        schema: {
+                            fields: {
+                                id: { path: "id", type: Number },
+                                req: { path: "req", type: String },
+                                response: { path: "response", type: String }
+                            }
+                        }
+                    },
+                    sorting: {
+                        multiple: true
+                    },
+                    rowHover: false,
+                    columns: [
+                        { field: "req", title: "Req", width: "300px" },
+                        { field: "response", title: "Response" },              
+                        {
+                            width: 70,
+                            title: "Action",
+                            buttons: [
+                                { commandName: "edit", caption: "Edit" },
+                            ]
+                        }
+                    ],
+                    editing: {
+                        enabled: true,
+                        mode: "popup",
+                        confirmation: {
+                            "delete": {
+                                enabled: true,
+                                template: function (item) {
+                                    return "Delete row with ID = " + item.id
+                                }
+                            }
+                        }
+                    }            
+                });
+            
+            
+            });
+
+            
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+
     $('#popList').on('change', function(){
         let x = $(this).val()
         
@@ -131,6 +194,6 @@
         }
     })
 
-        
 
+    
 </script>

@@ -5,6 +5,7 @@ const adminController = require('../app/controllers/AdminController')
 const passport = require('passport')
 const { isLoggedIn } = require('../config/loggedIn')
 const UserEnv = require('../app/models/user_env')
+const User = require('../app/models/user')
 const ConfigSite = require('../app/models/config_site')
 const OptionList = require('../app/models/option_list')
 
@@ -86,6 +87,24 @@ router.post('/edit-config/:id', isLoggedIn, async (req, res) => {
 
 
   res.redirect("/edit-config/" + req.params.id);
+
+})
+
+router.get('/user-config', isLoggedIn, async (req, res) => {
+
+  const user = await User.find({ email: req.user.email }).lean()
+
+  console.log(user)
+
+  if(!user)  res.json({statusCode: 400, message: 'Could not process it'})
+
+  const configList = await ConfigSite.find({uid: user[0]._id},null, {sort: {created_at: -1}})
+
+  if(!configList)  res.json({statusCode: 400, message: 'Could not process it'})
+
+  return res.json({statusCode: 200, message: configList})
+
+
 
 })
 

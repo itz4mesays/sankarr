@@ -103,6 +103,7 @@ module.exports = {
 
     const configList = await ConfigSite.find({uid: user[0]._id},null, {sort: {created_at: -1}})
     console.log(configList)
+    
     return res.render('restricted/config_form', {
         layout: 'main_layout',
         page_title: 'Config Site',
