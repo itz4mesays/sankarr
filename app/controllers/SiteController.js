@@ -6,12 +6,20 @@ const User = require('../models/user')
 const UserEnv = require('../models/user_env')
 const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
+const popList = require('../../populated_list.json')
+const ConfigSite = require('../models/config_site')
+const OptionList = require('../models/option_list')
+
 
 module.exports = {
   home: async (req, res) => {
+
+    const email = req.user ? req.user.email : null
+
     return res.render('site/index', {
       layout: 'main_layout',
       page_title: 'Login/Register',
+      email
     })
   },
   loggedIn: async (req, res) => {
@@ -89,15 +97,42 @@ module.exports = {
   },
   config: async (req, res) => {
 
-    User.findOne({ email: req.user.email }).lean().then(user => {
+    const user = await User.find({ email: req.user.email }).lean()
 
-      return res.render('restricted/config_form', {
+    if(!user) return res.sendStatus(404)
+
+    const configList = await ConfigSite.find({uid: user[0]._id},null, {sort: {created_at: -1}})
+
+    return res.render('restricted/config_form', {
         layout: 'main_layout',
         page_title: 'Config Site',
         email: req.user.email,
-        id: user._id
-      })
+        id: user[0]._id,
+        config_list: configList
+    })
+  },
+  editConfig: async (req, res) => {
 
-    }).catch(err => res.sendStatus(404))
+    if(!req.params.id) return res.sendStatus(404)
+
+    const config_site = await ConfigSite.find({ _id: req.params.id }).lean()
+
+    if(!config_site) return res.sendStatus(401)
+
+    return res.render('restricted/edit_config', {
+        layout: 'main_layout',
+        page_title: 'Edit Config',
+        email: req.user.email,
+        config: config_site[0]
+    })
+  },
+  fetchList: async (req, res) => {
+
+    const responseReq = await OptionList.find({ type: req.params.type }).lean()
+    
+    if(!responseReq) res.json({statusCode: 400, message: err})
+
+    return res.json({statusCode: 200, message: responseReq[0].response})
+
   }
 }

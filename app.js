@@ -45,8 +45,7 @@ if(v1 === v2) {
 }
 return options.inverse(this);
 });
-// Handlebars.registerHelper('paginate', paginate);
-// Handlebars.registerHelper('dateFormat', dateFormatt)
+
 
 // app.use(express.static('public'))
 app.use(express.static(__dirname + '/public'));

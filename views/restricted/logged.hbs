@@ -1,5 +1,17 @@
+{{#if userenv.profileapi_key}}
+
+<div class="container">
+<div class="alert alert-success">
+  <strong>Your Webhook URL: </strong> <span class="profile" style="word-wrap: break-word; width:300px"></span>
+</div>
+</div>
+
+
+<hr class="mb-4">
+
+{{/if}}
 <div class="row">
-    
+      
     <div class="col-md-6 order-md-2 mb-4">
         <h4 class="mb-3">User Env</h4>
         
@@ -53,3 +65,16 @@
     </div>
 
 </div>
+
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+<script>
+    let x = $('#profileApiKey').val()
+    if(x != ''){
+        let webhookurl = window.location.origin + "/site1/api/v1/" + x + "/webhook"
+        $('.profile').html(webhookurl)
+    }
+</script>

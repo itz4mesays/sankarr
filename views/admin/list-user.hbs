@@ -2,14 +2,7 @@
     <h4 class="mb-3">List Users</h4>
 
 
-    <div class="output">
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            Completed
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            </div>
-    </div>
+    <div class="output"> </div>
         
        <div class="container bootstrap snippets bootdey">
             <div class="row">
@@ -105,13 +98,18 @@
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
+  
 <script type="text/javascript">
- $('.statusBox').change(function(){
+ $('.statusBox, .siteBox').change(function(){
         id=$(this).attr('data-userid');
+        target=$(this).attr('name')
+        val=$(this).attr('value')
         status = this.checked ? 1 : 0;
         let fd= new FormData();
         fd.append('uid', id)
         fd.append('status', status)
+        fd.append('formName', target)
+        fd.append('dataVal', val)
         let url = window.location.origin + "/admin/update"
         fetch(url ,{
             method : 'POST',
@@ -121,48 +119,34 @@
             },
             body : JSON.stringify({
                 'id': id,
-                'status' : status
+                'status' : status,
+                'col': target,
+                'val': val
             })
         }).then(res=>res.json()).then(res=>{
-            console.log(res)
+            if(res.statusCode == 200){
+                $('.output').html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
+                ${res.message}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>`)
+            }else{
+                $('.output').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                ${res.message}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>`)
+            }
+            
         }).catch(err=>{
-            console.log(err);
+            $('.output').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                ${err}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>`)
         })
   });
-$(document).ready(function(){
-    //$('.siteBox, .statusBox').change(function() {
-      //  let x = $(this).prop('checked')
-        //let className = $(this).prop('class')
-        //let formName = $(this).prop('name')
-        //let uid = $(this).attr('data-userid')
-        //let x = $(this).val()
-
-     /*   let d = {
-            status: x,
-            name: formName,
-            class_type: className,
-            uid: uid
-        }
-
-        let url = window.location.origin + "/admin/update"
-
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: {d},
-            beforeSend: function () {
-            },
-            success: function (response) {
-                console.log(response)
-            },
-            complete: function () {
-            }
-
-        });
-
-        console.log(d)
-    })
-*/
-   
-})
 </script>

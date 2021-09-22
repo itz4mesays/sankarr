@@ -1,9 +1,15 @@
 const router = require('express').Router()
 const siteController = require('../app/controllers/SiteController')
+const adminController = require('../app/controllers/AdminController')
+
 const passport = require('passport')
 const { isLoggedIn } = require('../config/loggedIn')
 const UserEnv = require('../app/models/user_env')
 const ConfigSite = require('../app/models/config_site')
+const OptionList = require('../app/models/option_list')
+
+const { adminLogged } = require('../config/adminlogged')
+const {decodedToken} = require('../config/utils')
 
 router.get('/', siteController.home)
 router.get('/logged-in', isLoggedIn, siteController.loggedIn)
@@ -56,7 +62,31 @@ router.post('/config-site/:id', isLoggedIn, async (req, res) => {
       })
     })
 
-    return res.send('Config Site saving completed. <a href="/logged-in"> Back to Profile </a>')
+    return res.redirect('/config-site')
+    // return res.send('Config Site saving completed. <a href="/logged-in"> Back to Profile </a>')
+})
+
+router.post('/site1/api/v1/:profileapi_key/webhook', adminController.webhook)
+
+router.get('/fetch-response/:type', siteController.fetchList)
+router.get('/edit-config/:id', isLoggedIn, siteController.editConfig)
+
+router.post('/edit-config/:id', isLoggedIn, async (req, res) => {
+
+  const filter = { _id: req.params.id };
+  const update = { rtype: req.body.populated_List, req: req.body.req, response: req.body.response };
+
+  let updateConfig = await ConfigSite.findOneAndUpdate(filter, update, {
+      new: true
+  });
+
+  if(updateConfig){
+    return res.redirect('/config-site')
+  }
+
+
+  res.redirect("/edit-config/" + req.params.id);
+
 })
 
 module.exports = router
