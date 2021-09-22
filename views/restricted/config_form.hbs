@@ -46,7 +46,20 @@
 <br/>
 <hr class="mb-4">
 
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="">Records </h4>
+        </div>
+        <div class="panel-body">  
+            <p style="display: block;" class="outRes"> {{ config_list }}</p>
+            {{!-- <p class="outRes" data-id={{ config_list }}></p>           --}}
+            <div class="loading"></div>
 
+            <div id="gridd"></div>
+        </div>
+    </div>
+</div>
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -84,6 +97,15 @@
 
     }
 
+    const loadingImage = () => {
+        let elem = document.createElement("img")
+        elem.setAttribute("src", window.location.origin + "/assets/images/loading.gif")
+        elem.setAttribute("width", 55);
+        document.querySelector(".loading").appendChild(elem)
+    }
+
+    //loadingImage()
+
     $('#popList').on('change', function(){
         let x = $(this).val()
         
@@ -108,5 +130,7 @@
             })
         }
     })
+
+        
 
 </script>
