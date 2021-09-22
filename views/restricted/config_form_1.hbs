@@ -47,6 +47,17 @@
 <hr class="mb-4">
 
 
+<div class="col-md-12">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h4 class="">Records </h4>
+        </div>
+        <div class="panel-body text-center">            
+            <div id="grid"></div>
+        </div>
+    </div>
+</div>
+
 
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -109,4 +120,64 @@
         }
     })
 
+    var gridData = [
+        {
+            "id": 0,
+            "type": 1514141441,
+            "req": "8d1e53cb-464e-47c8-8742-068b3646b388",
+            "response": true
+        },
+        {
+            "id": 1,
+            "type": 1514141441,
+            "req": "1ca20df6-6ebe-44d2-b3bd-ef6d47c56404",
+            "response": true
+        }
+    ]
+   
+    $(document).ready(function () {
+        $("#grid").shieldGrid({
+            dataSource: {
+                data: gridData,
+                schema: {
+                    fields: {
+                        id: { path: "id", type: Number },
+                        type: { path: "type", type: String },
+                        req: { path: "req", type: String },
+                        response: { path: "response", type: String }
+                    }
+                }
+            },
+            sorting: {
+                multiple: true
+            },
+            rowHover: false,
+            columns: [
+                { field: "type", title: "Type", width: "120px" },
+                { field: "req", title: "Req", width: "150px" },
+                { field: "response", title: "Response" },              
+                {
+                    width: 70,
+                    title: "Action",
+                    buttons: [
+                        { commandName: "edit", caption: "Edit" },
+                    ]
+                }
+            ],
+            editing: {
+                enabled: true,
+                mode: "popup",
+                confirmation: {
+                    "delete": {
+                        enabled: true,
+                        template: function (item) {
+                            return "Delete row with ID = " + item.id
+                        }
+                    }
+                }
+            }            
+        });
+
+       
+    });
 </script>
