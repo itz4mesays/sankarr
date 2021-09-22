@@ -94,21 +94,15 @@
     $('.fa-plus-square').on('click', function(){
         let tbl = document.getElementById('dataTable');
         let tb = $('#dataTable').find('tr:last')
-        //$(tb).find('.response').val("");
         let trLast=tb.clone(true, true);
         $(trLast).find('.response').val("");
-       // let trNew=trLast.clone()
         trLast.appendTo('tbody');
-        //let rowC = tbl.rows.clone(true, true);
-        //rowC.appendTo('.table-row')
-      //  table.appendTo('.table-row');
-       // console.log(table);
     })
 
     function grab(event){
         let x=$(event).val()
         let resp = $(event).closest('tr').find('.response');
-        alert($(resp).val());
+        //alert($(resp).val());
         if(x != ""){
             let fd= new FormData();
             fd.append('uid', x)
