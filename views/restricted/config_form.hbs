@@ -102,7 +102,7 @@
         document.querySelector(".loading").appendChild(elem)
     }
 
-    //loadingImage()
+    loadingImage()
 
     let y = $('.outRes').html()
     
@@ -116,6 +116,8 @@
                 'Content-Type':'application/json'
             },
         }).then(res=> res.json()).then(res=>{
+
+            $('.loading').empty()
 
            var gridData = res.message
 
