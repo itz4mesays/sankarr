@@ -6,16 +6,19 @@
             <h4 class="mb-3">Config Form</h4>
 
             <div class="text-right">
-                <i class="fa fa-plus-square fa-2x" onclick="addRow('dataTable')" title="Click to Add More"></i>
+                <i class="fa fa-plus-square fa-2x" onclick="addRow('dataTable')"  title="Click to Add More"></i>
+                 <i class="fa fa-trash fa-2x" onclick="deleteRow('dataTable')"  title="Click to Add More"></i>
             </div>
-        
+            <div class="text-right">
+               
+            </div>
             <hr class="mb-3">
 
             <table id="dataTable" width="100%" border="0">
-                <tbody>
-                    <tr>
+                <tbody class="table-body">
+                    <tr class="table-row">
                     <td width="200">
-                        <select name="populated_List[]" class="form-control popList" required id="popList">
+                        <select onchange="grab(this)" name="populated_List[]" class="form-control popList" required id="popList">
                             <option value="">Select Type</option>
                             <option value="button">button</option>
                             <option value="text">text</option>
@@ -27,7 +30,7 @@
                         </select>
                     </td>
                     <td width="250"><input type="text" name="Reqq[]" class="form-control" placeholder="Req"/></td>
-                    <td width="250"><textarea type="text" name="Response[]" class="form-control" placeholder="Response" id="output" /></textarea></td>
+                    <td width="250"><textarea type="text" name="Response[]" class="form-control response" placeholder="Response" id="output" /></textarea></td>
                     
                 </tr>
                 </tbody>
@@ -65,6 +68,37 @@
   crossorigin="anonymous"></script>
 
 <script>
+$(document).ready(function(){
+    
+})
+    
+
+    function grab(event){
+        let x=$(event).val()
+        let resp = $(event).closest('tr').find('.response');
+       // alert($(resp).val());
+        if(x != ""){
+            let fd= new FormData();
+            fd.append('uid', x)
+            let url = window.location.origin + "/fetch-response/" + x
+            fetch(url ,{
+                method : 'GET',
+                headers : {
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                },
+            }).then(res=> res.json()).then(res=>{
+                if(res.statusCode == 200){
+                    let data = JSON.parse(JSON.stringify(res.message));
+                    resp.val(data);
+                    console.log(data)
+                }
+            }).catch(err=>{
+                console.log(err)
+            })
+        }
+    }
+
     function addRow (tblID) {
         
         var table = document.getElementById(tblID);
@@ -93,6 +127,18 @@
             }
         }
 
+    }
+
+    function deleteRow (tblID) {
+        
+        var table = document.getElementById(tblID);
+
+        var rowCount = table.rows.length;
+        if(rowCount > 1){
+            //table.getElementsByTagName('tr')[rowCount-1].romove();
+            lastRow=rowCount-1;
+            $('#'+tblID).find('tr:last').remove();
+        }
     }
 
     const loadingImage = () => {
