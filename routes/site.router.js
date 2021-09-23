@@ -114,11 +114,22 @@ router.post('/update-config', isLoggedIn, async (req, res) => {
   });
 
   if(updateConfig){
-    return res.json({statusCode: 200, message: 'Update Completed'})
+    return res.json({statusCode: 200, message: 'Update Completed...'})
   }else{
     return res.json({statusCode: 400, message: 'Could not process the operation at the moment'})
   }
 
+})
+
+router.get('/delete-config/:id', async (req, res) => {
+  
+  const configSite = await ConfigSite.findOneAndRemove({_id: req.params.id})
+
+  if(!configSite) return res.json({statusCode: 400, message: 'Could not process information at the moment'})
+
+  console.log('Record has been deleted successfully')
+
+  return res.json({statusCode: 200, message: 'Record has been deleted successfully...'})
 })
 
 module.exports = router
