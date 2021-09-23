@@ -6,8 +6,8 @@
             <h4 class="mb-3">Config Form</h4>
 
             <div class="text-right">
-                <i class="fa fa-plus-square fa-2x" onclick="addRow('dataTable')"  title="Click to Add More"></i>
-                 <i class="fa fa-trash fa-2x" onclick="deleteRow('dataTable')"  title="Click to Add More"></i>
+                <i class="fa fa-plus-square" onclick="addRow('dataTable')"  title="Click to Add More"></i>
+                 <i class="fa fa-trash" onclick="deleteRow('dataTable')"  title="Click to Delete "></i>
             </div>
             <div class="text-right">
                
@@ -50,6 +50,11 @@
 <hr class="mb-4">
 
 <div class="col-md-12">
+
+        <div class="output"> </div>
+
+        <br/>
+
     <div class="panel panel-default">
         <div class="panel-heading">
             <h4 class="">Records </h4>
@@ -173,7 +178,7 @@ $(document).ready(function(){
                         data: gridData,
                         schema: {
                             fields: {
-                                id: { path: "id", type: Number },
+                                id: { path: "_id", type: String },
                                 req: { path: "req", type: String },
                                 response: { path: "response", type: String }
                             }
@@ -182,9 +187,58 @@ $(document).ready(function(){
                     sorting: {
                         multiple: true
                     },
+                    events: {
+                        command: function(e) {
+                            if(e.commandName == 'save'){
+                                let data = e.target.dataSource.tracker.changes.edited[0].data
+                                let x = {
+                                    id: data.id,
+                                    req_q: data.req,
+                                    response: data.response
+                                }
+                                if(data.id){
+                                    let url = window.location.origin + "/update-config"
+                                    fetch(url ,{
+                                        method : 'POST',
+                                        headers : {
+                                            'Accept':'application/json',
+                                            'Content-Type':'application/json'
+                                        },
+                                        body : JSON.stringify(x)
+                                    }).then(res=> res.json()).then(res=>{
+                                        if(res.statusCode == 200){
+                                            $('.output').html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            ${res.message}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>`)
+                                        }else{
+                                            $('.output').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            ${res.message}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>`)
+                                        }
+                                    }).catch(err=>{
+                                         $('.output').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            ${err}
+                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                            </div>`)
+                                    })
+                                }
+                            }
+                            
+                            //console.log(row) 
+                        }    
+                    },
                     rowHover: false,
                     columns: [
-                        { field: "req", title: "Req", width: "300px" },
+                        { field: "id", title: "Id", width: "200px" },
+                        { field: "req", title: "Req", width: "200px" },
                         { field: "response", title: "Response" },              
                         {
                             width: 70,

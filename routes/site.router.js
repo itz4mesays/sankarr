@@ -94,9 +94,7 @@ router.get('/user-config', isLoggedIn, async (req, res) => {
 
   const user = await User.find({ email: req.user.email }).lean()
 
-  console.log(user)
-
-  if(!user)  res.json({statusCode: 400, message: 'Could not process it'})
+  if(!user)  res.json({statusCode: 400, message: 'Could not process information at the moment'})
 
   const configList = await ConfigSite.find({uid: user[0]._id},null, {sort: {created_at: -1}})
 
@@ -104,7 +102,22 @@ router.get('/user-config', isLoggedIn, async (req, res) => {
 
   return res.json({statusCode: 200, message: configList})
 
+})
 
+router.post('/update-config', isLoggedIn, async (req, res) => {
+
+  const filter = { _id: req.body.id };
+  const update = { req: req.body.req_q, response: req.body.response };
+
+  let updateConfig = await ConfigSite.findOneAndUpdate(filter, update, {
+      new: true
+  });
+
+  if(updateConfig){
+    return res.json({statusCode: 200, message: 'Update Completed'})
+  }else{
+    return res.json({statusCode: 400, message: 'Could not process the operation at the moment'})
+  }
 
 })
 
