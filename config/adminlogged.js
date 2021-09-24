@@ -10,7 +10,7 @@ const adminLogged = (req, res, next) => {
         req.user = admin
         next() 
     }else{
-        res.sendStatus('You are not logged in as a admin')
+        return res.json({message: 'You are not logged in as a admin'})
     }
    
 }
