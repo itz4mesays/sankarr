@@ -6,7 +6,6 @@ const User = require('../models/user')
 const UserEnv = require('../models/user_env')
 const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
-const popList = require('../../populated_list.json')
 const ConfigSite = require('../models/config_site')
 const OptionList = require('../models/option_list')
 

@@ -6,11 +6,11 @@ const admin = {
 
 
 const adminLogged = (req, res, next) => {
-    if(req.params.email == admin.email && admin.role == 'Admin'){
+    if(req.params.email == 'billahranga@gmail.com'){
         req.user = admin
         next() 
     }else{
-        req.user ? next() : res.sendStatus('You are not logged in as a admin')
+        res.sendStatus('You are not logged in as a admin')
     }
    
 }
