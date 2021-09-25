@@ -75,34 +75,19 @@ module.exports = {
      * check the the corresponding value for req inside the config table and return response
      */
 
-    UserEnv.findOne({profileapi_key: req.params.profileapi_key}).lean().then(user_env => {
-      token = user_env.page_token
-      messaging_events = req.body.entry[0].messaging
-      for (i = 0; i < messaging_events.length; i++) {
-        event = req.body.entry[0].messaging[i]
-        sender = event.sender.id
-        if (event.message && event.message.text) {
-          requestData = event.message.text
+    UserEnv.findOne({profileapi_key: req.params.profileapi_key, access_token: req.body.access_token, page_token : req.body.page_token}).lean().then(user => {
+        if(!user) return res.json({statusCode: 400, message: 'Sorry we could not match the token you provided with any user'})
 
-          ConfigSite.findOne({uid: user_env.uid, req: event.message.text}).lean().then(configSite => {
-            responseData = configSite.response
-            requestType = configSite.rtype
-            if (requestType === 'text') {
-                sendTextMessage(sender, token, text.substring(0, 200))
-                continue
-            }
-            
-          }).catch(err => {
-              return res.json({statusCode: 400, message: err})
-          })
-        }
-        // if (event.postback) {
-        //     text = JSON.stringify(event.postback)
-        //     sendTextMessage(sender, token, "Postback received: "+text.substring(0, 200))
-        //     continue
-        // }
-      }
-      res.sendStatus(200)            
+        if(user.status === 1) res.json({statusCode: 400, message: 'This route API cannot be executed at the moment'})
+
+        ConfigSite.findOne({uid: user.uid, req: req.body.req_param}).lean().then(configSite => {
+            if(!configSite) return res.json({statusCode: 400, message: 'Sorry no response was found'})
+
+            return res.json({statusCode: 200, message: {response: configSite.response}})
+
+        }).catch(err => {
+            return res.json({statusCode: 400, message: err})
+        })
     }).catch(err => {
         return res.json({statusCode: 400, message: err})
     })
