@@ -92,8 +92,15 @@ module.exports = {
     // })
     UserEnv.findOne({profileapi_key: req.params.profileapi_key}).lean().then(user => {
         if(!user) return res.json({statusCode: 400, message: 'Sorry we could not match the token you provided with any user'})
-
         if(user.status === 1) res.json({statusCode: 400, message: 'This route API cannot be executed at the moment'})
+        
+
+        UserEnv.findOne({profileapi_key: req.params.profileapi_key}).lean().then(user_env => {
+            token = user_env.page_token
+        }).catch(err => {
+            return res.json({statusCode: 400, message: err})
+        })
+
         messaging_events = req.body.entry[0].messaging
         for (i = 0; i < messaging_events.length; i++) {
           event = req.body.entry[0].messaging[i]
@@ -101,7 +108,25 @@ module.exports = {
           if (event.message && event.message.text) {
             text = event.message.text
             if (text === 'text') {
-                sendTextMessage(sender, "parrot: " + text.substring(0, 200))
+                // sendTextMessage(sender, "parrot: " + text.substring(0, 200), token)
+                messageData = {
+                    text:text
+                }
+                request({
+                    url: 'https://graph.facebook.com/v2.6/me/messages',
+                    qs: {access_token:token},
+                    method: 'POST',
+                    json: {
+                        recipient: {id:sender},
+                        message: messageData,
+                    }
+                }, function(error, response, body) {
+                    if (error) {
+                        console.log('Error sending messages: ', error)
+                    } else if (response.body.error) {
+                        console.log('Error: ', response.body.error)
+                    }
+                })                
                 continue
             }              
           }
@@ -145,4 +170,24 @@ module.exports = {
     })
 
   }
+}
+function sendTextMessage(sender, text, token) {
+    messageData = {
+        text:text
+    }
+    request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token:token},
+        method: 'POST',
+        json: {
+            recipient: {id:sender},
+            message: messageData,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error)
+        }
+    })
 }
