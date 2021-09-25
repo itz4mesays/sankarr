@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const UserEnv = require('../models/user_env')
 const ConfigSite = require('../models/config_site')
-var request = require('request')
+const { sendTextMessage } = require('../../config/message');
 
 module.exports = {
   list_users: async (req, res) => {
@@ -74,22 +74,6 @@ module.exports = {
      * check if both access_token and page_token matches the customer with the return id from step 1
      * check the the corresponding value for req inside the config table and return response
      */
-    // UserEnv.findOne({profileapi_key: req.params.profileapi_key, access_token: req.body.access_token, page_token : req.body.page_token}).lean().then(user => {
-    //     if(!user) return res.json({statusCode: 400, message: 'Sorry we could not match the token you provided with any user'})
-
-    //     if(user.status === 1) res.json({statusCode: 400, message: 'This route API cannot be executed at the moment'})
-
-    //     ConfigSite.findOne({uid: user.uid, req: req.body.req_param}).lean().then(configSite => {
-    //         if(!configSite) return res.json({statusCode: 400, message: 'Sorry no response was found'})
-
-    //         return res.json({statusCode: 200, message: {response: configSite.response}})
-
-    //     }).catch(err => {
-    //         return res.json({statusCode: 400, message: err})
-    //     })
-    // }).catch(err => {
-    //     return res.json({statusCode: 400, message: err})
-    // })
 
     UserEnv.findOne({profileapi_key: req.params.profileapi_key}).lean().then(user_env => {
       token = user_env.page_token
@@ -107,53 +91,21 @@ module.exports = {
                 sendTextMessage(sender, token, text.substring(0, 200))
                 continue
             }
-            if (requestType === 'button') {
-                sendButtonMessage(sender, token, responseData)
-                continue
-            }
-            if (requestType === 'image') {
-                sendImageMessage(sender, token, responseData)
-                continue
-            }
-            if (requestType === 'video') {
-                sendVideoMessage(sender, token, responseData)
-                continue
-            }
-            if (requestType === 'feedback') {
-                sendFeedbackMessage(sender, token, responseData)
-                continue
-            }
-            if (requestType === 'grid') {
-                sendGenericMessage(sender, token, responseData)
-                continue
-            }
-            if (requestType === 'order') {
-                sendOrderMessage(sender, token, responseData)
-                continue
-            }
-
+            
           }).catch(err => {
               return res.json({statusCode: 400, message: err})
           })
         }
-        if (event.postback) {
-            text = JSON.stringify(event.postback)
-            sendTextMessage(sender, token, "Postback received: "+text.substring(0, 200))
-            continue
-        }
+        // if (event.postback) {
+        //     text = JSON.stringify(event.postback)
+        //     sendTextMessage(sender, token, "Postback received: "+text.substring(0, 200))
+        //     continue
+        // }
       }
       res.sendStatus(200)            
     }).catch(err => {
         return res.json({statusCode: 400, message: err})
     })
-    // ConfigSite.findOne({uid: user.uid, req: req.body.req_param}).lean().then(configSite => {
-    //     if(!configSite) return res.json({statusCode: 400, message: 'Sorry no response was found'})
-
-    //     return res.json({statusCode: 200, message: {response: configSite.response}})
-
-    // }).catch(err => {
-    //     return res.json({statusCode: 400, message: err})
-    // })
   },
   getwebhook: async (req, res) => {
     /**
@@ -162,101 +114,18 @@ module.exports = {
      * check the the corresponding value for req inside the config table and return response
      */
     UserEnv.findOne({profileapi_key: req.params.profileapi_key}).lean().then(user_env => {
-        if(!user_env) res.send('Error, No details are there')
-        if(user_env.status === 1) res.send('Error, Forbidden')
-        
-        if (req.query['hub.verify_token'] === user_env.access_token) {
-            res.send(req.query['hub.challenge'])
-        }
-        else{
-          res.send('Error, wrong token')
-        }
+      if(!user_env) res.send('Error, No details are there')
+      if(user_env.status === 1) res.send('Error, Forbidden')
+      
+      if (req.query['hub.verify_token'] === user_env.access_token) {
+          res.send(req.query['hub.challenge'])
+      }
+      else{
+        res.send('Error, wrong token')
+      }
     }).catch(err => {
         return res.json({statusCode: 400, message: err})
     })
 
   }
-}
-function sendTextMessage(sender, token, data) {
-    messageData = {
-        text:data
-    }
-    sendAutoMessage(sender, token, messageData)
-}
-function sendButtonMessage(sender, token, data) {
-    messageData = {
-        "attachment":{
-          "type":"template",
-          "payload": data
-        }
-    }
-    sendAutoMessage(sender, token, messageData)
-}
-function sendImageMessage(sender, token, data) {
-    messageData = {
-      "attachment":{
-        "type":"template",
-        "payload":{
-          "template_type": "media",
-          "elements": data
-        }
-      }
-    }
-    sendAutoMessage(sender, token, messageData)
-}
-function sendVideoMessage(sender, token, data) {
-    messageData = {
-      "attachment":{
-        "type":"template",
-        "payload":{
-          "template_type": "media",
-          "elements": data
-        }
-      }
-    }
-    sendAutoMessage(sender, token, messageData)
-}
-function sendFeedbackMessage(sender, token, data) {
-    messageData = {
-      "attachment":{
-          "type":"template",
-          "payload": data
-      }
-    }
-    sendAutoMessage(sender, token, messageData)
-}
-function sendGenericMessage(sender, token, data) {
-    messageData = {
-      "attachment": {
-          "type": "template",
-          "payload": data
-      }
-    }
-    sendAutoMessage(sender, token, messageData)
-}
-function sendOrderMessage(sender, token, data) {
-    messageData = {
-    "attachment":{
-        "type":"template",
-        "payload":data
-    }
-  }
-    sendAutoMessage(sender, token, messageData)
-}
-function sendAutoMessage(sender, token, messageData) {
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token:token},
-        method: 'POST',
-        json: {
-            recipient: {id:sender},
-            message: messageData,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error)
-        }
-    })
 }
