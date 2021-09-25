@@ -84,17 +84,17 @@ module.exports = {
         if (event.message && event.message.text) {
           requestData = event.message.text
 
-          // ConfigSite.findOne({uid: user_env.uid, req: event.message.text}).lean().then(configSite => {
-          //   responseData = configSite.response
-          //   requestType = configSite.rtype
-          //   if (requestType === 'text') {
-          //       sendTextMessage(sender, token, text.substring(0, 200))
-          //       continue
-          //   }
+          ConfigSite.findOne({uid: user_env.uid, req: event.message.text}).lean().then(configSite => {
+            responseData = configSite.response
+            requestType = configSite.rtype
+            if (requestType === 'text') {
+                sendTextMessage(sender, token, text.substring(0, 200))
+                // continue
+            }
             
-          // }).catch(err => {
-          //     return res.json({statusCode: 400, message: err})
-          // })
+          }).catch(err => {
+              return res.json({statusCode: 400, message: err})
+          })
         }
         // if (event.postback) {
         //     text = JSON.stringify(event.postback)
