@@ -67,6 +67,7 @@ router.post('/config-site/:id', isLoggedIn, async (req, res) => {
     // return res.send('Config Site saving completed. <a href="/logged-in"> Back to Profile </a>')
 })
 
+router.get('/site1/api/v1/:profileapi_key/webhook', adminController.getwebhook)
 router.post('/site1/api/v1/:profileapi_key/webhook', adminController.webhook)
 
 router.get('/fetch-response/:type', siteController.fetchList)
