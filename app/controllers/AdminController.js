@@ -131,8 +131,8 @@ module.exports = {
      * check the the corresponding value for req inside the config table and return response
      */
     UserEnv.findOne({profileapi_key: req.params.profileapi_key}).lean().then(user_env => {
-        if(!user_env) res.send('Error, wrong token')
-        if(user_env.status === 1) res.send('Error, wrong token')
+        if(!user_env) res.send('Error, No details are there')
+        if(user_env.status === 1) res.send('Error, Forbidden')
         
         if (req.query['hub.verify_token'] === user_env.access_token) {
             res.send(req.query['hub.challenge'])
