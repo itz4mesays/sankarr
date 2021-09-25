@@ -90,9 +90,9 @@ module.exports = {
     // }).catch(err => {
     //     return res.json({statusCode: 400, message: err})
     // })
-    UserEnv.findOne({profileapi_key: req.params.profileapi_key}).lean().then(user => {
-        if(!user) return res.json({statusCode: 400, message: 'Sorry we could not match the token you provided with any user'})
-        if(user.status === 1) res.json({statusCode: 400, message: 'This route API cannot be executed at the moment'})
+    // UserEnv.findOne({profileapi_key: req.params.profileapi_key}).lean().then(user => {
+        // if(!user) return res.json({statusCode: 400, message: 'Sorry we could not match the token you provided with any user'})
+        // if(user.status === 1) res.json({statusCode: 400, message: 'This route API cannot be executed at the moment'})
         
 
         UserEnv.findOne({profileapi_key: req.params.profileapi_key}).lean().then(user_env => {
@@ -126,15 +126,14 @@ module.exports = {
                     } else if (response.body.error) {
                         console.log('Error: ', response.body.error)
                     }
-                })                
-                continue
+                })
             }              
           }
-          if (event.postback) {
-              text = JSON.stringify(event.postback)
-              sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
-              continue
-          }
+          // if (event.postback) {
+          //     text = JSON.stringify(event.postback)
+          //     sendTextMessage(sender, "Postback received: "+text.substring(0, 200), token)
+          //     continue
+          // }
         }
         res.sendStatus(200)
         // ConfigSite.findOne({uid: user.uid, req: req.body.req_param}).lean().then(configSite => {
@@ -145,9 +144,9 @@ module.exports = {
         // }).catch(err => {
         //     return res.json({statusCode: 400, message: err})
         // })
-    }).catch(err => {
-        return res.json({statusCode: 400, message: err})
-    })
+    // }).catch(err => {
+    //     return res.json({statusCode: 400, message: err})
+    // })
   },
   getwebhook: async (req, res) => {
     /**
