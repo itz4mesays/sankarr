@@ -27,7 +27,7 @@ module.exports = {
     User.findOne({ email: req.user.email }).lean().then(user => {
 
       try{
-        window.localStorage.setItem('storedUid', user._id)
+        // window.localStorage.setItem('storedUid', user._id)
         UserEnv.findOne({ uid: user._id }).lean()
           .then(data => {   
             return res.render('restricted/logged', {

@@ -12,7 +12,7 @@ module.exports = {
 
     const perPage = 20
     const page = req.query.p
-
+    // const storedUid = window.localStorage.getItem('storedUid')
     User.find({})
       .skip((perPage * page) - perPage)
       .limit(perPage)
