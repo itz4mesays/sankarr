@@ -14,6 +14,7 @@ const sendButtonMessage = (sender, token, data) => {
           "payload": data
         }
     }
+    console.log("ButtonmessageData:" + messageData)
     sendAutoMessage(sender, token, messageData)
 }
 const sendImageMessage = (sender, token, data) => {
