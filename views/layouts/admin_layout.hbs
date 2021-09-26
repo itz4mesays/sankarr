@@ -29,38 +29,8 @@
       {{!-- <a href="/"> --}}
         <h5 class="my-0 mr-md-auto font-weight-normal"> <a href="/">Bot Monk</a>  </h5>
       {{!-- </a> --}}
-      {{#if email }}
-
-        <nav class="my-2 my-md-0 mr-md-3">
-          <a class="p-2 text-dark" href="/logged-in">Profile</a>
-          <a class="p-2 text-dark" href="/config-site">Create Flow</a>
-        </nav>
-            <a class="btn btn-outline-primary" href="/auth/logout">Logout</a>
-      {{/if}}
-      {{!-- <a class="btn btn-outline-primary" href="#">Sign up</a> --}}
     </div>
-    {{#ifCond email null}}
-    <section id="hero" class="hero align-items-center" style="user-select: auto;width: 100%;height: 100vh;background: url(../../assets/images/hero-bg.png) top center no-repeat;background-size: cover;">
 
-        <div class="container" style="user-select: auto;">
-          <div class="row" style="user-select: auto;">
-            <div class="col-lg-6 d-flex flex-column justify-content-center" style="user-select: auto;">
-              <h1 data-aos="fade-up" class="aos-init aos-animate" style="user-select: auto;">Modern solutions for growing your business</h1>
-              <h2 data-aos="fade-up" data-aos-delay="400" class="aos-init aos-animate" style="user-select: auto;">This tool helps Genearate leads Organically</h2>
-              
-            </div>
-            <div class="col-lg-6 hero-img aos-init aos-animate" data-aos="zoom-out" data-aos-delay="200" style="user-select: auto;">
-              <img src="../../assets/images/hero-img.png" class="img-fluid" alt="" style="user-select: auto;">
-            </div>
-            <div class="col-lg-6" style="position: relative;top: -40px;">
-              {{{body}}}
-            </div>
-            <div class="col-lg-6"></div>
-          </div>
-        </div>
-
-      </section>
-      {{/ifCond}}
     <div class="container">
       
       {{!-- <div style="margin-top: 50px;"> --}}

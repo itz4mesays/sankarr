@@ -24,12 +24,13 @@ module.exports = {
           }
 
           res.render('admin/list-user', {
-              layout: 'main_layout',
+              layout: 'admin_layout',
               pagination: {
                   page: req.query.p || 1,
                   pageCount: Math.ceil(count / perPage)
               },
               data,
+              email: req.params.email,
               page_title: 'Dashboard'
           })
       })
