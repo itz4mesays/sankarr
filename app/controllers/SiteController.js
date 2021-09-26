@@ -20,13 +20,14 @@ module.exports = {
   home: async (req, res) => {
 
     const email = req.user ? req.user.email : null
-    const name = req.user ? req.user.name : null
+    // const name = req.user ? req.user.name : null
+    const user = await User.findOne({ email: req.user.email }).lean();
 
     return res.render('site/index', {
       layout: 'main_layout',
       page_title: 'Login/Register',
       email,
-      name
+      name: user.name
     })
   },
   loggedIn: async (req, res) => {
