@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const UserEnv = require('../models/user_env')
 const ConfigSite = require('../models/config_site')
-const { sendTextMessage } = require('../../config/message');
+const { sendTextMessage, sendButtonMessage, sendImageMessage, sendVideoMessage, sendFeedbackMessage, sendGenericMessage, sendOrderMessage } = require('../../config/message');
 
 module.exports = {
   list_users: async (req, res) => {
@@ -92,30 +92,30 @@ module.exports = {
                 sendTextMessage(sender, token, responseData.substring(0, 200))
                 // continue
             }
-            // if (requestType === 'button') {
-            //     sendButtonMessage(sender, token, responseData)
-            //     // continue
-            // }
-            // if (requestType === 'image') {
-            //     sendImageMessage(sender, token, responseData)
-            //     // continue
-            // }
-            // if (requestType === 'video') {
-            //     sendVideoMessage(sender, token, responseData)
-            //     // continue
-            // }
-            // if (requestType === 'feedback') {
-            //     sendFeedbackMessage(sender, token, responseData)
-            //     // continue
-            // }
-            // if (requestType === 'grid') {
-            //     sendGenericMessage(sender, token, responseData)
-            //     // continue
-            // }
-            // if (requestType === 'order') {
-            //     sendOrderMessage(sender, token, responseData)
-            //     // continue
-            // }
+            if (requestType === 'button') {
+                sendButtonMessage(sender, token, responseData)
+                // continue
+            }
+            if (requestType === 'image') {
+                sendImageMessage(sender, token, responseData)
+                // continue
+            }
+            if (requestType === 'video') {
+                sendVideoMessage(sender, token, responseData)
+                // continue
+            }
+            if (requestType === 'feedback') {
+                sendFeedbackMessage(sender, token, responseData)
+                // continue
+            }
+            if (requestType === 'grid') {
+                sendGenericMessage(sender, token, responseData)
+                // continue
+            }
+            if (requestType === 'order') {
+                sendOrderMessage(sender, token, responseData)
+                // continue
+            }
           }).catch(err => {
               return res.json({statusCode: 400, message: err})
           })

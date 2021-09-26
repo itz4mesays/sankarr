@@ -6,7 +6,66 @@ const sendTextMessage = (sender, token, data) => {
   }
   sendAutoMessage(sender, token, messageData)
 }
-
+const sendButtonMessage = (sender, token, data) => {
+    messageData = {
+        "attachment":{
+          "type":"template",
+          "payload": data
+        }
+    }
+    sendAutoMessage(sender, token, messageData)
+}
+const sendImageMessage = (sender, token, data) => {
+    messageData = {
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type": "media",
+          "elements": data
+        }
+      }
+    }
+    sendAutoMessage(sender, token, messageData)
+}
+const sendVideoMessage = (sender, token, data) => {
+    messageData = {
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type": "media",
+          "elements": data
+        }
+      }
+    }
+    sendAutoMessage(sender, token, messageData)
+}
+const sendFeedbackMessage = (sender, token, data) => {
+    messageData = {
+      "attachment":{
+          "type":"template",
+          "payload": data
+      }
+    }
+    sendAutoMessage(sender, token, messageData)
+}
+const sendGenericMessage = (sender, token, data) => {
+    messageData = {
+      "attachment": {
+          "type": "template",
+          "payload": data
+      }
+    }
+    sendAutoMessage(sender, token, messageData)
+}
+const sendOrderMessage = (sender, token, data) => {
+    messageData = {
+    "attachment":{
+        "type":"template",
+        "payload":data
+    }
+  }
+    sendAutoMessage(sender, token, messageData)
+}
 
 const sendAutoMessage = (sender, token, messageData) => {
   request({
@@ -27,6 +86,12 @@ const sendAutoMessage = (sender, token, messageData) => {
 }
 module.exports = {
     sendTextMessage,
+    sendButtonMessage,
+    sendImageMessage,
+    sendVideoMessage,
+    sendFeedbackMessage,
+    sendGenericMessage,
+    sendOrderMessage,
     sendAutoMessage
 }
 // module.exports.adminLogged = adminLogged
