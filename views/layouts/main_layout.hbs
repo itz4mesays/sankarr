@@ -32,6 +32,11 @@
       {{#if email }}
 
         <nav class="my-2 my-md-0 mr-md-3">
+          {{#ifCond email null}}
+            <a class="p-2 text-dark" href="#">Hi! {{name}}</a>
+          {{else}}
+            <a class="p-2 text-dark" href="#">Hi! Guest</a>
+          {{/ifCond}}
           <a class="p-2 text-dark" href="/logged-in">Profile</a>
           <a class="p-2 text-dark" href="/config-site">Create Flow</a>
         </nav>

@@ -14,11 +14,13 @@ module.exports = {
   home: async (req, res) => {
 
     const email = req.user ? req.user.email : null
+    const name = req.user ? req.user.name : null
 
     return res.render('site/index', {
       layout: 'main_layout',
       page_title: 'Login/Register',
-      email
+      email,
+      name
     })
   },
   loggedIn: async (req, res) => {
@@ -33,7 +35,8 @@ module.exports = {
               page_title: 'Logged In',
               user,
               userenv: data,
-              email: req.user.email
+              email: req.user.email,
+              name: req.user.name
             })
 
         });  
@@ -80,6 +83,7 @@ module.exports = {
               page_title: 'Edit',
               user,
               email: user.email,
+              name: user.name,
               userEnv
             })
 
@@ -106,6 +110,7 @@ module.exports = {
         layout: 'main_layout',
         page_title: 'Config Site',
         email: req.user.email,
+        name: req.user.name,
         id: user[0]._id,
         config_list: configList
     })
@@ -122,6 +127,7 @@ module.exports = {
         layout: 'main_layout',
         page_title: 'Edit Config',
         email: req.user.email,
+        name: req.user.name,
         config: config_site[0]
     })
   },
