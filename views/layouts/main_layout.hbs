@@ -8,7 +8,7 @@
     <meta name="author" content="">
     {{!-- <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico"> --}}
 
-    <title>Your App - {{ page_title }}</title>
+    <title>BotMonk - {{ page_title }}</title>
 
     <!-- Bootstrap core CSS -->
     <link href="../../assets/css/bootstrap.min.css" rel="stylesheet" />
@@ -24,13 +24,13 @@
 
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
       {{!-- <a href="/"> --}}
-        <h5 class="my-0 mr-md-auto font-weight-normal"> <a href="/">Logo Here</a>  </h5>
+        <h5 class="my-0 mr-md-auto font-weight-normal"> <a href="/">Bot Monk</a>  </h5>
       {{!-- </a> --}}
       {{#if email }}
 
         <nav class="my-2 my-md-0 mr-md-3">
-          <a class="p-2 text-dark" href="/logged-in">View Profile</a>
-          <a class="p-2 text-dark" href="/config-site">Config Site</a>
+          <a class="p-2 text-dark" href="/logged-in">Profile</a>
+          <a class="p-2 text-dark" href="/config-site">Create Flow</a>
         </nav>
             <a class="btn btn-outline-primary" href="/auth/logout">Logout</a>
       {{/if}}
@@ -58,6 +58,7 @@
             <small class="d-block mb-3 text-muted">&copy; Copyright, 2021</small>
           </div>
           <div class="col-6 col-md">
+            <small class="d-block mb-3 text-muted">Developed by <a href="https://sankarprakash.com/" target="_blank">SankarPrakash</a></small>
           </div>
           <div class="col-6 col-md">
           </div>
