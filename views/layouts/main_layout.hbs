@@ -36,7 +36,7 @@
       {{/if}}
       {{!-- <a class="btn btn-outline-primary" href="#">Sign up</a> --}}
     </div>
-    {{#if !email }}
+    {{#ifCond email null}}
     <section id="hero" class="hero align-items-center" style="user-select: auto;width: 100%;height: 100vh;background: url(../../assets/images/hero-bg.png) top center no-repeat;background-size: cover;">
 
         <div class="container" style="user-select: auto;">
@@ -57,7 +57,7 @@
         </div>
 
       </section>
-      {{/if}}
+      {{/ifCond}}
     <div class="container">
       
       {{!-- <div style="margin-top: 50px;"> --}}
