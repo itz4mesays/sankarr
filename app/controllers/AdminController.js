@@ -74,20 +74,20 @@ module.exports = {
      * check if both access_token and page_token matches the customer with the return id from step 1
      * check the the corresponding value for req inside the config table and return response
      */
-     console.log("Profile key:" + req.params.profileapi_key);
+     // console.log("Profile key:" + req.params.profileapi_key)
     UserEnv.findOne({profileapi_key: req.params.profileapi_key}).lean().then(user_env => {
       token = user_env.page_token
-      console.log("token key:" + token);
       messaging_events = req.body.entry[0].messaging
       for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
         sender = event.sender.id
         if (event.message && event.message.text) {
           requestData = event.message.text
-
+          console.log("requestData:" + requestData)
           ConfigSite.findOne({uid: user_env.uid, req: event.message.text}).lean().then(configSite => {
             responseData = configSite.response
             requestType = configSite.rtype
+            console.log("requestType:" + requestType)
             if (requestType === 'text') {
                 sendTextMessage(sender, token, responseData.substring(0, 200))
                 // continue

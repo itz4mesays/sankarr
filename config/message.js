@@ -7,6 +7,7 @@ const sendTextMessage = (sender, token, data) => {
   sendAutoMessage(sender, token, messageData)
 }
 const sendButtonMessage = (sender, token, data) => {
+  console.log('sendButtonMessage'+data)
     messageData = {
         "attachment":{
           "type":"template",
