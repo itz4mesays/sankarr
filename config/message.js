@@ -57,6 +57,7 @@ const sendGenericMessage = (sender, token, data) => {
     //       "payload": data
     //   }
     // }
+    console.log("GridMessageData:" + data)
     sendAutoMessage(sender, token, data)
 }
 const sendOrderMessage = (sender, token, data) => {
