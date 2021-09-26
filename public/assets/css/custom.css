@@ -217,7 +217,7 @@ text-decoration:none;
     td input[type=text],
     td select {
       width: 100%;
-      height: 30px;
+      height: 36px;
       margin: 0;
       padding: 2px 8px;
     }

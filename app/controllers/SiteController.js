@@ -8,7 +8,13 @@ const crypto = require('crypto')
 const jwt = require('jsonwebtoken')
 const ConfigSite = require('../models/config_site')
 const OptionList = require('../models/option_list')
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+}
 
+// localStorage.setItem('myFirstKey', 'myFirstValue');
+// console.log(localStorage.getItem('myFirstKey'));
 
 module.exports = {
   home: async (req, res) => {
@@ -24,6 +30,7 @@ module.exports = {
     })
   },
   loggedIn: async (req, res) => {
+    localStorage.setItem('storedEmail', req.user.email);
     User.findOne({ email: req.user.email }).lean().then(user => {
 
       try{
@@ -110,7 +117,7 @@ module.exports = {
         layout: 'main_layout',
         page_title: 'Config Site',
         email: req.user.email,
-        name: req.user.name,
+        name: user[0].name,
         id: user[0]._id,
         config_list: configList
     })

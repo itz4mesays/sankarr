@@ -6,10 +6,14 @@ const User = require('../models/user')
 const UserEnv = require('../models/user_env')
 const ConfigSite = require('../models/config_site')
 const { sendTextMessage, sendButtonMessage, sendImageMessage, sendVideoMessage, sendFeedbackMessage, sendGenericMessage, sendOrderMessage } = require('../../config/message');
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+}
 
 module.exports = {
   list_users: async (req, res) => {
-
+    const storedEmail = localStorage.getItem('storedEmail')
     const perPage = 20
     const page = req.query.p
     // const storedUid = window.localStorage.getItem('storedUid')
@@ -22,7 +26,9 @@ module.exports = {
           if (err) {
               return res.sendStatus(401)
           }
-
+          if(storedEmail != req.params.email){
+            return res.sendStatus(401)
+          }
           res.render('admin/list-user', {
               layout: 'admin_layout',
               pagination: {
