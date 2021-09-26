@@ -15,7 +15,7 @@ const sendButtonMessage = (sender, token, data) => {
         }
     }
     messageData = JSON.stringify(messageData, null, 4)
-    messageData = messageData.replace(/\\n/g, '').replace(/\\r/g, '')
+    messageData = messageData.replace(/\\n/g, '').replace(/\\r/g, '').replace(/\/g, '')
     console.log("ButtonmessageData:" + messageData)
     sendAutoMessage(sender, token, messageData)
 }
