@@ -90,31 +90,31 @@ module.exports = {
             requestType = configSite.rtype
             if (requestType === 'text') {
                 sendTextMessage(sender, token, responseData.substring(0, 200))
-                continue
+                // continue
             }
             if (requestType === 'button') {
                 sendButtonMessage(sender, token, responseData)
-                continue
+                // continue
             }
             if (requestType === 'image') {
                 sendImageMessage(sender, token, responseData)
-                continue
+                // continue
             }
             if (requestType === 'video') {
                 sendVideoMessage(sender, token, responseData)
-                continue
+                // continue
             }
             if (requestType === 'feedback') {
                 sendFeedbackMessage(sender, token, responseData)
-                continue
+                // continue
             }
             if (requestType === 'grid') {
                 sendGenericMessage(sender, token, responseData)
-                continue
+                // continue
             }
             if (requestType === 'order') {
                 sendOrderMessage(sender, token, responseData)
-                continue
+                // continue
             }
           }).catch(err => {
               return res.json({statusCode: 400, message: err})
