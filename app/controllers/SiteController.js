@@ -36,7 +36,7 @@ module.exports = {
               user,
               userenv: data,
               email: req.user.email,
-              name: req.user.name
+              name: user.name
             })
 
         });  
