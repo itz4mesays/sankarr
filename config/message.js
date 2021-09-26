@@ -91,6 +91,7 @@ module.exports = {
     sendVideoMessage,
     sendFeedbackMessage,
     sendGenericMessage,
-    sendOrderMessage
+    sendOrderMessage,
+    sendAutoMessage
 }
 // module.exports.adminLogged = adminLogged
