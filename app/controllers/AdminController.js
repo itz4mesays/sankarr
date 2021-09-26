@@ -74,7 +74,22 @@ module.exports = {
      * check if both access_token and page_token matches the customer with the return id from step 1
      * check the the corresponding value for req inside the config table and return response
      */
-     // console.log("Profile key:" + req.params.profileapi_key)
+    // UserEnv.findOne({profileapi_key: req.params.profileapi_key, access_token: req.body.access_token, page_token : req.body.page_token}).lean().then(user => {
+    //     if(!user) return res.json({statusCode: 400, message: 'Sorry we could not match the token you provided with any user'})
+
+    //     if(user.status === 1) res.json({statusCode: 400, message: 'This route API cannot be executed at the moment'})
+
+    //     ConfigSite.findOne({uid: user.uid, req: req.body.req_param}).lean().then(configSite => {
+    //         if(!configSite) return res.json({statusCode: 400, message: 'Sorry no response was found'})
+
+    //         return res.json({statusCode: 200, message: {response: configSite.response}})
+
+    //     }).catch(err => {
+    //         return res.json({statusCode: 400, message: err})
+    //     })
+    // }).catch(err => {
+    //     return res.json({statusCode: 400, message: err})
+    // })
     UserEnv.findOne({profileapi_key: req.params.profileapi_key}).lean().then(user_env => {
       token = user_env.page_token
       messaging_events = req.body.entry[0].messaging
