@@ -14,7 +14,7 @@ const sendButtonMessage = (sender, token, data) => {
           "payload": data
         }
     }
-    messageData = JSON.stringify(messageData)
+    messageData = encodeURIComponent(JSON.stringify(messageData))
     // messageData = messageData.replace(/\\n/g, '').replace(/\\r/g, '')
     console.log("ButtonmessageData:" + messageData)
     sendAutoMessage(sender, token, data)
