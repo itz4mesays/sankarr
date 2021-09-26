@@ -50,43 +50,13 @@ const sendFeedbackMessage = (sender, token, data) => {
     sendAutoMessage(sender, token, messageData)
 }
 const sendGenericMessage = (sender, token, data) => {
-    messageData = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [{
-                    "title": "What is Clickfunnels? And How Does it Work?",
-                    "subtitle": "Communities to Follow",
-                    "image_url": "https://sankarprakash.com/wp-content/uploads/2021/06/The_Purchase_Funnel-1024x839.jpg",
-                    "buttons": [{
-                        "type": "web_url",
-                        "url": "https://sankarprakash.com/clickfunnel-works/",
-                        "title": "Read More"
-                    }, {
-                        "type": "web_url",
-                        "url": "https://sankarprakash.com/recommends/ofa/",
-                        "title": "Try ClickFunnel"
-                    },{
-                        "type": "web_url",
-                        "url": "https://sankarprakash.com/recommends/5daychallenge/",
-                        "title": "Want to try 5 Days Lead Challenge"
-                    }],
-                }, 
-                {
-                    "title": "How I make money online",
-                    "subtitle": "Passive income Lifestyle",
-                    "image_url": "http://www.brandknewmag.com/wp-content/uploads/2015/12/cortana.jpg",
-                    "buttons": [{
-                        "type": "postback",
-                        "title": "AIML",
-                        "payload": "Checkout Artificial Intelligence Mark Up Language. Its easier than you think!",
-                    }],
-                }]  
-            } 
-        }
-    }
-    sendAutoMessage(sender, token, messageData)
+    // messageData = {
+    //   "attachment": {
+    //       "type": "template",
+    //       "payload": data
+    //   }
+    // }
+    sendAutoMessage(sender, token, data)
 }
 const sendOrderMessage = (sender, token, data) => {
     messageData = {
