@@ -30,7 +30,7 @@ const sendImageMessage = (sender, token, data) => {
       }
     }
     console.log("ImagemessageData:" + messageData)
-    sendAutoMessage(sender, token, messageData)
+    sendAutoMessage(sender, token, data)
 }
 const sendVideoMessage = (sender, token, data) => {
     messageData = {
@@ -43,7 +43,7 @@ const sendVideoMessage = (sender, token, data) => {
       }
     }
     console.log("VideomessageData:" + messageData)
-    sendAutoMessage(sender, token, messageData)
+    sendAutoMessage(sender, token, data)
 }
 const sendFeedbackMessage = (sender, token, data) => {
     messageData = {
