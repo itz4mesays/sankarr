@@ -14,6 +14,7 @@ const sendButtonMessage = (sender, token, data) => {
           "payload": data
         }
     }
+    messageData = JSON.stringify(messageData)
     console.log("ButtonmessageData:" + messageData)
     sendAutoMessage(sender, token, messageData)
 }
