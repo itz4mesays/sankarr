@@ -5,9 +5,67 @@ const sendTextMessage = (sender, token, data) => {
       text:data
   }
   sendAutoMessage(sender, token, messageData)
-   
 }
-
+const sendButtonMessage = (sender, token, data) => {
+    messageData = {
+        "attachment":{
+          "type":"template",
+          "payload": data
+        }
+    }
+    sendAutoMessage(sender, token, messageData)
+}
+const sendImageMessage = (sender, token, data) => {
+    messageData = {
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type": "media",
+          "elements": data
+        }
+      }
+    }
+    sendAutoMessage(sender, token, messageData)
+}
+const sendVideoMessage = (sender, token, data) => {
+    messageData = {
+      "attachment":{
+        "type":"template",
+        "payload":{
+          "template_type": "media",
+          "elements": data
+        }
+      }
+    }
+    sendAutoMessage(sender, token, messageData)
+}
+const sendFeedbackMessage = (sender, token, data) => {
+    messageData = {
+      "attachment":{
+          "type":"template",
+          "payload": data
+      }
+    }
+    sendAutoMessage(sender, token, messageData)
+}
+const sendGenericMessage = (sender, token, data) => {
+    messageData = {
+      "attachment": {
+          "type": "template",
+          "payload": data
+      }
+    }
+    sendAutoMessage(sender, token, messageData)
+}
+const sendOrderMessage = (sender, token, data) => {
+    messageData = {
+    "attachment":{
+        "type":"template",
+        "payload":data
+    }
+  }
+    sendAutoMessage(sender, token, messageData)
+}
 
 const sendAutoMessage = (sender, token, messageData) => {
   request({
@@ -18,7 +76,7 @@ const sendAutoMessage = (sender, token, messageData) => {
         recipient: {id:sender},
         message: messageData,
     }
-  }, function(error, response, body) {
+  }, const(error, response, body) {
       if (error) {
           console.log('Error sending messages: ', error)
       } else if (response.body.error) {
@@ -28,6 +86,11 @@ const sendAutoMessage = (sender, token, messageData) => {
 }
 module.exports = {
     sendTextMessage,
-    sendAutoMessage
+    sendButtonMessage,
+    sendImageMessage,
+    sendVideoMessage,
+    sendFeedbackMessage,
+    sendGenericMessage,
+    sendOrderMessage
 }
 // module.exports.adminLogged = adminLogged
