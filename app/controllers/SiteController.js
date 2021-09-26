@@ -21,14 +21,19 @@ module.exports = {
 
     const email = req.user ? req.user.email : null
     // const name = req.user ? req.user.name : null
-    const user = await User.findOne({ email: req.user.email }).lean();
+    const user = await User.findOne({ email: req.user.email }).lean().then(user => {
 
-    return res.render('site/index', {
-      layout: 'main_layout',
-      page_title: 'Login/Register',
-      email,
-      name: user.name
-    })
+
+      return res.render('site/index', {
+        layout: 'main_layout',
+        page_title: 'Login/Register',
+        email,
+        name: user.name
+      })
+
+
+    }).catch(err => res.sendStatus(404))
+
   },
   loggedIn: async (req, res) => {
     localStorage.setItem('storedEmail', req.user.email);
