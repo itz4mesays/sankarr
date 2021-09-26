@@ -17,7 +17,7 @@ const sendButtonMessage = (sender, token, data) => {
     messageData = JSON.stringify(messageData, null, 4)
     messageData = messageData.replace(/\\n/g, '').replace(/\\r/g, '')
     console.log("ButtonmessageData:" + messageData)
-    sendAutoMessage(sender, token, messageData)
+    sendAutoMessage(sender, token, data)
 }
 const sendImageMessage = (sender, token, data) => {
     messageData = {
@@ -29,6 +29,7 @@ const sendImageMessage = (sender, token, data) => {
         }
       }
     }
+    console.log("ImagemessageData:" + messageData)
     sendAutoMessage(sender, token, messageData)
 }
 const sendVideoMessage = (sender, token, data) => {
@@ -41,6 +42,7 @@ const sendVideoMessage = (sender, token, data) => {
         }
       }
     }
+    console.log("VideomessageData:" + messageData)
     sendAutoMessage(sender, token, messageData)
 }
 const sendFeedbackMessage = (sender, token, data) => {
@@ -50,7 +52,8 @@ const sendFeedbackMessage = (sender, token, data) => {
           "payload": data
       }
     }
-    sendAutoMessage(sender, token, messageData)
+    console.log("FeedbackmessageData:" + messageData)
+    sendAutoMessage(sender, token, data)
 }
 const sendGenericMessage = (sender, token, data) => {
     // messageData = {
@@ -69,7 +72,8 @@ const sendOrderMessage = (sender, token, data) => {
         "payload":data
     }
   }
-    sendAutoMessage(sender, token, messageData)
+  console.log("OrdermessageData:" + messageData)
+    sendAutoMessage(sender, token, data)
 }
 
 const sendAutoMessage = (sender, token, messageData) => {
