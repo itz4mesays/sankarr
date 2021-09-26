@@ -21,9 +21,9 @@ module.exports = {
 
     const email = req.user ? req.user.email : null
     // const name = req.user ? req.user.name : null
-    const user = await User.findOne({ email: req.user.email }).lean().then(user => {
+    User.findOne({ email: req.user.email }).lean().then(user => {
 
-      const name = user.name ? user.name : null
+      const name = user.name ? user.name : "Guest!"
       return res.render('site/index', {
         layout: 'main_layout',
         page_title: 'Login/Register',
