@@ -83,11 +83,11 @@ module.exports = {
         sender = event.sender.id
         if (event.message && event.message.text) {
           requestData = event.message.text
-          // console.log("requestData:" + requestData)
+          console.log("requestData:" + requestData)
           ConfigSite.findOne({uid: user_env.uid, req: event.message.text}).lean().then(configSite => {
             responseData = configSite.response
             requestType = configSite.rtype
-            // console.log("requestType:" + requestType)
+            console.log("requestType:" + requestType)
             if (requestType === 'text') {
                 sendTextMessage(sender, token, responseData.substring(0, 200))
                 // continue
