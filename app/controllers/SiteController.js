@@ -20,20 +20,14 @@ module.exports = {
   home: async (req, res) => {
 
     const email = req.user ? req.user.email : null
-    // const name = req.user ? req.user.name : null
-    User.findOne({ email: req.user.email }).lean().then(user => {
+    const name = req.user ? req.user.name : "Guest!"
 
-      const name = user.name ? user.name : "Guest!"
-      return res.render('site/index', {
-        layout: 'main_layout',
-        page_title: 'Login/Register',
-        email,
-        name
-      })
-
-
-    }).catch(err => res.sendStatus(404))
-
+    return res.render('site/index', {
+      layout: 'main_layout',
+      page_title: 'Login/Register',
+      email,
+      name
+    })
   },
   loggedIn: async (req, res) => {
     localStorage.setItem('storedEmail', req.user.email);
