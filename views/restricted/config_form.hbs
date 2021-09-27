@@ -475,10 +475,13 @@ $(document).ready(function(){
       var msgReq =  $("#Reqq").val();
       var msgFreetext =  $("#freetext").val();
       if(msgType == 'text'){
-        $('#output').val(msgFreetext);
+        messageData = {
+            text:msgFreetext
+        }
+        messageData = JSON.stringify(messageData);
+        $('#output').val(messageData);
       }
       if(msgType == 'image'){
-
         messageData = {
           "attachment":{
               "type":"template",
@@ -492,19 +495,58 @@ $(document).ready(function(){
                 ]
               }
           }
-        }   
-        // console.log(messageData);
+        }
         messageData = JSON.stringify(messageData);
-        // console.log(messageData);
         $('#output').val(messageData);
       }
-      if(msgType == 'text'){
-        $('#output').val(msgFreetext);
+      if(msgType == 'video'){
+        messageData = {
+          "attachment":{
+            "type":"template",
+            "payload":{
+              "template_type": "media",
+              "elements": [
+               {
+                "media_type": "video",
+                "url": msgFreetext
+               }
+              ]
+            }
+          }
+        }
+        messageData = JSON.stringify(messageData);
+        $('#output').val(messageData);
       }
-      if(msgType == 'text'){
-        $('#output').val(msgFreetext);
+      if(msgType == 'button'){
+        var btnJsonStr = '';
+        var ItemArray = [];
+        ItemArray.push({
+          attachment:{
+            type : 'template', 
+            payload:{
+              template_type:'button',
+              text:'test',
+              buttons: []
+            }
+          }
+        });
+       
+        var obj = {};
+        $('#show_button tr').each(function(idx) {
+          var buttontype = $(this).find('#buttontype').val();
+          var btn_url = $(this).find('.btn_url').val();
+          var btn_txt = $(this).find('.btn_txt').val();
+          obj['type'] = buttontype;
+          obj['url'] = btn_url;
+          obj['title'] = btn_txt;
+          ItemArray[0].attachment['payload']['buttons'].push(obj);
+        });
+        var messageData = JSON.stringify(ItemArray);
+        // console.log(messageData);
+        // btnJsonStr = btnJsonStr.replace(/,\s*$/, "");
+        $('#output').val(messageData);
       }
-      if(msgType == 'text'){
+      if(msgType == 'grid'){
         $('#output').val(msgFreetext);
       }
       if(msgType == 'feedback'){
@@ -512,9 +554,8 @@ $(document).ready(function(){
       }
       if(msgType == 'order'){
         // $('#output').val(msgFreetext);
-      }      
-      // console.log("Type"+msgType+"Reg"+msgReq+"Free"+msgFreetext)
-      form.submit();
+      }
+      // form.submit();
     });    
     // Custom Form Submit
 </script>

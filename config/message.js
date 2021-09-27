@@ -1,58 +1,58 @@
 var request = require('request')
 
 const sendTextMessage = (sender, token, data) => {
-  messageData = {
-      text:data
-  }
-  sendAutoMessage(sender, token, messageData)
+  // messageData = {
+  //     text:data
+  // }
+  sendAutoMessage(sender, token, data)
 }
 const sendButtonMessage = (sender, token, data) => {
-  console.log('sendButtonMessage'+data)
-    messageData = {
-        "attachment":{
-          "type":"template",
-          "payload": data
-        }
-    }
-    messageData = JSON.stringify(messageData)
-    // messageData = messageData.replace(/\\n/g, '').replace(/\\r/g, '')
-    console.log("ButtonmessageData:" + messageData)
+  // console.log('sendButtonMessage'+data)
+  //   messageData = {
+  //       "attachment":{
+  //         "type":"template",
+  //         "payload": data
+  //       }
+  //   }
+  //   messageData = JSON.stringify(messageData)
+  //   // messageData = messageData.replace(/\\n/g, '').replace(/\\r/g, '')
+  //   console.log("ButtonmessageData:" + messageData)
     sendAutoMessage(sender, token, data)
 }
 const sendImageMessage = (sender, token, data) => {
-    messageData = {
-      "attachment":{
-        "type":"template",
-        "payload":{
-          "template_type": "media",
-          "elements": data
-        }
-      }
-    }
-    console.log("ImagemessageData:" + messageData)
+    // messageData = {
+    //   "attachment":{
+    //     "type":"template",
+    //     "payload":{
+    //       "template_type": "media",
+    //       "elements": data
+    //     }
+    //   }
+    // }
+    // console.log("ImagemessageData:" + messageData)
     sendAutoMessage(sender, token, data)
 }
 const sendVideoMessage = (sender, token, data) => {
-    messageData = {
-      "attachment":{
-        "type":"template",
-        "payload":{
-          "template_type": "media",
-          "elements": data
-        }
-      }
-    }
-    console.log("VideomessageData:" + messageData)
+    // messageData = {
+    //   "attachment":{
+    //     "type":"template",
+    //     "payload":{
+    //       "template_type": "media",
+    //       "elements": data
+    //     }
+    //   }
+    // }
+    // console.log("VideomessageData:" + messageData)
     sendAutoMessage(sender, token, data)
 }
 const sendFeedbackMessage = (sender, token, data) => {
-    messageData = {
-      "attachment":{
-          "type":"template",
-          "payload": data
-      }
-    }
-    console.log("FeedbackmessageData:" + messageData)
+    // messageData = {
+    //   "attachment":{
+    //       "type":"template",
+    //       "payload": data
+    //   }
+    // }
+    // console.log("FeedbackmessageData:" + messageData)
     sendAutoMessage(sender, token, data)
 }
 const sendGenericMessage = (sender, token, data) => {
