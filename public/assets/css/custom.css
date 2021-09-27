@@ -244,3 +244,16 @@ text-decoration:none;
       line-height: 30px;
       width: 30px;
     }
+    .red-tooltip + .tooltip > .tooltip-inner {
+      background-color: "blue";
+    }
+    .show_addl{
+      padding: 5px;
+      border: 1px solid #eaeaea;
+      margin: 5px;
+      border-radius: 5px;
+      background-color: #e6e6e6;
+    }
+    .pad5{
+      padding: 5px 0px;
+    }

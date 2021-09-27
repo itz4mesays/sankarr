@@ -6,8 +6,17 @@
             <h4 class="mb-3">Config Form</h4>
 
             <div class="text-right">
-                <i class="fa fa-plus-square" onclick="addRow('dataTable')"  title="Click to Add More"></i>
-                 <i class="fa fa-trash" onclick="deleteRow('dataTable')"  title="Click to Delete "></i>
+                <span>
+                  <i class="fa fa-question-circle red-tooltip text-tooltip" data-toggle="tooltip" data-html="true" title="It will render as conversation plain text"></i>
+                  <i class="fa fa-question-circle red-tooltip image-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/image.png' alt='image' width='150'/>"></i>
+                  <i class="fa fa-question-circle red-tooltip video-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/video.png' alt='image' width='150'/>"></i>
+                  <i class="fa fa-question-circle red-tooltip button-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/button.png' alt='image' width='150'/>"></i>
+                  <i class="fa fa-question-circle red-tooltip grid-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/grid.png' alt='image' width='150'/>"></i>
+                  <i class="fa fa-question-circle red-tooltip feedback-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/feedback.png' alt='image' width='150'/>"></i>
+                  <i class="fa fa-question-circle red-tooltip order-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/order.png' alt='image' width='150'/>"></i>
+                </span>               
+<!--                 <i class="fa fa-plus-square" onclick="addRow('dataTable')"  title="Click to Add More"></i>
+                 <i class="fa fa-trash" onclick="deleteRow('dataTable')"  title="Click to Delete "></i>   -->               
             </div>
             <div class="text-right">
                
@@ -17,21 +26,95 @@
             <table id="dataTable" width="100%" border="0">
                 <tbody class="table-body">
                     <tr class="table-row">
-                    <td width="50">
+                    <td width="20">                     
                         <select onchange="grab(this)" name="populated_List[]" class="form-control popList" required id="popList">
                             <option value="">Select Type</option>
                             <option value="button">Button</option>
                             <option value="text">Text</option>
                             <option value="image">Image</option>
                             <option value="video">Video</option>
-                            <option value="feedback">Feedback</option>
                             <option value="grid">Grid</option>
-                            <option value="order">Order</option>
+                            <!-- <option value="feedback">Feedback</option> -->
+                            <!-- <option value="order">Order</option> -->
                         </select>
+                        <div class="pad5">
+                          <input type="text" required id="Reqq" name="Reqq[]" class="form-control" placeholder="Req"/>
+                        </div>
                     </td>
-                    <td width="100"><input type="text" name="Reqq[]" class="form-control" placeholder="Req"/></td>
+                    <!--<td width="100"><input type="text" name="Reqq[]" class="form-control" placeholder="Req"/></td>-->
                     <td width="250"><textarea type="text" name="Response[]" class="form-control response" placeholder="Response" id="output" /></textarea></td>
-                    
+                    <td width="80">
+                      <input type="text" id="freetext" name="freetext[]" class="form-control freetext" placeholder="Image or Video Url"/>
+                      <div class="show_addl">
+                      <table id="show_button" width="100%" border="0">
+                        <tbody class="table-body">
+                          <tr class="table-row">
+                            <td width="65">                        
+                              <fieldset name="show_button[]">
+                                <div class="pad5">
+                                  <select onchange="" name="buttontype[]" class="form-control buttontype" id="buttontype">
+                                      <option value="">Button Type</option>
+                                      <option value="web_url">Redirect</option>
+                                      <option value="postback">Postback</option>
+                                  </select>
+                                </div>
+                                <div class="pad5">
+                                  <input type="text" name="btn_url[]" class="form-control btn_url" placeholder="Redirect Url"/>
+                                </div>
+                                <div class="pad5">
+                                  <input type="text" name="btn_txt[]" class="form-control btn_txt" placeholder="Button Label"/> 
+                                </div>
+                                <div class="text-right">
+                                  <i class="fa fa-plus-square" onclick="addRow('show_button')"  title="Add More Button"></i>
+                                   <i class="fa fa-trash" onclick="deleteRow('show_button')"  title="Click to Delete "></i>
+                                </div>                          
+                              </fieldset>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <table id="show_grid" width="100%" border="0">
+                        <tbody class="table-body">
+                          <tr class="table-row">
+                            <td width="65">                        
+                              <fieldset name="show_grid[]">
+                                <div class="col-md-6" style="float: left;"> 
+                                  <div class="pad5">  
+                                    <input type="text" name="grid_title[]" class="form-control grid_title" placeholder="Title"/>
+                                  </div>
+                                  <div class="pad5">  
+                                    <input type="text" name="grid_subtitle[]" class="form-control grid_subtitle" placeholder="Sub title"/>
+                                  </div>
+                                  <div class="pad5">  
+                                    <input type="text" name="grid_image_url[]" class="form-control grid_image_url" placeholder="Image Url"/>
+                                  </div>
+                                </div>
+                                <div class="col-md-6" style="float: left;"> 
+                                  <div class="pad5">
+                                    <select onchange="" name="gridbuttontype[]" class="form-control gridbuttontype" id="gridbuttontype">
+                                        <option value="">Button Type</option>
+                                        <option value="web_url">Redirect</option>
+                                        <option value="postback">Postback</option>
+                                    </select>
+                                  </div>
+                                  <div class="pad5">
+                                    <input type="text" name="gridbtn_url[]" class="form-control gridbtn_url" placeholder="Redirect Url"/>
+                                  </div>
+                                  <div class="pad5">
+                                    <input type="text" name="gridbtn_txt[]" class="form-control gridbtn_txt" placeholder="Button Label"/> 
+                                  </div>
+                                </div>
+                                <div class="text-right">
+                                  <i class="fa fa-plus-square" onclick="addRow('show_grid')"  title="Add More Button"></i>
+                                   <i class="fa fa-trash" onclick="deleteRow('show_grid')"  title="Click to Delete "></i>
+                                </div>                          
+                              </fieldset>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      </div>                   
+                    </td>
                 </tr>
                 </tbody>
                 
@@ -41,7 +124,7 @@
 
     </div>
 
-    <div class="col-sm-2">
+    <div class="col-sm-2">      
         <button class="btn btn-primary btn-md btn-block" type="submit">Submit</button>
     </div>
 </form>
@@ -74,7 +157,7 @@
 
 <script>
 $(document).ready(function(){
-    
+    $('[data-toggle="tooltip"]').tooltip();
 })
     
 
@@ -96,7 +179,7 @@ $(document).ready(function(){
                 if(res.statusCode == 200){
                     let data = JSON.parse(JSON.stringify(res.message));
                     resp.val(data);
-                    console.log(data)
+                    // console.log(data)
                 }
             }).catch(err=>{
                 console.log(err)
@@ -306,10 +389,62 @@ $(document).ready(function(){
             console.log(err)
         })
     }
-
+    $('.text-tooltip').hide();
+    $('.video-tooltip').hide();
+    $('.image-tooltip').hide();
+    $('.grid-tooltip').hide();
+    $('.feedback-tooltip').hide();
+    $('.order-tooltip').hide();
+    $('.button-tooltip').hide();
+    $('.show_addl').hide();
+    $('#show_button').hide();
+    $('#show_grid').hide();
     $('#popList').on('change', function(){
         let x = $(this).val()
-        
+        $('.text-tooltip').hide();
+        $('.video-tooltip').hide();
+        $('.image-tooltip').hide();
+        $('.grid-tooltip').hide();
+        $('.feedback-tooltip').hide();
+        $('.order-tooltip').hide();
+        $('.button-tooltip').hide();
+        $('.show_addl').hide();
+        $('#show_button').hide();
+        $('#show_grid').hide();
+        if(x=='text'){
+          $('.text-tooltip').show();
+          $('.freetext').attr('placeholder', 'Enter valid Text Response');
+        }
+        if(x=='video'){
+          $('.video-tooltip').show();
+          $('.freetext').attr('placeholder', 'Enter valid Video url');
+        }
+        if(x=='image'){
+          $('.image-tooltip').show();
+          $('.freetext').attr('placeholder', 'Enter valid Image url');
+        }
+        if(x=='button'){
+          $('.button-tooltip').show();
+          $('.show_addl').show();
+          $('#show_button').show();
+          $('.freetext').attr('placeholder', 'Enter valid Text description for the button widget selection');
+        }
+        if(x=='grid'){
+          $('.grid-tooltip').show();
+          $('.show_addl').show();
+          $('#show_grid').show();
+          $('.freetext').attr('placeholder', 'Enter valid title for grid');
+        }
+        if(x=='feedback'){
+          $('.feedback-tooltip').show();
+          $('.show_addl').show();
+          $('.freetext').attr('placeholder', 'Enter valid Ttitle for feedback');
+        }
+        if(x=='order'){
+          $('.order-tooltip').show();
+          $('.show_addl').show();
+          $('.freetext').attr('placeholder', 'Enter valid title for order');
+        }
         if(x != ""){
             let fd= new FormData();
             fd.append('uid', x)
@@ -324,12 +459,62 @@ $(document).ready(function(){
                 if(res.statusCode == 200){
                     let data = JSON.parse(JSON.stringify(res.message));
 
-                    console.log(data)
+                    // console.log(data)
                 }
             }).catch(err=>{
                 console.log(err)
             })
         }
     })
+    // Custom Form Submit
+    const form = document.querySelector("#config-form");
+    form.addEventListener("submit", function (event) {
+      // stop form submission
+      event.preventDefault();
+      var msgType = $('#popList').val();
+      var msgReq =  $("#Reqq").val();
+      var msgFreetext =  $("#freetext").val();
+      if(msgType == 'text'){
+        $('#output').val(msgFreetext);
+      }
+      if(msgType == 'image'){
 
+        messageData = {
+          "attachment":{
+              "type":"template",
+              "payload":{
+                "template_type": "media",
+                "elements": [
+                   {
+                      "media_type": "image",
+                      "url": msgFreetext
+                   }
+                ]
+              }
+          }
+        }   
+        // console.log(messageData);
+        messageData = JSON.stringify(messageData);
+        // console.log(messageData);
+        $('#output').val(messageData);
+      }
+      if(msgType == 'text'){
+        $('#output').val(msgFreetext);
+      }
+      if(msgType == 'text'){
+        $('#output').val(msgFreetext);
+      }
+      if(msgType == 'text'){
+        $('#output').val(msgFreetext);
+      }
+      if(msgType == 'feedback'){
+        // $('#output').val(msgFreetext);
+      }
+      if(msgType == 'order'){
+        // $('#output').val(msgFreetext);
+      }      
+      // console.log("Type"+msgType+"Reg"+msgReq+"Free"+msgFreetext)
+      form.submit();
+    });    
+    // Custom Form Submit
 </script>

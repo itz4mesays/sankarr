@@ -40,7 +40,7 @@ router.post('/edit/:id', isLoggedIn, async (req, res) => {
 router.get('/config-site', isLoggedIn, siteController.config)
 router.post('/config-site/:id', isLoggedIn, async (req, res) => {
   let data = req.body
-
+  // console.log(data)
   const jsonData = Object.values(Object.entries(data)
     .reduce((acc, [ key, value ]) => {
         Object.values(value).forEach((data, i) => {
@@ -50,7 +50,8 @@ router.post('/config-site/:id', isLoggedIn, async (req, res) => {
         return acc;
     }, {  }));
 
-    jsonData.forEach((value, index, self) => {      
+    jsonData.forEach((value, index, self) => { 
+      // console.log(value)     
       new ConfigSite({
         uid: req.params.id,
         rtype: value.populated_List, 
