@@ -541,7 +541,7 @@ $(document).ready(function(){
           obj['title'] = btn_txt;
           ItemArray[0].attachment['payload']['buttons'].push(obj);
         });
-        var messageData = JSON.stringify(ItemArray);
+        var messageData = JSON.stringify(ItemArray[0]);
         // console.log(messageData);
         // btnJsonStr = btnJsonStr.replace(/,\s*$/, "");
         $('#output').val(messageData);
