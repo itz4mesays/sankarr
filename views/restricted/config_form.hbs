@@ -531,8 +531,9 @@ $(document).ready(function(){
           }
         });
        
-        var obj = {};
+        
         $('#show_button tr').each(function(idx) {
+          var obj = {};
           var buttontype = $(this).find('#buttontype').val();
           var btn_url = $(this).find('.btn_url').val();
           var btn_txt = $(this).find('.btn_txt').val();
