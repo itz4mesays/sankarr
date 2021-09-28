@@ -75,7 +75,7 @@
                       </table>
                       <table id="show_grid" width="100%" border="0">
                         <tbody class="table-body">
-                          <tr class="table-row">
+                          <tr class="table-row eachrow">
                             <td width="65">                        
                               <fieldset name="show_grid[]">
                                 <div class="col-md-6" style="float: left;"> 
@@ -90,23 +90,29 @@
                                   </div>
                                 </div>
                                 <div class="col-md-6" style="float: left;"> 
-                                  <div class="pad5">
-                                    <select onchange="" name="gridbuttontype[]" class="form-control gridbuttontype" id="gridbuttontype">
-                                        <option value="">Button Type</option>
-                                        <option value="web_url">Redirect</option>
-                                        <option value="postback">Postback</option>
-                                    </select>
-                                  </div>
-                                  <div class="pad5">
-                                    <input type="text" name="gridbtn_url[]" class="form-control gridbtn_url" placeholder="Redirect Url"/>
-                                  </div>
-                                  <div class="pad5">
-                                    <input type="text" name="gridbtn_txt[]" class="form-control gridbtn_txt" placeholder="Button Label"/> 
+                                  <div id="grid_btn_container">
+                                    <div class="pad5">
+                                      <select onchange="" name="gridbuttontype[]" class="form-control gridbuttontype" id="gridbuttontype">
+                                          <option value="">Button Type</option>
+                                          <option value="web_url">Redirect</option>
+                                          <option value="postback">Postback</option>
+                                      </select>
+                                    </div>
+                                    <div class="pad5">
+                                      <input type="text" name="gridbtn_url[]" class="form-control gridbtn_url" placeholder="Redirect Url"/>
+                                    </div>
+                                    <div class="pad5">
+                                      <input type="text" name="gridbtn_txt[]" class="form-control gridbtn_txt" placeholder="Button Label"/> 
+                                    </div>
+                                    <!-- <div class="text-right">
+                                      <i class="fa fa-plus-square" onclick="addRow('grid_btn_container')"  title="Add More Button"></i>
+                                       <i class="fa fa-trash" onclick="deleteRow('grid_btn_container')"  title="Click to Delete "></i>
+                                    </div>   -->
                                   </div>
                                 </div>
                                 <div class="text-right">
                                   <i class="fa fa-plus-square" onclick="addRow('show_grid')"  title="Add More Button"></i>
-                                   <i class="fa fa-trash" onclick="deleteRow('show_grid')"  title="Click to Delete "></i>
+                                  <i class="fa fa-trash" onclick="deleteRow('show_grid')"  title="Click to Delete "></i>
                                 </div>                          
                               </fieldset>
                             </td>
@@ -530,7 +536,6 @@ $(document).ready(function(){
             }
           }
         });
-       
         
         $('#show_button tr').each(function(idx) {
           var obj = {};
@@ -548,15 +553,86 @@ $(document).ready(function(){
         $('#output').val(messageData);
       }
       if(msgType == 'grid'){
-        $('#output').val(msgFreetext);
+        var ItemArray = [];
+        ItemArray.push({
+          attachment: {
+              type: "template",
+              payload: {
+                template_type: "generic",
+                elements: []
+              } 
+          }
+        });
+        $('#show_grid tr').each(function(idx) {
+          var obj = {};
+          var btn_obj = {};
+          var btns = [];
+          var grid_title = $(this).find('.grid_title').val();
+          var grid_image_url = $(this).find('.grid_image_url').val();
+          var grid_subtitle = $(this).find('.grid_subtitle').val();
+
+          var gridbuttontype = $(this).find('#gridbuttontype').val();
+          var gridbtn_url = $(this).find('.gridbtn_url').val();
+          var gridbtn_txt = $(this).find('.gridbtn_txt').val();
+
+          obj['title'] = grid_title;
+          obj['image_url'] = grid_image_url;
+          obj['subtitle'] = grid_subtitle;
+          
+          btn_obj['type'] = gridbuttontype;
+          if(gridbuttontype == 'web_url'){
+            btn_obj['url'] = gridbtn_url;
+          }
+          if(gridbuttontype == 'postback'){
+            btn_obj['payload'] = gridbtn_url;
+          }
+          btn_obj['title'] = gridbtn_txt;
+          btns.push(btn_obj);
+          obj['buttons'] = btns;
+          ItemArray[0].attachment['payload']['elements'].push(obj);
+        });        
+        var messageData = JSON.stringify(ItemArray[0]);
+        $('#output').val(messageData);
       }
       if(msgType == 'feedback'){
-        // $('#output').val(msgFreetext);
+        var ItemArray = [];
+        ItemArray.push({
+          attachment:{
+            type:"template",
+            payload: {
+              template_type: "customer_feedback",
+              title: "Rate your experience with Original Coast Clothing.",
+              subtitle: "Let Original Coast Clothing know how they are doing by answering two questions",
+              button_title: "Rate Experience",
+              feedback_screens: [{
+                questions:[{
+                  "id": "hauydmns8",
+                  "type": "csat",
+                  "title": "How would you rate your experience with Original Coast Clothing?",
+                  "score_label": "neg_pos",
+                  "score_option": "five_stars",
+                  "follow_up": 
+                  {
+                    "type": "free_form", 
+                    "placeholder": "Give additional feedback"
+                  }
+                }]
+              }],
+              business_privacy: 
+              {
+                  url: "https://www.example.com"
+               },
+              expires_in_days : 3 
+            }
+          }
+        });        
+        var messageData = JSON.stringify(ItemArray[0]);
+        $('#output').val(messageData);
       }
       if(msgType == 'order'){
         // $('#output').val(msgFreetext);
       }
-      form.submit();
+      // form.submit();
     });    
     // Custom Form Submit
 </script>

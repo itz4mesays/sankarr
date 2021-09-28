@@ -76,6 +76,7 @@ module.exports = {
     }
   },
   webhook: async (req, res) => { 
+    console.log(request.body);
     /**
      * Find the profileapi_key is valid
      * check if both access_token and page_token matches the customer with the return id from step 1
