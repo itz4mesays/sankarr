@@ -148,13 +148,14 @@ module.exports = {
           })
         }
         if(event.postback.payload === 'GET_STARTED'){
+          console.log(event.postback.payload)
           sendTextMessage(sender, token, "Hello {{user_first_name}}!")
         }
-        if (event.postback) {
-            text = JSON.stringify(event.postback)
-            // sendTextMessage(sender, token, "Postback received: "+text.substring(0, 200))
-            // continue
-        }
+        // if (event.postback) {
+        //     text = JSON.stringify(event.postback)
+        //     // sendTextMessage(sender, token, "Postback received: "+text.substring(0, 200))
+        //     // continue
+        // }
         if(event.hasOwnProperty('messaging_feedback')){
           // var replyMsg = '{"messaging_type": "RESPONSE","recipient": {"id": '+recipient+'},"message": {"text": "Your feedback received, Thanks for your feedback"}}';          
           sendTextMessage(sender, token, "Your feedback received, Thanks for your feedback")
