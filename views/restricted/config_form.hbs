@@ -37,7 +37,7 @@
               </div>
             </td>
             <!--<td width="100"><input type="text" name="Reqq[]" class="form-control" placeholder="Req"/></td>-->
-            <td width="250"><textarea type="text" name="Response[]" class="form-control response" placeholder="Response" id="output" / style="display:none"></textarea></td>
+            <td width="250" style="display:none"><textarea type="text" name="Response[]" class="form-control response" placeholder="Response" id="output" / ></textarea></td>
             <td width="80">
               <input type="text" id="freetext" name="freetext[]" class="form-control freetext" placeholder="Image or Video Url"/>
               <div class="show_addl">
@@ -424,44 +424,28 @@
               console.log(err)
           })
       }
-      $('.text-tooltip').hide();
-      $('.video-tooltip').hide();
-      $('.image-tooltip').hide();
-      $('.grid-tooltip').hide();
-      $('.feedback-tooltip').hide();
-      $('.order-tooltip').hide();
-      $('.button-tooltip').hide();
-      $('.show_addl').hide();
-      $('#show_button').hide();
-      $('#show_grid').hide();
-      $('#show_feedback').hide();
+      hideAllElment();
       $('#popList').on('change', function(){
           let x = $(this).val()
-          $('.text-tooltip').hide();
-          $('.video-tooltip').hide();
-          $('.image-tooltip').hide();
-          $('.grid-tooltip').hide();
-          $('.feedback-tooltip').hide();
-          $('.order-tooltip').hide();
-          $('.button-tooltip').hide();
-          $('.show_addl').hide();
-          $('#show_button').hide();
-          $('#show_grid').hide();
-          $('#show_feedback').hide();
+          hideAllElment();
           if(x=='text'){
             $('.text-tooltip').show();
+            $('#freetext').show();
             $('.freetext').attr('placeholder', 'Enter valid Text Response');
           }
           if(x=='video'){
             $('.video-tooltip').show();
+            $('#freetext').show();
             $('.freetext').attr('placeholder', 'Enter valid Video url');
           }
           if(x=='image'){
             $('.image-tooltip').show();
+            $('#freetext').show();
             $('.freetext').attr('placeholder', 'Enter valid Image url');
           }
           if(x=='button'){
             $('.button-tooltip').show();
+            $('#freetext').show();
             $('.show_addl').show();
             $('#show_button').show();
             $('.freetext').attr('placeholder', 'Enter valid Text description for the button widget selection');
@@ -700,5 +684,19 @@
           $('#score_options').append(score_options);        
         }
       })   
+      function hideAllElment() {
+        $('.text-tooltip').hide();
+        $('.video-tooltip').hide();
+        $('.image-tooltip').hide();
+        $('.grid-tooltip').hide();
+        $('.feedback-tooltip').hide();
+        $('.order-tooltip').hide();
+        $('.button-tooltip').hide();
+        $('.show_addl').hide();
+        $('#show_button').hide();
+        $('#show_grid').hide();
+        $('#show_feedback').hide();
+        $('#freetext').hide();        
+      }
       // Custom Form Submit
 </script>
