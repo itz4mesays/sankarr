@@ -114,8 +114,14 @@ module.exports = {
         //   event.message.text = "Get Started"
         //   // sendTextMessage(sender, token, "Hello {{user_first_name}}!")
         // }        
-        if (event.message && event.message.text) {
-          requestData = event.message.text
+        if ((event.message && event.message.text) || (event.postback.payload === 'GET_STARTED')) {
+          
+          if(event.postback.payload === 'GET_STARTED'){
+            requestData = 'grid'
+          }
+          else{
+            requestData = event.message.text
+          }
           // console.log("requestData:" + requestData)
           ConfigSite.findOne({uid: user_env.uid, req: event.message.text}).lean().then(configSite => {
             responseData = configSite.response
