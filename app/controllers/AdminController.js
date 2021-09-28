@@ -146,7 +146,7 @@ module.exports = {
           })
         }
         if(event.postback.payload=='GET_STARTED'){
-          sendTextMessage(sender, token, "Hello {{user_first_name}}!")
+          // sendTextMessage(sender, token, "Hello {{user_first_name}}!")
         }
         if (event.postback) {
             text = JSON.stringify(event.postback)
