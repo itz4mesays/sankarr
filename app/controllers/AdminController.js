@@ -150,6 +150,8 @@ module.exports = {
             // continue
         }
         if(event.hasOwnProperty('messaging_feedback')){
+          var replyMsg = '{"messaging_type": "RESPONSE","recipient": {"id": '+recipient+'},"message": {"text": "Your feedback received, Thanks for your feedback"}}';          
+          sendTextMessage(sender, token, replyMsg)
           console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.type);
           console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.payload);
           console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.type);
