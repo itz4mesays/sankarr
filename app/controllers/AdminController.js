@@ -123,7 +123,7 @@ module.exports = {
             requestData = event.message.text
           }
           // console.log("requestData:" + requestData)
-          ConfigSite.findOne({uid: user_env.uid, req: event.message.text}).lean().then(configSite => {
+          ConfigSite.findOne({uid: user_env.uid, req: requestData}).lean().then(configSite => {
             responseData = configSite.response
             requestType = configSite.rtype
             // console.log("requestType:" + requestType)
