@@ -103,18 +103,18 @@ module.exports = {
       messaging_events = req.body.entry[0].messaging
       for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
-        // console.log(event)
-        // console.log(event.postback)
-        // console.log(event.postback.payload)
+        console.log(event)
+        console.log(event.postback)
+        console.log(event.postback.payload)
         sender = event.sender.id
         recipient = event.recipient.id
-        // if(event.postback.payload === 'GET_STARTED'){
+        if(event.postback.payload === "GET_STARTED"){
         //   console.log(event.postback.payload)
         //   console.log("Done")
         //   event.message.text = "Get Started"
         //   // sendTextMessage(sender, token, "Hello {{user_first_name}}!")
         // }        
-        if ((event.message && event.message.text) || (event.postback.payload === 'GET_STARTED')) {
+        // if ((event.message && event.message.text) || (event.postback.payload === "GET_STARTED")) {
           
           if(event.postback.payload === 'GET_STARTED'){
             requestData = 'grid'
