@@ -1,638 +1,699 @@
 <form class="needs-validation" id="config-form" method="post" action="/config-site/{{ id }}">
-
-    <div class="row">
-        
-        <div class="col-md-12 order-md-2 mb-4">
-            <h4 class="mb-3">Config Form</h4>
-
-            <div class="text-right">
-                <span>
-                  <i class="fa fa-question-circle red-tooltip text-tooltip" data-toggle="tooltip" data-html="true" title="It will render as conversation plain text"></i>
-                  <i class="fa fa-question-circle red-tooltip image-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/image.png' alt='image' width='150'/>"></i>
-                  <i class="fa fa-question-circle red-tooltip video-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/video.png' alt='image' width='150'/>"></i>
-                  <i class="fa fa-question-circle red-tooltip button-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/button.png' alt='image' width='150'/>"></i>
-                  <i class="fa fa-question-circle red-tooltip grid-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/grid.png' alt='image' width='150'/>"></i>
-                  <i class="fa fa-question-circle red-tooltip feedback-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/feedback.png' alt='image' width='150'/>"></i>
-                  <i class="fa fa-question-circle red-tooltip order-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/order.png' alt='image' width='150'/>"></i>
-                </span>               
-<!--                 <i class="fa fa-plus-square" onclick="addRow('dataTable')"  title="Click to Add More"></i>
-                 <i class="fa fa-trash" onclick="deleteRow('dataTable')"  title="Click to Delete "></i>   -->               
-            </div>
-            <div class="text-right">
-               
-            </div>
-            <hr class="mb-3">
-
-            <table id="dataTable" width="100%" border="0">
-                <tbody class="table-body">
+  <div class="row">
+    <div class="col-md-12 order-md-2 mb-4">
+      <h4 class="mb-3">Config Form</h4>
+      <div class="text-right">
+        <span>
+        <i class="fa fa-question-circle red-tooltip text-tooltip" data-toggle="tooltip" data-html="true" title="It will render as conversation plain text"></i>
+        <i class="fa fa-question-circle red-tooltip image-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/image.png' alt='image' width='150'/>"></i>
+        <i class="fa fa-question-circle red-tooltip video-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/video.png' alt='image' width='150'/>"></i>
+        <i class="fa fa-question-circle red-tooltip button-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/button.png' alt='image' width='150'/>"></i>
+        <i class="fa fa-question-circle red-tooltip grid-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/grid.png' alt='image' width='150'/>"></i>
+        <i class="fa fa-question-circle red-tooltip feedback-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/feedback.png' alt='image' width='150'/>"></i>
+        <i class="fa fa-question-circle red-tooltip order-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/order.png' alt='image' width='150'/>"></i>
+        </span>               
+        <!--                 <i class="fa fa-plus-square" onclick="addRow('dataTable')"  title="Click to Add More"></i>
+          <i class="fa fa-trash" onclick="deleteRow('dataTable')"  title="Click to Delete "></i>   -->               
+      </div>
+      <div class="text-right">
+      </div>
+      <hr class="mb-3">
+      <table id="dataTable" width="100%" border="0">
+        <tbody class="table-body">
+          <tr class="table-row">
+            <td width="20">
+              <select onchange="grab(this)" name="populated_List[]" class="form-control popList" required id="popList">
+                <option value="">Select Type</option>
+                <option value="button">Button</option>
+                <option value="text">Text</option>
+                <option value="image">Image</option>
+                <option value="video">Video</option>
+                <option value="grid">Grid</option>
+                <option value="feedback">Feedback</option>
+                <!-- <option value="order">Order</option> -->
+              </select>
+              <div class="pad5">
+                <input type="text" required id="Reqq" name="Reqq[]" class="form-control" placeholder="Req"/>
+              </div>
+            </td>
+            <!--<td width="100"><input type="text" name="Reqq[]" class="form-control" placeholder="Req"/></td>-->
+            <td width="250"><textarea type="text" name="Response[]" class="form-control response" placeholder="Response" id="output" /></textarea></td>
+            <td width="80">
+              <input type="text" id="freetext" name="freetext[]" class="form-control freetext" placeholder="Image or Video Url"/>
+              <div class="show_addl">
+                <table id="show_button" width="100%" border="0">
+                  <tbody class="table-body">
                     <tr class="table-row">
-                    <td width="20">                     
-                        <select onchange="grab(this)" name="populated_List[]" class="form-control popList" required id="popList">
-                            <option value="">Select Type</option>
-                            <option value="button">Button</option>
-                            <option value="text">Text</option>
-                            <option value="image">Image</option>
-                            <option value="video">Video</option>
-                            <option value="grid">Grid</option>
-                            <!-- <option value="feedback">Feedback</option> -->
-                            <!-- <option value="order">Order</option> -->
-                        </select>
-                        <div class="pad5">
-                          <input type="text" required id="Reqq" name="Reqq[]" class="form-control" placeholder="Req"/>
-                        </div>
-                    </td>
-                    <!--<td width="100"><input type="text" name="Reqq[]" class="form-control" placeholder="Req"/></td>-->
-                    <td width="250"><textarea type="text" name="Response[]" class="form-control response" placeholder="Response" id="output" /></textarea></td>
-                    <td width="80">
-                      <input type="text" id="freetext" name="freetext[]" class="form-control freetext" placeholder="Image or Video Url"/>
-                      <div class="show_addl">
-                      <table id="show_button" width="100%" border="0">
-                        <tbody class="table-body">
-                          <tr class="table-row">
-                            <td width="65">                        
-                              <fieldset name="show_button[]">
-                                <div class="pad5">
-                                  <select onchange="" name="buttontype[]" class="form-control buttontype" id="buttontype">
-                                      <option value="">Button Type</option>
-                                      <option value="web_url">Redirect</option>
-                                      <option value="postback">Postback</option>
-                                  </select>
-                                </div>
-                                <div class="pad5">
-                                  <input type="text" name="btn_url[]" class="form-control btn_url" placeholder="Redirect Url"/>
-                                </div>
-                                <div class="pad5">
-                                  <input type="text" name="btn_txt[]" class="form-control btn_txt" placeholder="Button Label"/> 
-                                </div>
-                                <div class="text-right">
-                                  <i class="fa fa-plus-square" onclick="addRow('show_button')"  title="Add More Button"></i>
-                                   <i class="fa fa-trash" onclick="deleteRow('show_button')"  title="Click to Delete "></i>
-                                </div>                          
-                              </fieldset>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      <table id="show_grid" width="100%" border="0">
-                        <tbody class="table-body">
-                          <tr class="table-row eachrow">
-                            <td width="65">                        
-                              <fieldset name="show_grid[]">
-                                <div class="col-md-6" style="float: left;"> 
-                                  <div class="pad5">  
-                                    <input type="text" name="grid_title[]" class="form-control grid_title" placeholder="Title"/>
-                                  </div>
-                                  <div class="pad5">  
-                                    <input type="text" name="grid_subtitle[]" class="form-control grid_subtitle" placeholder="Sub title"/>
-                                  </div>
-                                  <div class="pad5">  
-                                    <input type="text" name="grid_image_url[]" class="form-control grid_image_url" placeholder="Image Url"/>
-                                  </div>
-                                </div>
-                                <div class="col-md-6" style="float: left;"> 
-                                  <div id="grid_btn_container">
-                                    <div class="pad5">
-                                      <select onchange="" name="gridbuttontype[]" class="form-control gridbuttontype" id="gridbuttontype">
-                                          <option value="">Button Type</option>
-                                          <option value="web_url">Redirect</option>
-                                          <option value="postback">Postback</option>
-                                      </select>
-                                    </div>
-                                    <div class="pad5">
-                                      <input type="text" name="gridbtn_url[]" class="form-control gridbtn_url" placeholder="Redirect Url"/>
-                                    </div>
-                                    <div class="pad5">
-                                      <input type="text" name="gridbtn_txt[]" class="form-control gridbtn_txt" placeholder="Button Label"/> 
-                                    </div>
-                                    <!-- <div class="text-right">
-                                      <i class="fa fa-plus-square" onclick="addRow('grid_btn_container')"  title="Add More Button"></i>
-                                       <i class="fa fa-trash" onclick="deleteRow('grid_btn_container')"  title="Click to Delete "></i>
-                                    </div>   -->
-                                  </div>
-                                </div>
-                                <div class="text-right">
-                                  <i class="fa fa-plus-square" onclick="addRow('show_grid')"  title="Add More Button"></i>
-                                  <i class="fa fa-trash" onclick="deleteRow('show_grid')"  title="Click to Delete "></i>
-                                </div>                          
-                              </fieldset>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                      </div>                   
-                    </td>
-                </tr>
-                </tbody>
-                
-            </table>         
-            
-        </div>
+                      <td width="65">
+                        <fieldset name="show_button[]">
+                          <div class="pad5">
+                            <select onchange="" name="buttontype[]" class="form-control buttontype" id="buttontype">
+                              <option value="">Button Type</option>
+                              <option value="web_url">Redirect</option>
+                              <option value="postback">Postback</option>
+                            </select>
+                          </div>
+                          <div class="pad5">
+                            <input type="text" name="btn_url[]" class="form-control btn_url" placeholder="Redirect Url"/>
+                          </div>
+                          <div class="pad5">
+                            <input type="text" name="btn_txt[]" class="form-control btn_txt" placeholder="Button Label"/> 
+                          </div>
+                          <div class="text-right">
+                            <i class="fa fa-plus-square" onclick="addRow('show_button')"  title="Add More Button"></i>
+                            <i class="fa fa-trash" onclick="deleteRow('show_button')"  title="Click to Delete "></i>
+                          </div>
+                        </fieldset>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table id="show_grid" width="100%" border="0">
+                  <tbody class="table-body">
+                    <tr class="table-row eachrow">
+                      <td width="65">
+                        <fieldset name="show_grid[]">
+                          <div class="col-md-6" style="float: left;">
+                            <div class="pad5">  
+                              <input type="text" name="grid_title[]" class="form-control grid_title" placeholder="Title"/>
+                            </div>
+                            <div class="pad5">  
+                              <input type="text" name="grid_subtitle[]" class="form-control grid_subtitle" placeholder="Sub title"/>
+                            </div>
+                            <div class="pad5">  
+                              <input type="text" name="grid_image_url[]" class="form-control grid_image_url" placeholder="Image Url"/>
+                            </div>
+                          </div>
+                          <div class="col-md-6" style="float: left;">
+                            <div id="grid_btn_container">
+                              <div class="pad5">
+                                <select onchange="" name="gridbuttontype[]" class="form-control gridbuttontype" id="gridbuttontype">
+                                  <option value="">Button Type</option>
+                                  <option value="web_url">Redirect</option>
+                                  <option value="postback">Postback</option>
+                                </select>
+                              </div>
+                              <div class="pad5">
+                                <input type="text" name="gridbtn_url[]" class="form-control gridbtn_url" placeholder="Redirect Url"/>
+                              </div>
+                              <div class="pad5">
+                                <input type="text" name="gridbtn_txt[]" class="form-control gridbtn_txt" placeholder="Button Label"/> 
+                              </div>
+                              <!-- <div class="text-right">
+                                <i class="fa fa-plus-square" onclick="addRow('grid_btn_container')"  title="Add More Button"></i>
+                                 <i class="fa fa-trash" onclick="deleteRow('grid_btn_container')"  title="Click to Delete "></i>
+                                </div>   -->
+                            </div>
+                          </div>
+                          <div class="text-right">
+                            <i class="fa fa-plus-square" onclick="addRow('show_grid')"  title="Add More Button"></i>
+                            <i class="fa fa-trash" onclick="deleteRow('show_grid')"  title="Click to Delete "></i>
+                          </div>
+                        </fieldset>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table id="show_feedback" width="100%" border="0">
+                  <tbody class="table-body">
+                    <tr class="table-row">
+                      <td width="65">
+                        <fieldset name="show_feedback[]">
+                          <div class="pad5">
+                            <select onchange="" name="buttontype[]" class="form-control buttontype" id="buttontype">
+                              <option value="">Feedback Type</option>
+                              <option value="csat">Customer Satisfaction Score</option>
+                              <option value="nps">Net Promoter Score</option>
+                              <option value="ces">Customer Effort Score</option>
+                            </select>
+                          </div>
+                          <div class="pad5">
+                            <input type="text" name="title[]" class="form-control title" placeholder="Title"/>
+                          </div>
+                          <div class="pad5">
+                            <input type="text" name="sub_title[]" class="form-control sub_title" placeholder="Sub Title"/> 
+                          </div>
+                          <div class="pad5">
+                            <input type="text" name="button_title[]" class="form-control button_title" placeholder="Button Title"/> 
+                          </div>
+                          <div class="pad5">
+                            <select onchange="" name="score_level[]" class="form-control score_level" id="score_level">
 
-    </div>
+                            </select>
+                          </div>
+                          <div class="pad5">
+                            <select onchange="" name="score_options[]" class="form-control score_options" id="score_options">
 
-    <div class="col-sm-2">      
-        <button class="btn btn-primary btn-md btn-block" type="submit">Submit</button>
+                            </select>
+                          </div>
+                          <div class="pad5">
+                            <input type="text" name="feedback_qn_title[]" class="form-control feedback_qn_title" placeholder="Feedback question Title"/> 
+                          </div> 
+                          <div class="pad5">
+                            <input type="text" name="privacy_policy_url[]" class="form-control privacy_policy_url" placeholder="Business Privacy URL"/> 
+                          </div> 
+                        </fieldset>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>                
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
+  </div>
+  <div class="col-sm-2">      
+    <button class="btn btn-primary btn-md btn-block" type="submit">Submit</button>
+  </div>
 </form>
-
 <br/>
 <hr class="mb-4">
-
 <div class="col-md-12">
-
-        <div class="output"> </div>
-
-        <br/>
-
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h4 class="">Records </h4>
-        </div>
-        <div class="panel-body">  
-            <div class="loading"></div>
-
-            <div id="grid"></div>
-        </div>
+  <div class="output"> </div>
+  <br/>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="">Records </h4>
     </div>
+    <div class="panel-body">
+      <div class="loading"></div>
+      <div id="grid"></div>
+    </div>
+  </div>
 </div>
-
 <script
   src="https://code.jquery.com/jquery-3.4.1.min.js"
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
-
 <script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-})
-    
-
-    function grab(event){
-        let x=$(event).val()
-        let resp = $(event).closest('tr').find('.response');
-       // alert($(resp).val());
-        if(x != ""){
-            let fd= new FormData();
-            fd.append('uid', x)
-            let url = window.location.origin + "/fetch-response/" + x
-            fetch(url ,{
-                method : 'GET',
-                headers : {
-                    'Accept':'application/json',
-                    'Content-Type':'application/json'
-                },
-            }).then(res=> res.json()).then(res=>{
-                if(res.statusCode == 200){
-                    let data = JSON.parse(JSON.stringify(res.message));
-                    resp.val(data);
-                    // console.log(data)
-                }
-            }).catch(err=>{
-                console.log(err)
-            })
-        }
-    }
-
-    function addRow (tblID) {
-        
-        var table = document.getElementById(tblID);
-
-        var rowCount = table.rows.length;
-        var row = table.insertRow(rowCount);
-
-        var colCount = table.rows[0].cells.length;
-
-        for(var i=0; i<colCount; i++) {
-
-            var newcell	= row.insertCell(i);
-
-            newcell.innerHTML = table.rows[0].cells[i].innerHTML;
-            //alert(newcell.childNodes);
-            switch(newcell.childNodes[0].type) {
-                case "text":
-                        newcell.childNodes[0].value = "";
-                        break;
-                case "checkbox":
-                        newcell.childNodes[0].checked = false;
-                        break;
-                case "select-one":
-                        newcell.childNodes[0].selectedIndex = 0;
-                        break;
-            }
-        }
-
-    }
-
-    function deleteRow (tblID) {
-        
-        var table = document.getElementById(tblID);
-
-        var rowCount = table.rows.length;
-        if(rowCount > 1){
-            //table.getElementsByTagName('tr')[rowCount-1].romove();
-            lastRow=rowCount-1;
-            $('#'+tblID).find('tr:last').remove();
-        }
-    }
-
-    const loadingImage = () => {
-        let elem = document.createElement("img")
-        elem.setAttribute("src", window.location.origin + "/assets/images/loading.gif")
-        elem.setAttribute("width", 55);
-        document.querySelector(".loading").appendChild(elem)
-    }
-
-    loadingImage()
-
-    let y = $('.outRes').html()
-    
-    if(y != ""){
-
-        let url = window.location.origin + "/user-config"
-        fetch(url ,{
-            method : 'GET',
-            headers : {
-                'Accept':'application/json',
-                'Content-Type':'application/json'
-            },
-        }).then(res=> res.json()).then(res=>{
-
-            $('.loading').empty()
-
-           var gridData = res.message
-
-            $(document).ready(function () {
-                $("#grid").shieldGrid({
-                    dataSource: {
-                        data: gridData,
-                        schema: {
-                            fields: {
-                                id: { path: "_id", type: String },
-                                req: { path: "req", type: String },
-                                response: { path: "response", type: String }
-                            }
-                        }
-                    },
-                    sorting: {
-                        multiple: true
-                    },
-                    events: {
-                        command: function(e) {
-                            if(e.commandName == 'save'){
-                                let data = e.target.dataSource.tracker.changes.edited[0].data
-                                let x = {
-                                    id: data.id,
-                                    req_q: data.req,
-                                    response: data.response
-                                }
-                                if(data.id){
-                                    let url = window.location.origin + "/update-config"
-                                    fetch(url ,{
-                                        method : 'POST',
-                                        headers : {
-                                            'Accept':'application/json',
-                                            'Content-Type':'application/json'
-                                        },
-                                        body : JSON.stringify(x)
-                                    }).then(res=> res.json()).then(res=>{
-                                        if(res.statusCode == 200){
-                                            $('.output').html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                            ${res.message}
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </div>`)
-                                        }else{
-                                            $('.output').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            ${res.message}
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </div>`)
-                                        }
-                                    }).catch(err=>{
-                                         $('.output').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                            ${err}
-                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                <span aria-hidden="true">&times;</span>
-                                            </button>
-                                            </div>`)
-                                    })
-                                }
-                            }
-                            
-                            //console.log(row) 
-                        }    
-                    },
-                    rowHover: false,
-                    columns: [
-                        { field: "req", title: "Req", width: "200px" },
-                        { field: "response", title: "Response" },              
-                        {
-                            width: 70,
-                            title: "Action",
-                            buttons: [
-                                { commandName: "edit", caption: "Edit" },
-                                { commandName: "delete", caption: "Delete" }
-                            ]
-                        }
-                    ],
-                    editing: {
-                        enabled: true,
-                        mode: "popup",
-                        confirmation: {
-                            "delete": {
-                                enabled: true,
-                                template: function (item) {
-
-                                    var x = confirm("This record will be deleted. Are you sure you want to delete?");
-
-                                    if (x){
-                                        let url = window.location.origin + "/delete-config/" + item.id
-                                        fetch(url ,{
-                                            method : 'GET',
-                                            headers : {
-                                                'Accept':'application/json',
-                                                'Content-Type':'application/json'
-                                            }
-                                        }).then(res=> res.json()).then(res=>{
-                                            if(res.statusCode == 200){
-                                                $('.output').html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
-                                                ${res.message}
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                </div>`)
-                                            }else{
-                                                $('.output').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                ${res.message}
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                </div>`)
-                                            }
-                                        }).catch(err=>{
-                                            $('.output').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
-                                                ${err}
-                                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                                </div>`)
-                                        })
-                                    }
-                                    
-                                }
-                            }
-                        }
-                    }            
-                });
-            
-            
-            });
-
-            
-        }).catch(err=>{
-            console.log(err)
-        })
-    }
-    $('.text-tooltip').hide();
-    $('.video-tooltip').hide();
-    $('.image-tooltip').hide();
-    $('.grid-tooltip').hide();
-    $('.feedback-tooltip').hide();
-    $('.order-tooltip').hide();
-    $('.button-tooltip').hide();
-    $('.show_addl').hide();
-    $('#show_button').hide();
-    $('#show_grid').hide();
-    $('#popList').on('change', function(){
-        let x = $(this).val()
-        $('.text-tooltip').hide();
-        $('.video-tooltip').hide();
-        $('.image-tooltip').hide();
-        $('.grid-tooltip').hide();
-        $('.feedback-tooltip').hide();
-        $('.order-tooltip').hide();
-        $('.button-tooltip').hide();
-        $('.show_addl').hide();
-        $('#show_button').hide();
-        $('#show_grid').hide();
-        if(x=='text'){
-          $('.text-tooltip').show();
-          $('.freetext').attr('placeholder', 'Enter valid Text Response');
-        }
-        if(x=='video'){
-          $('.video-tooltip').show();
-          $('.freetext').attr('placeholder', 'Enter valid Video url');
-        }
-        if(x=='image'){
-          $('.image-tooltip').show();
-          $('.freetext').attr('placeholder', 'Enter valid Image url');
-        }
-        if(x=='button'){
-          $('.button-tooltip').show();
-          $('.show_addl').show();
-          $('#show_button').show();
-          $('.freetext').attr('placeholder', 'Enter valid Text description for the button widget selection');
-        }
-        if(x=='grid'){
-          $('.grid-tooltip').show();
-          $('.show_addl').show();
-          $('#show_grid').show();
-          $('.freetext').attr('placeholder', 'Enter valid title for grid');
-        }
-        if(x=='feedback'){
-          $('.feedback-tooltip').show();
-          $('.show_addl').show();
-          $('.freetext').attr('placeholder', 'Enter valid Ttitle for feedback');
-        }
-        if(x=='order'){
-          $('.order-tooltip').show();
-          $('.show_addl').show();
-          $('.freetext').attr('placeholder', 'Enter valid title for order');
-        }
-        if(x != ""){
-            let fd= new FormData();
-            fd.append('uid', x)
-            let url = window.location.origin + "/fetch-response/" + x
-            fetch(url ,{
-                method : 'GET',
-                headers : {
-                    'Accept':'application/json',
-                    'Content-Type':'application/json'
-                },
-            }).then(res=> res.json()).then(res=>{
-                if(res.statusCode == 200){
-                    let data = JSON.parse(JSON.stringify(res.message));
-
-                    // console.log(data)
-                }
-            }).catch(err=>{
-                console.log(err)
-            })
-        }
-    })
-    // Custom Form Submit
-    const form = document.querySelector("#config-form");
-    form.addEventListener("submit", function (event) {
-      // stop form submission
-      event.preventDefault();
-      var msgType = $('#popList').val();
-      var msgReq =  $("#Reqq").val();
-      var msgFreetext =  $("#freetext").val();
-      if(msgType == 'text'){
-        messageData = {
-            text:msgFreetext
-        }
-        messageData = JSON.stringify(messageData);
-        $('#output').val(messageData);
+  $(document).ready(function(){
+      $('[data-toggle="tooltip"]').tooltip();
+  })
+      
+  
+      function grab(event){
+          let x=$(event).val()
+          let resp = $(event).closest('tr').find('.response');
+         // alert($(resp).val());
+          if(x != ""){
+              let fd= new FormData();
+              fd.append('uid', x)
+              let url = window.location.origin + "/fetch-response/" + x
+              fetch(url ,{
+                  method : 'GET',
+                  headers : {
+                      'Accept':'application/json',
+                      'Content-Type':'application/json'
+                  },
+              }).then(res=> res.json()).then(res=>{
+                  if(res.statusCode == 200){
+                      let data = JSON.parse(JSON.stringify(res.message));
+                      resp.val(data);
+                      // console.log(data)
+                  }
+              }).catch(err=>{
+                  console.log(err)
+              })
+          }
       }
-      if(msgType == 'image'){
-        messageData = {
-          "attachment":{
+  
+      function addRow (tblID) {
+          
+          var table = document.getElementById(tblID);
+  
+          var rowCount = table.rows.length;
+          var row = table.insertRow(rowCount);
+  
+          var colCount = table.rows[0].cells.length;
+  
+          for(var i=0; i<colCount; i++) {
+  
+              var newcell = row.insertCell(i);
+  
+              newcell.innerHTML = table.rows[0].cells[i].innerHTML;
+              //alert(newcell.childNodes);
+              switch(newcell.childNodes[0].type) {
+                  case "text":
+                          newcell.childNodes[0].value = "";
+                          break;
+                  case "checkbox":
+                          newcell.childNodes[0].checked = false;
+                          break;
+                  case "select-one":
+                          newcell.childNodes[0].selectedIndex = 0;
+                          break;
+              }
+          }
+  
+      }
+  
+      function deleteRow (tblID) {
+          
+          var table = document.getElementById(tblID);
+  
+          var rowCount = table.rows.length;
+          if(rowCount > 1){
+              //table.getElementsByTagName('tr')[rowCount-1].romove();
+              lastRow=rowCount-1;
+              $('#'+tblID).find('tr:last').remove();
+          }
+      }
+  
+      const loadingImage = () => {
+          let elem = document.createElement("img")
+          elem.setAttribute("src", window.location.origin + "/assets/images/loading.gif")
+          elem.setAttribute("width", 55);
+          document.querySelector(".loading").appendChild(elem)
+      }
+  
+      loadingImage()
+  
+      let y = $('.outRes').html()
+      
+      if(y != ""){
+  
+          let url = window.location.origin + "/user-config"
+          fetch(url ,{
+              method : 'GET',
+              headers : {
+                  'Accept':'application/json',
+                  'Content-Type':'application/json'
+              },
+          }).then(res=> res.json()).then(res=>{
+  
+              $('.loading').empty()
+  
+             var gridData = res.message
+  
+              $(document).ready(function () {
+                  $("#grid").shieldGrid({
+                      dataSource: {
+                          data: gridData,
+                          schema: {
+                              fields: {
+                                  id: { path: "_id", type: String },
+                                  req: { path: "req", type: String },
+                                  response: { path: "response", type: String }
+                              }
+                          }
+                      },
+                      sorting: {
+                          multiple: true
+                      },
+                      events: {
+                          command: function(e) {
+                              if(e.commandName == 'save'){
+                                  let data = e.target.dataSource.tracker.changes.edited[0].data
+                                  let x = {
+                                      id: data.id,
+                                      req_q: data.req,
+                                      response: data.response
+                                  }
+                                  if(data.id){
+                                      let url = window.location.origin + "/update-config"
+                                      fetch(url ,{
+                                          method : 'POST',
+                                          headers : {
+                                              'Accept':'application/json',
+                                              'Content-Type':'application/json'
+                                          },
+                                          body : JSON.stringify(x)
+                                      }).then(res=> res.json()).then(res=>{
+                                          if(res.statusCode == 200){
+                                              $('.output').html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                              ${res.message}
+                                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                              </div>`)
+                                          }else{
+                                              $('.output').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                              ${res.message}
+                                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                              </div>`)
+                                          }
+                                      }).catch(err=>{
+                                           $('.output').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                              ${err}
+                                              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                  <span aria-hidden="true">&times;</span>
+                                              </button>
+                                              </div>`)
+                                      })
+                                  }
+                              }
+                              
+                              //console.log(row) 
+                          }    
+                      },
+                      rowHover: false,
+                      columns: [
+                          { field: "req", title: "Req", width: "200px" },
+                          { field: "response", title: "Response" },              
+                          {
+                              width: 70,
+                              title: "Action",
+                              buttons: [
+                                  { commandName: "edit", caption: "Edit" },
+                                  { commandName: "delete", caption: "Delete" }
+                              ]
+                          }
+                      ],
+                      editing: {
+                          enabled: true,
+                          mode: "popup",
+                          confirmation: {
+                              "delete": {
+                                  enabled: true,
+                                  template: function (item) {
+  
+                                      var x = confirm("This record will be deleted. Are you sure you want to delete?");
+  
+                                      if (x){
+                                          let url = window.location.origin + "/delete-config/" + item.id
+                                          fetch(url ,{
+                                              method : 'GET',
+                                              headers : {
+                                                  'Accept':'application/json',
+                                                  'Content-Type':'application/json'
+                                              }
+                                          }).then(res=> res.json()).then(res=>{
+                                              if(res.statusCode == 200){
+                                                  $('.output').html(`<div class="alert alert-success alert-dismissible fade show" role="alert">
+                                                  ${res.message}
+                                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                  </div>`)
+                                              }else{
+                                                  $('.output').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                  ${res.message}
+                                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                  </div>`)
+                                              }
+                                          }).catch(err=>{
+                                              $('.output').html(`<div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                                  ${err}
+                                                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                      <span aria-hidden="true">&times;</span>
+                                                  </button>
+                                                  </div>`)
+                                          })
+                                      }
+                                      
+                                  }
+                              }
+                          }
+                      }            
+                  });
+              
+              
+              });
+  
+              
+          }).catch(err=>{
+              console.log(err)
+          })
+      }
+      $('.text-tooltip').hide();
+      $('.video-tooltip').hide();
+      $('.image-tooltip').hide();
+      $('.grid-tooltip').hide();
+      $('.feedback-tooltip').hide();
+      $('.order-tooltip').hide();
+      $('.button-tooltip').hide();
+      $('.show_addl').hide();
+      $('#show_button').hide();
+      $('#show_grid').hide();
+      $('#show_feedback').hide();
+      $('#popList').on('change', function(){
+          let x = $(this).val()
+          $('.text-tooltip').hide();
+          $('.video-tooltip').hide();
+          $('.image-tooltip').hide();
+          $('.grid-tooltip').hide();
+          $('.feedback-tooltip').hide();
+          $('.order-tooltip').hide();
+          $('.button-tooltip').hide();
+          $('.show_addl').hide();
+          $('#show_button').hide();
+          $('#show_grid').hide();
+          $('#show_feedback').hide();
+          if(x=='text'){
+            $('.text-tooltip').show();
+            $('.freetext').attr('placeholder', 'Enter valid Text Response');
+          }
+          if(x=='video'){
+            $('.video-tooltip').show();
+            $('.freetext').attr('placeholder', 'Enter valid Video url');
+          }
+          if(x=='image'){
+            $('.image-tooltip').show();
+            $('.freetext').attr('placeholder', 'Enter valid Image url');
+          }
+          if(x=='button'){
+            $('.button-tooltip').show();
+            $('.show_addl').show();
+            $('#show_button').show();
+            $('.freetext').attr('placeholder', 'Enter valid Text description for the button widget selection');
+          }
+          if(x=='grid'){
+            $('.grid-tooltip').show();
+            $('.show_addl').show();
+            $('#show_grid').show();
+            $('.freetext').attr('placeholder', 'Enter valid title for grid');
+          }
+          if(x=='feedback'){
+            $('.feedback-tooltip').show();
+            $('.show_addl').show();
+            $('#show_feedback').show();
+            $('.freetext').attr('placeholder', 'Enter valid Ttitle for feedback');
+          }
+          if(x=='order'){
+            $('.order-tooltip').show();
+            $('.show_addl').show();
+            $('.freetext').attr('placeholder', 'Enter valid title for order');
+          }
+          if(x != ""){
+              let fd= new FormData();
+              fd.append('uid', x)
+              let url = window.location.origin + "/fetch-response/" + x
+              fetch(url ,{
+                  method : 'GET',
+                  headers : {
+                      'Accept':'application/json',
+                      'Content-Type':'application/json'
+                  },
+              }).then(res=> res.json()).then(res=>{
+                  if(res.statusCode == 200){
+                      let data = JSON.parse(JSON.stringify(res.message));
+  
+                      // console.log(data)
+                  }
+              }).catch(err=>{
+                  console.log(err)
+              })
+          }
+      })
+      // Custom Form Submit
+      const form = document.querySelector("#config-form");
+      form.addEventListener("submit", function (event) {
+        // stop form submission
+        event.preventDefault();
+        var msgType = $('#popList').val();
+        var msgReq =  $("#Reqq").val();
+        var msgFreetext =  $("#freetext").val();
+        if(msgType == 'text'){
+          messageData = {
+              text:msgFreetext
+          }
+          messageData = JSON.stringify(messageData);
+          $('#output').val(messageData);
+        }
+        if(msgType == 'image'){
+          messageData = {
+            "attachment":{
+                "type":"template",
+                "payload":{
+                  "template_type": "media",
+                  "elements": [
+                     {
+                        "media_type": "image",
+                        "url": msgFreetext
+                     }
+                  ]
+                }
+            }
+          }
+          messageData = JSON.stringify(messageData);
+          $('#output').val(messageData);
+        }
+        if(msgType == 'video'){
+          messageData = {
+            "attachment":{
               "type":"template",
               "payload":{
                 "template_type": "media",
                 "elements": [
-                   {
-                      "media_type": "image",
-                      "url": msgFreetext
-                   }
+                 {
+                  "media_type": "video",
+                  "url": msgFreetext
+                 }
                 ]
               }
-          }
-        }
-        messageData = JSON.stringify(messageData);
-        $('#output').val(messageData);
-      }
-      if(msgType == 'video'){
-        messageData = {
-          "attachment":{
-            "type":"template",
-            "payload":{
-              "template_type": "media",
-              "elements": [
-               {
-                "media_type": "video",
-                "url": msgFreetext
-               }
-              ]
             }
           }
+          messageData = JSON.stringify(messageData);
+          $('#output').val(messageData);
         }
-        messageData = JSON.stringify(messageData);
-        $('#output').val(messageData);
-      }
-      if(msgType == 'button'){
-        var btnJsonStr = '';
-        var ItemArray = [];
-        ItemArray.push({
-          attachment:{
-            type : 'template', 
-            payload:{
-              template_type:'button',
-              text:msgFreetext,
-              buttons: []
+        if(msgType == 'button'){
+          var btnJsonStr = '';
+          var ItemArray = [];
+          ItemArray.push({
+            attachment:{
+              type : 'template', 
+              payload:{
+                template_type:'button',
+                text:msgFreetext,
+                buttons: []
+              }
             }
-          }
-        });
-        
-        $('#show_button tr').each(function(idx) {
-          var obj = {};
-          var buttontype = $(this).find('#buttontype').val();
-          var btn_url = $(this).find('.btn_url').val();
-          var btn_txt = $(this).find('.btn_txt').val();
-          obj['type'] = buttontype;
-          obj['url'] = btn_url;
-          obj['title'] = btn_txt;
-          ItemArray[0].attachment['payload']['buttons'].push(obj);
-        });
-        var messageData = JSON.stringify(ItemArray[0]);
-        // console.log(messageData);
-        // btnJsonStr = btnJsonStr.replace(/,\s*$/, "");
-        $('#output').val(messageData);
-      }
-      if(msgType == 'grid'){
-        var ItemArray = [];
-        ItemArray.push({
-          attachment: {
-              type: "template",
-              payload: {
-                template_type: "generic",
-                elements: []
-              } 
-          }
-        });
-        $('#show_grid tr').each(function(idx) {
-          var obj = {};
-          var btn_obj = {};
-          var btns = [];
-          var grid_title = $(this).find('.grid_title').val();
-          var grid_image_url = $(this).find('.grid_image_url').val();
-          var grid_subtitle = $(this).find('.grid_subtitle').val();
-
-          var gridbuttontype = $(this).find('#gridbuttontype').val();
-          var gridbtn_url = $(this).find('.gridbtn_url').val();
-          var gridbtn_txt = $(this).find('.gridbtn_txt').val();
-
-          obj['title'] = grid_title;
-          obj['image_url'] = grid_image_url;
-          obj['subtitle'] = grid_subtitle;
+          });
           
-          btn_obj['type'] = gridbuttontype;
-          if(gridbuttontype == 'web_url'){
-            btn_obj['url'] = gridbtn_url;
-          }
-          if(gridbuttontype == 'postback'){
-            btn_obj['payload'] = gridbtn_url;
-          }
-          btn_obj['title'] = gridbtn_txt;
-          btns.push(btn_obj);
-          obj['buttons'] = btns;
-          ItemArray[0].attachment['payload']['elements'].push(obj);
-        });        
-        var messageData = JSON.stringify(ItemArray[0]);
-        $('#output').val(messageData);
-      }
-      if(msgType == 'feedback'){
-        var ItemArray = [];
-        ItemArray.push({
-          attachment:{
-            type:"template",
-            payload: {
-              template_type: "customer_feedback",
-              title: "Rate your experience with Original Coast Clothing.",
-              subtitle: "Let Original Coast Clothing know how they are doing by answering two questions",
-              button_title: "Rate Experience",
-              feedback_screens: [{
-                questions:[{
-                  "id": "hauydmns8",
-                  "type": "csat",
-                  "title": "How would you rate your experience with Original Coast Clothing?",
-                  "score_label": "neg_pos",
-                  "score_option": "five_stars",
-                  "follow_up": 
-                  {
-                    "type": "free_form", 
-                    "placeholder": "Give additional feedback"
-                  }
-                }]
-              }],
-              business_privacy: 
-              {
-                  url: "https://www.example.com"
-               },
-              expires_in_days : 3 
+          $('#show_button tr').each(function(idx) {
+            var obj = {};
+            var buttontype = $(this).find('#buttontype').val();
+            var btn_url = $(this).find('.btn_url').val();
+            var btn_txt = $(this).find('.btn_txt').val();
+            obj['type'] = buttontype;
+            obj['url'] = btn_url;
+            obj['title'] = btn_txt;
+            ItemArray[0].attachment['payload']['buttons'].push(obj);
+          });
+          var messageData = JSON.stringify(ItemArray[0]);
+          // console.log(messageData);
+          // btnJsonStr = btnJsonStr.replace(/,\s*$/, "");
+          $('#output').val(messageData);
+        }
+        if(msgType == 'grid'){
+          var ItemArray = [];
+          ItemArray.push({
+            attachment: {
+                type: "template",
+                payload: {
+                  template_type: "generic",
+                  elements: []
+                } 
             }
-          }
-        });        
-        var messageData = JSON.stringify(ItemArray[0]);
-        $('#output').val(messageData);
-      }
-      if(msgType == 'order'){
-        // $('#output').val(msgFreetext);
-      }
-      // form.submit();
-    });    
-    // Custom Form Submit
+          });
+          $('#show_grid tr').each(function(idx) {
+            var obj = {};
+            var btn_obj = {};
+            var btns = [];
+            var grid_title = $(this).find('.grid_title').val();
+            var grid_image_url = $(this).find('.grid_image_url').val();
+            var grid_subtitle = $(this).find('.grid_subtitle').val();
+  
+            var gridbuttontype = $(this).find('#gridbuttontype').val();
+            var gridbtn_url = $(this).find('.gridbtn_url').val();
+            var gridbtn_txt = $(this).find('.gridbtn_txt').val();
+  
+            obj['title'] = grid_title;
+            obj['image_url'] = grid_image_url;
+            obj['subtitle'] = grid_subtitle;
+            
+            btn_obj['type'] = gridbuttontype;
+            if(gridbuttontype == 'web_url'){
+              btn_obj['url'] = gridbtn_url;
+            }
+            if(gridbuttontype == 'postback'){
+              btn_obj['payload'] = gridbtn_url;
+            }
+            btn_obj['title'] = gridbtn_txt;
+            btns.push(btn_obj);
+            obj['buttons'] = btns;
+            ItemArray[0].attachment['payload']['elements'].push(obj);
+          });        
+          var messageData = JSON.stringify(ItemArray[0]);
+          $('#output').val(messageData);
+        }
+        if(msgType == 'feedback'){
+          var ItemArray = [];
+          var buttontype = $('#show_feedback .buttontype').val();
+          var title = $('#show_feedback .title').val();
+          var sub_title = $('#show_feedback .sub_title').val();
+          var button_title = $('#show_feedback .button_title').val();
+          var score_level = $('#show_feedback #score_level').val();
+          var score_options = $('#show_feedback #score_options').val();
+          var feedback_qn_title = $('#show_feedback .feedback_qn_title').val();
+          var privacy_policy_url = $('#show_feedback .privacy_policy_url').val();
+          ItemArray.push({
+            attachment:{
+              type:"template",
+              payload: {
+                template_type: "customer_feedback",
+                title: title,
+                subtitle: sub_title,
+                button_title: button_title,
+                feedback_screens: [{
+                  questions:[{
+                    "id": "hauydmns8",
+                    "type": buttontype,
+                    "title": feedback_qn_title,
+                    "score_label": score_level,
+                    "score_option": score_options,
+                    "follow_up": 
+                    {
+                      "type": "free_form", 
+                      "placeholder": "Give additional feedback"
+                    }
+                  }]
+                }],
+                business_privacy: 
+                {
+                    url: privacy_policy_url
+                 },
+                expires_in_days : 3 
+              }
+            }
+          });        
+          var messageData = JSON.stringify(ItemArray[0]);
+          $('#output').val(messageData);
+        }
+        if(msgType == 'order'){
+          // $('#output').val(msgFreetext);
+        }
+        // form.submit();
+      }); 
+      $('#show_feedback #buttontype').on('change', function(){
+        var type = $(this).val();
+        $('#score_level').empty();
+        $('#score_options').empty();        
+        console.log(type);
+        if(type=="csat"){
+          var score_level = '<option value="">Score Level</option><option value="neg_pos">Negative - Positive</option><option value="dis_sat">Very Dissatisfied - Very Satisfied</option><option value="poor_great">Poor - Great</option>';
+          var score_options = '<option value="">Score Options</option><option value="one_to_five">One to Five</option><option value="five_stars">Five stars</option><option value="five_emojis">Five Emojis</option>';
+          $('#score_level').append(score_level);
+          $('#score_options').append(score_options);
+        }
+        else if(type=="nps"){
+          var score_level = '<option value="">Score Level</option><option value="dis_sat">Very Dissatisfied - Very Satisfied</option><option value="unlike_like">Very Unlikely - Very Likely</option><option value="poor_great">Poor - Great</option>';
+          var score_options = '<option value="">Score Options</option><option value="zero_to_ten">0 to 10</option>';
+          $('#score_level').append(score_level);
+          $('#score_options').append(score_options);        
+        }
+        else if(type=="ces"){
+          var score_level = '<option value="">Score Level</option><option value="hard_easy">Hard - Easy</option><option value="dis_sat">Very Dissatisfied - Very Satisfied</option><option value="poor_great">Poor - Great</option>';
+          var score_options = '<option value="">Score Options</option><option value="one_to_seven">1 to 7</option>';
+          $('#score_level').append(score_level);
+          $('#score_options').append(score_options);        
+        }
+      })   
+      // Custom Form Submit
 </script>
