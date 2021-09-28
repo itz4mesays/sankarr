@@ -108,6 +108,12 @@ module.exports = {
         // console.log(event.postback.payload)
         sender = event.sender.id
         recipient = event.recipient.id
+        if(event.postback.payload === 'GET_STARTED'){
+          console.log(event.postback.payload)
+          console.log("Done")
+          event.message.text = "Get Started"
+          // sendTextMessage(sender, token, "Hello {{user_first_name}}!")
+        }        
         if (event.message && event.message.text) {
           requestData = event.message.text
           // console.log("requestData:" + requestData)
@@ -146,10 +152,6 @@ module.exports = {
           }).catch(err => {
               return res.json({statusCode: 400, message: err})
           })
-        }
-        if(event.postback.payload === 'GET_STARTED'){
-          console.log(event.postback.payload)
-          sendTextMessage(sender, token, "Hello {{user_first_name}}!")
         }
         // if (event.postback) {
         //     text = JSON.stringify(event.postback)
