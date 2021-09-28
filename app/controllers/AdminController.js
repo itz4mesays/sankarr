@@ -104,6 +104,7 @@ module.exports = {
       for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
         sender = event.sender.id
+        recipient = event.recipient.id
         if (event.message && event.message.text) {
           requestData = event.message.text
           // console.log("requestData:" + requestData)
@@ -149,10 +150,10 @@ module.exports = {
             // continue
         }
         if(event.hasOwnProperty('messaging_feedback')){
-          console.log('messaging_feedback');
-          console.log(event.messaging_feedback);
-          console.log(event.messaging_feedback.feedback_screens);
-          console.log(event.messaging_feedback.feedback_screens[0].screen_id);
+          console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.type);
+          console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.payload);
+          console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.type);
+          console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.payload);
         }
       }
       res.sendStatus(200)            
