@@ -150,6 +150,9 @@
                             <input type="text" name="feedback_qn_title[]" class="form-control feedback_qn_title" placeholder="Feedback question Title"/> 
                           </div> 
                           <div class="pad5">
+                            <input type="text" name="purpose_text[]" class="form-control purpose_text" placeholder="Label for what information you are expecting the user needs to enter. (Ex. What is your contact E-Mail? or What is your primary contact number?)"/> 
+                          </div>                           
+                          <div class="pad5">
                             <input type="text" name="privacy_policy_url[]" class="form-control privacy_policy_url" placeholder="Business Privacy URL"/> 
                           </div> 
                         </fieldset>
@@ -633,6 +636,8 @@
           var score_options = $('#show_feedback #score_options').val();
           var feedback_qn_title = $('#show_feedback .feedback_qn_title').val();
           var privacy_policy_url = $('#show_feedback .privacy_policy_url').val();
+          var purpose_text = $('#show_feedback .purpose_text').val();
+          
           ItemArray.push({
             attachment:{
               type:"template",
@@ -651,7 +656,7 @@
                     "follow_up": 
                     {
                       "type": "free_form", 
-                      "placeholder": "Give additional feedback"
+                      "placeholder": purpose_text
                     }
                   }]
                 }],
