@@ -79,9 +79,9 @@ module.exports = {
     if(req.body.entry.messaging){
     console.log(JSON.stringify(req.body.entry.messaging));
     }
-    if(req.body.entry.messaging.sender.id){
-    console.log(req.body.entry.messaging.sender.id);
-    }    
+    // if(req.body.entry.messaging.sender.id){
+    // console.log(req.body.entry.messaging.sender.id);
+    // }    
     /**
      * Find the profileapi_key is valid
      * check if both access_token and page_token matches the customer with the return id from step 1
