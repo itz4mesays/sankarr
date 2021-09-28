@@ -76,12 +76,7 @@ module.exports = {
     }
   },
   webhook: async (req, res) => { 
-    if(req.body.entry.messaging){
-    console.log(JSON.stringify(req.body.entry.messaging));
-    }
-    // if(req.body.entry.messaging.sender.id){
-    // console.log(req.body.entry.messaging.sender.id);
-    // }    
+
     /**
      * Find the profileapi_key is valid
      * check if both access_token and page_token matches the customer with the return id from step 1
@@ -148,11 +143,17 @@ module.exports = {
               return res.json({statusCode: 400, message: err})
           })
         }
-        // if (event.postback) {
-        //     text = JSON.stringify(event.postback)
-        //     sendTextMessage(sender, token, "Postback received: "+text.substring(0, 200))
-        //     continue
-        // }
+        if (event.postback) {
+            text = JSON.stringify(event.postback)
+            sendTextMessage(sender, token, "Postback received: "+text.substring(0, 200))
+            // continue
+        }
+        if(event.hasOwnProperty('messaging_feedback')){
+          console.log('messaging_feedback');
+          console.log(event.messaging_feedback);
+          console.log(event.messaging_feedback.feedback_screens);
+          console.log(event.messaging_feedback.feedback_screens[0].screen_id);
+        }
       }
       res.sendStatus(200)            
     }).catch(err => {
