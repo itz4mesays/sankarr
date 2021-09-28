@@ -103,7 +103,7 @@ module.exports = {
       messaging_events = req.body.entry[0].messaging
       for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
-        // console.log(event)
+        console.log(event.postback.payload)
         sender = event.sender.id
         recipient = event.recipient.id
         if (event.message && event.message.text) {
@@ -145,7 +145,7 @@ module.exports = {
               return res.json({statusCode: 400, message: err})
           })
         }
-        if(event.postback.payload=='GET_STARTED'){
+        if(event.postback.payload === 'GET_STARTED'){
           // sendTextMessage(sender, token, "Hello {{user_first_name}}!")
         }
         if (event.postback) {
