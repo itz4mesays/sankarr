@@ -107,17 +107,10 @@ module.exports = {
         // console.log(event.postback)
         // console.log(event.postback.payload)
         sender = event.sender.id
-        recipient = event.recipient.id
-        // if(event.postback.payload === "GET_STARTED"){
-        //   console.log(event.postback.payload)
-        //   console.log("Done")
-        //   event.message.text = "Get Started"
-        //   // sendTextMessage(sender, token, "Hello {{user_first_name}}!")
-        // }        
+        recipient = event.recipient.id     
         if ((event.message && event.message.text) || (event.postback.payload === "GET_STARTED")) {
-          
           if(event.postback && event.postback.payload && event.postback.payload === 'GET_STARTED'){
-            requestData = 'Get Started'
+            requestData = 'START'
           }
           else{
             requestData = event.message.text
