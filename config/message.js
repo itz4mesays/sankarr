@@ -7,15 +7,21 @@ const sendTextMessage = (sender, token, data) => {
   sendAutoMessage(sender, token, messageData)
 }
 const sendActionTyping = (sender, token, data) => {
-  if(data==1){ action = "typing_on"}
-  if(data==0){ action = "typing_off"}
-  messageData = {
-    recipient:{
-      id:"sender"
-    },
-    sender_action:"typing_on"
-  }
-  sendAutoMessage(sender, token, messageData)
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: {
+        recipient: {id:sender},
+        sender_action: data,
+    }
+  }, function(error, response, body) {
+      if (error) {
+          console.log('Error sending messages: ', error)
+      } else if (response.body.error) {
+          console.log('Error: ', response.body.error)
+      }
+  })  
 }
 const sendPostbackResponse = (sender, token, data) => {
   sendAutoMessage(sender, token, data)

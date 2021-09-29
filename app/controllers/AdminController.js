@@ -121,9 +121,9 @@ module.exports = {
               responseData = configSite.response
               requestType = configSite.rtype   
               // console.log(responseData)
-              sendActionTyping(sender, token, 1)
+              sendActionTyping(sender, token, "typing_on")
               sendPostbackResponse(sender, token, responseData)
-              sendActionTyping(sender, token, 0)
+              sendActionTyping(sender, token, "typing_off")
             }).catch(err => {
                 // return res.json({statusCode: 400, message: err})
                 console.log("Postback ERROR - Catch Exception"+ err)
