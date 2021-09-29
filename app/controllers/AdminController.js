@@ -128,7 +128,7 @@ module.exports = {
               sendPostbackResponse(sender, token, responseData)
             }).catch(err => {
                 // return res.json({statusCode: 400, message: err})
-                console.log("ERROR - Catch Exception"+ err)
+                console.log("Postback ERROR - Catch Exception"+ err)
             })
         }        
 
@@ -173,7 +173,7 @@ module.exports = {
             }
           }).catch(err => {
               // return res.json({statusCode: 400, message: err})
-              console.log("ERROR - Catch Exception"+ err)
+              console.log("Message ERROR - Catch Exception"+ err)
           })
         }
         // if (event.postback) {

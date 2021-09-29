@@ -107,6 +107,7 @@ const sendAutoMessage = (sender, token, messageData) => {
 }
 module.exports = {
     sendTextMessage,
+    sendPostbackResponse
     sendButtonMessage,
     sendImageMessage,
     sendVideoMessage,
