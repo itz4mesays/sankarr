@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const UserEnv = require('../models/user_env')
 const ConfigSite = require('../models/config_site')
-const { sendTextMessage, sendButtonMessage, sendImageMessage, sendVideoMessage, sendFeedbackMessage, sendGenericMessage, sendOrderMessage } = require('../../config/message');
+const { sendPostbackResponse, sendTextMessage, sendButtonMessage, sendImageMessage, sendVideoMessage, sendFeedbackMessage, sendGenericMessage, sendOrderMessage } = require('../../config/message');
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
   localStorage = new LocalStorage('./scratch');
@@ -103,6 +103,8 @@ module.exports = {
       messaging_events = req.body.entry[0].messaging
       for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
+        sender = event.sender.id
+        recipient = event.recipient.id        
         // console.log(event)
         // console.log(event.postback)
         // console.log(event.postback.payload)
@@ -112,9 +114,24 @@ module.exports = {
             console.log(event.message)
         } else if (event.postback) {
             console.log(event.postback)
+            // Get the payload for the postback
+            let payload = event.payload;
+            postback_data = payload
+            if(payload === 'GET_STARTED'){
+              postback_data = 'START'
+            }
+            console.log(postback_data)
+            ConfigSite.findOne({uid: user_env.uid, req: postback_data}).lean().then(configSite => {
+              responseData = configSite.response
+              requestType = configSite.rtype   
+              console.log(responseData)
+              sendPostbackResponse(sender, token, responseData)
+            }).catch(err => {
+                // return res.json({statusCode: 400, message: err})
+                console.log("ERROR - Catch Exception"+ err)
+            })
         }        
-        sender = event.sender.id
-        recipient = event.recipient.id
+
         // if(event.postback.payload === 'GET_STARTED'){
         //   console.log(event.postback.payload)
         //   console.log("Done")
@@ -123,11 +140,9 @@ module.exports = {
         // }        
         if (event.message && event.message.text) {
           requestData = event.message.text
-          // console.log("requestData:" + requestData)
           ConfigSite.findOne({uid: user_env.uid, req: event.message.text}).lean().then(configSite => {
             responseData = configSite.response
             requestType = configSite.rtype
-            // console.log("requestType:" + requestType)
             if (requestType === 'text') {
                 sendTextMessage(sender, token, responseData.substring(0, 200))
                 // continue

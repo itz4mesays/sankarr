@@ -1,9 +1,21 @@
 var request = require('request')
 
 const sendTextMessage = (sender, token, data) => {
-  // messageData = {
-  //     text:data
-  // }
+  messageData = {
+      text:data
+  }
+  sendAutoMessage(sender, token, messageData)
+}
+const sendPostbackResponse = (sender, token, data) => {
+  // Construct the message body
+  console.log("From Postbackresponse")
+  console.log(data)
+  // let messageData = {
+  //     "recipient": {
+  //         "id": sender
+  //     },
+  //     "message": data
+  // };
   sendAutoMessage(sender, token, data)
 }
 const sendButtonMessage = (sender, token, data) => {
