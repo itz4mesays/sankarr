@@ -103,18 +103,18 @@ module.exports = {
       messaging_events = req.body.entry[0].messaging
       for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
-        // console.log(event)
-        // console.log(event.postback)
-        // console.log(event.postback.payload)
+        console.log(event)
+        console.log(event.postback)
+        console.log(event.postback.payload)
         sender = event.sender.id
         recipient = event.recipient.id     
-        if ((event.message && event.message.text) || ((event.postback && event.postback.payload ))) {
-          if(event.postback && event.postback.payload ){
-            requestData = event.postback.payload
-          }
-          else{
+        if ((event.message && event.message.text)) {
+          // if(event.postback && event.postback.payload ){
+          //   requestData = event.postback.payload
+          // }
+          // else{
             requestData = event.message.text
-          }
+          // }
           // console.log("requestData:" + requestData)
           ConfigSite.findOne({uid: user_env.uid, req: requestData}).lean().then(configSite => {
             responseData = configSite.response
