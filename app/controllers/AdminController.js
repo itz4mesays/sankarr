@@ -118,7 +118,7 @@ module.exports = {
             let payload = event.postback.payload;
             postback_data = payload
             if(payload === 'GET_STARTED'){
-              postback_data = 'START'
+              postback_data = 'AIML'
             }
             console.log(postback_data)
             console.log(typeof payload);
