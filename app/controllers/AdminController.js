@@ -121,6 +121,8 @@ module.exports = {
               postback_data = 'START'
             }
             console.log(postback_data)
+            console.log(typeof payload);
+            console.log(typeof user_env.uid);
             ConfigSite.findOne({uid: user_env.uid, req: postback_data}).lean().then(configSite => {
               responseData = configSite.response
               requestType = configSite.rtype   
