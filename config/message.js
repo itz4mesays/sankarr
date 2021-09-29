@@ -6,75 +6,34 @@ const sendTextMessage = (sender, token, data) => {
   }
   sendAutoMessage(sender, token, messageData)
 }
+const sendActionTyping = (sender, token, data) => {
+  if(data==1){ action = "typing_on"}
+  if(data==0){ action = "typing_off"}
+  messageData = {
+    recipient:{
+      id:"sender"
+    },
+    sender_action:"typing_on"
+  }
+  sendAutoMessage(sender, token, messageData)
+}
 const sendPostbackResponse = (sender, token, data) => {
-  // Construct the message body
-  console.log("From Postbackresponse")
-  console.log(data)
-  // let messageData = {
-  //     "recipient": {
-  //         "id": sender
-  //     },
-  //     "message": data
-  // };
   sendAutoMessage(sender, token, data)
 }
 const sendButtonMessage = (sender, token, data) => {
-  // console.log('sendButtonMessage'+data)
-  //   messageData = {
-  //       "attachment":{
-  //         "type":"template",
-  //         "payload": data
-  //       }
-  //   }
-  //   messageData = JSON.stringify(messageData)
-  //   // messageData = messageData.replace(/\\n/g, '').replace(/\\r/g, '')
-  //   console.log("ButtonmessageData:" + messageData)
     sendAutoMessage(sender, token, data)
 }
 const sendImageMessage = (sender, token, data) => {
-    // messageData = {
-    //   "attachment":{
-    //     "type":"template",
-    //     "payload":{
-    //       "template_type": "media",
-    //       "elements": data
-    //     }
-    //   }
-    // }
-    // console.log("ImagemessageData:" + messageData)
     sendAutoMessage(sender, token, data)
 }
 const sendVideoMessage = (sender, token, data) => {
-    // messageData = {
-    //   "attachment":{
-    //     "type":"template",
-    //     "payload":{
-    //       "template_type": "media",
-    //       "elements": data
-    //     }
-    //   }
-    // }
-    // console.log("VideomessageData:" + messageData)
     sendAutoMessage(sender, token, data)
 }
 const sendFeedbackMessage = (sender, token, data) => {
-    // messageData = {
-    //   "attachment":{
-    //       "type":"template",
-    //       "payload": data
-    //   }
-    // }
-    // console.log("FeedbackmessageData:" + messageData)
     sendAutoMessage(sender, token, data)
 }
 const sendGenericMessage = (sender, token, data) => {
-    // messageData = {
-    //   "attachment": {
-    //       "type": "template",
-    //       "payload": data
-    //   }
-    // }
-    console.log("GridMessageData:" + data)
+    // console.log("GridMessageData:" + data)
     sendAutoMessage(sender, token, data)
 }
 const sendOrderMessage = (sender, token, data) => {
@@ -84,7 +43,7 @@ const sendOrderMessage = (sender, token, data) => {
         "payload":data
     }
   }
-  console.log("OrdermessageData:" + messageData)
+  // console.log("OrdermessageData:" + messageData)
     sendAutoMessage(sender, token, data)
 }
 
@@ -108,6 +67,7 @@ const sendAutoMessage = (sender, token, messageData) => {
 module.exports = {
     sendTextMessage,
     sendPostbackResponse,
+    sendActionTyping,
     sendButtonMessage,
     sendImageMessage,
     sendVideoMessage,

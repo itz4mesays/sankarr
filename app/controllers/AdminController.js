@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const UserEnv = require('../models/user_env')
 const ConfigSite = require('../models/config_site')
-const { sendPostbackResponse, sendTextMessage, sendButtonMessage, sendImageMessage, sendVideoMessage, sendFeedbackMessage, sendGenericMessage, sendOrderMessage } = require('../../config/message');
+const { sendActionTyping, sendPostbackResponse, sendTextMessage, sendButtonMessage, sendImageMessage, sendVideoMessage, sendFeedbackMessage, sendGenericMessage, sendOrderMessage } = require('../../config/message');
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
   localStorage = new LocalStorage('./scratch');
@@ -104,30 +104,26 @@ module.exports = {
       for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
         sender = event.sender.id
-        recipient = event.recipient.id        
-        // console.log(event)
-        // console.log(event.postback)
-        // console.log(event.postback.payload)
+        recipient = event.recipient.id
         // Check if the event is a message or postback and
         // pass the event to the appropriate handler function
         if (event.message) {
-            console.log(event.message)
+            // console.log(event.message)
         } else if (event.postback) {
-            console.log(event.postback)
+            // console.log(event.postback)
             // Get the payload for the postback
             let payload = event.postback.payload;
             postback_data = payload
             if(payload === 'GET_STARTED'){
               postback_data = 'welcome'
             }
-            // console.log(postback_data)
-            // console.log(typeof payload);
-            // console.log(typeof user_env.uid);
             ConfigSite.findOne({uid: user_env.uid, req: postback_data}).lean().then(configSite => {
               responseData = configSite.response
               requestType = configSite.rtype   
-              console.log(responseData)
+              // console.log(responseData)
+              sendActionTyping(sender, token, 1)
               sendPostbackResponse(sender, token, responseData)
+              sendActionTyping(sender, token, 0)
             }).catch(err => {
                 // return res.json({statusCode: 400, message: err})
                 console.log("Postback ERROR - Catch Exception"+ err)
