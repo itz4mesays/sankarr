@@ -108,11 +108,11 @@ module.exports = {
         // console.log(event.postback.payload)
         sender = event.sender.id
         recipient = event.recipient.id     
-        if ((event.message && event.message.text) || ((typeof event.postback !== 'undefined' && event.postback && typeof event.postback.payload !== 'undefined' && event.postback.payload ))) {
-                  console.log(event)
-        console.log(event.postback)
-        console.log(event.postback.payload)
-          if(event.postback && event.postback.payload ){
+        if ((event.message && event.message.text) || ((typeof event.postback !== 'undefined'))) {
+        //           console.log(event)
+        // console.log(event.postback)
+        // console.log(event.postback.payload)
+          if(typeof event.postback.payload !== 'undefined' ){
             requestData = event.postback.payload
           }
           else{
@@ -152,7 +152,8 @@ module.exports = {
                 // continue
             }
           }).catch(err => {
-              return res.json({statusCode: 400, message: err})
+              // return res.json({statusCode: 400, message: err})
+              console.log("ERROR - Catch Exception"+ err)
           })
         }
         // if (event.postback) {
