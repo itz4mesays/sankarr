@@ -1,10 +1,10 @@
 var request = require('request')
 
 const sendTextMessage = (sender, token, data) => {
-  messageData = {
-      text:data
-  }
-  sendAutoMessage(sender, token, messageData)
+  // messageData = {
+  //     text:data
+  // }
+  sendAutoMessage(sender, token, data)
 }
 const sendActionTyping = (sender, token, data) => {
   request({
