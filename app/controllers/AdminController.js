@@ -107,19 +107,17 @@ module.exports = {
         // console.log(event.postback)
         // console.log(event.postback.payload)
         sender = event.sender.id
-        recipient = event.recipient.id     
-        if ((event.message && event.message.text) || ((typeof event.postback !== 'undefined'))) {
-        //           console.log(event)
-        // console.log(event.postback)
-        // console.log(event.postback.payload)
-          if(typeof event.postback.payload !== 'undefined' ){
-            requestData = event.postback.payload
-          }
-          else{
-            requestData = event.message.text
-          }
+        recipient = event.recipient.id
+        // if(event.postback.payload === 'GET_STARTED'){
+        //   console.log(event.postback.payload)
+        //   console.log("Done")
+        //   event.message.text = "Get Started"
+        //   // sendTextMessage(sender, token, "Hello {{user_first_name}}!")
+        // }        
+        if (event.message && event.message.text) {
+          requestData = event.message.text
           // console.log("requestData:" + requestData)
-          ConfigSite.findOne({uid: user_env.uid, req: requestData}).lean().then(configSite => {
+          ConfigSite.findOne({uid: user_env.uid, req: event.message.text}).lean().then(configSite => {
             responseData = configSite.response
             requestType = configSite.rtype
             // console.log("requestType:" + requestType)
