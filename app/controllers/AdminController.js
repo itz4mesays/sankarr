@@ -106,6 +106,13 @@ module.exports = {
         // console.log(event)
         // console.log(event.postback)
         // console.log(event.postback.payload)
+        // Check if the event is a message or postback and
+        // pass the event to the appropriate handler function
+        if (event.message) {
+            console.log(event.message)
+        } else if (event.postback) {
+            console.log(event.postback)
+        }        
         sender = event.sender.id
         recipient = event.recipient.id
         // if(event.postback.payload === 'GET_STARTED'){
