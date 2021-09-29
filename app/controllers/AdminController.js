@@ -115,7 +115,7 @@ module.exports = {
         } else if (event.postback) {
             console.log(event.postback)
             // Get the payload for the postback
-            let payload = event.payload;
+            let payload = event.postback.payload;
             postback_data = payload
             if(payload === 'GET_STARTED'){
               postback_data = 'START'
