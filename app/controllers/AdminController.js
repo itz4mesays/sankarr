@@ -118,11 +118,11 @@ module.exports = {
             let payload = event.postback.payload;
             postback_data = payload
             if(payload === 'GET_STARTED'){
-              postback_data = 'AIML'
+              postback_data = 'welcome'
             }
-            console.log(postback_data)
-            console.log(typeof payload);
-            console.log(typeof user_env.uid);
+            // console.log(postback_data)
+            // console.log(typeof payload);
+            // console.log(typeof user_env.uid);
             ConfigSite.findOne({uid: user_env.uid, req: postback_data}).lean().then(configSite => {
               responseData = configSite.response
               requestType = configSite.rtype   
