@@ -12,57 +12,55 @@
 {{/if}}
 <div class="row">
       
-    <div class="col-md-6 order-md-2 mb-4">
-        <h4 class="mb-3">User Env</h4>
+  <div class="col-md-6 order-md-2 mb-4">
+  <h4 class="mb-3">User Env</h4>
         
-        <div class="row">
-            <div class="col-md-12 mb-3">
-                <label for="profileapi_key">Profileapi Key</label>
-                <textarea cols="30" rows="5" class="form-control" name="profileapi_key" id="profileApiKey" readonly> {{ userenv.profileapi_key }} </textarea>          
-            </div>
+    <div class="row">
+      <div class="col-md-12 mb-3">
+          <label for="profileapi_key">Profileapi Key</label>
+          <textarea cols="30" rows="5" class="form-control" name="profileapi_key" id="profileApiKey" readonly> {{ userenv.profileapi_key }} </textarea>          
+      </div>
 
-            <div class="col-md-12 mb-3">
-                <label for="accessToken">Access Token</label>
-                <input type="text" class="form-control" id="accessToken" placeholder="" value="{{ userenv.access_token }}" readonly>
-            </div>
-
-        </div>
-
-        <div class="row">
-            <div class="col-md-12 mb-3">
-                <label for="pageToken">Page Token</label>
-                <input type="text" class="form-control" id="pageToken" placeholder="" value="{{ userenv.page_token }}" readonly>
-            </div>
-
-            <div class="col-md-12 mb-3">
-                <label for="status">Status</label>
-                <input type="text" class="form-control" id="status" placeholder="" value="{{ userenv.status }}" readonly>
-            </div>
-
-        </div>
-
+      <div class="col-md-12 mb-3">
+          <label for="accessToken">Access Token</label>
+          <input type="text" class="form-control" id="accessToken" placeholder="" value="{{ userenv.access_token }}" readonly>
+      </div>
 
     </div>
 
-    <div class="col-md-6 order-md-1">
-        <h4 class="mb-3">Basic Information</h4>
-        <div class="row">
-            <div class="col-md-12 mb-3">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="displayName" placeholder="" value="{{user.name}}" readonly>
-            
-            </div>
-            <div class="col-md-12 mb-3">
-            <label for="email">Email</label>
-            <input type="text" class="form-control" id="email" placeholder="" value="{{user.email}}" readonly>
-            </div>
-        </div>
+    <div class="row">
+      <div class="col-md-12 mb-3">
+          <label for="pageToken">Page Token</label>
+          <input type="text" class="form-control" id="pageToken" placeholder="" value="{{ userenv.page_token }}" readonly>
+      </div>
 
-
-        <hr class="mb-4">
-        <a class="btn btn-primary btn-lg btn-block" href="/edit/{{ user._id }}">Click to Edit</a>
+      <div class="col-md-12 mb-3">
+          <label for="status">Status</label>
+          <input type="text" class="form-control" id="status" placeholder="" value="{{ userenv.status }}" readonly>
+      </div>
 
     </div>
+
+
+  </div>
+
+  <div class="col-md-6 order-md-1">
+    <h4 class="mb-3">Basic Information</h4>
+    <div class="row">
+      <div class="col-md-12 mb-3">
+      <label for="name">Name</label>
+      <input type="text" class="form-control" id="displayName" placeholder="" value="{{user.name}}" readonly>
+      
+      </div>
+      <div class="col-md-12 mb-3">
+      <label for="email">Email</label>
+      <input type="text" class="form-control" id="email" placeholder="" value="{{user.email}}" readonly>
+      </div>
+    </div>
+    <hr class="mb-4">
+    <a class="btn btn-primary btn-lg btn-block" href="/edit/{{ user._id }}">Click to Edit</a>
+
+  </div>
 
 </div>
 
@@ -72,9 +70,9 @@
   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
   crossorigin="anonymous"></script>
 <script>
-    let x = $('#profileApiKey').val()
-    if(x != ''){
-        let webhookurl = window.location.origin + "/site1/api/v1/"+x.trim()+"/webhook"
-        $('.profile').html(webhookurl.trim())
-    }
+  let x = $('#profileApiKey').val()
+  if(x != ''){
+    let webhookurl = window.location.origin + "/site1/api/v1/"+x.trim()+"/webhook"
+    $('.profile').html(webhookurl.trim())
+  }
 </script>

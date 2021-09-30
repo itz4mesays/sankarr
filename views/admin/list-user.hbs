@@ -1,95 +1,93 @@
 <div class="col-md-12 order-md-1">
-    <h4 class="mb-3">List Users</h4>
-
-
-    <div class="output"> </div>
+  <h4 class="mb-3">List Users</h4>
+  <div class="output"> </div>
         
-       <div class="container bootstrap snippets bootdey">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="main-box no-header clearfix">
-                        <div class="main-box-body clearfix">
+  <div class="container bootstrap snippets bootdey">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="main-box no-header clearfix">
+          <div class="main-box-body clearfix">
 
-                            {{#if data}}
+            {{#if data}}
 
-                            <div class="table-responsive">
-                                <table class="table ">
-                                    <thead>
-                                        <tr>
-                                            <th><span>Name</span></th>
-                                            <th><span>Email</span></th>
-                                            <th class="text-center"><span>Status</span></th>
-                                            <th><span>Site Status</span></th>
-                                        </tr>
-                                    </thead>
+            <div class="table-responsive">
+              <table class="table ">
+                <thead>
+                    <tr>
+                        <th><span>Name</span></th>
+                        <th><span>Email</span></th>
+                        <th class="text-center"><span>Status</span></th>
+                        <th><span>Site Status</span></th>
+                    </tr>
+                </thead>
 
-                                    {{#each data}}
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" width="30">
-                                               &ensp; <a href="#" class="user-link"> {{ this.name }}</a>
-                                            </td>
-                                            <td>{{ this.email }}</td>
-                                            <td class="text-center">
+                {{#each data}}
+                <tbody>
+                  <tr>
+                    <td>
+                        <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="" width="30">
+                       &ensp; <a href="#" class="user-link"> {{ this.name }}</a>
+                    </td>
+                    <td>{{ this.email }}</td>
+                    <td class="text-center">
 
-                                               <span class="stat">
-                                                   <label class="check-1">
-                                                    <input 
-                                                        type="checkbox"
-                                                        class="statusBox"
-                                                        name="user_status" 
-                                                        {{#ifCond this.status 0}}
-                                                            checked
-                                                            value="0"
-                                                        {{else}}
-                                                            unchecked
-                                                            value="1"
-                                                        {{/ifCond}}
-                                                        data-userid={{ this._id }}
-                                                        />
-                                                        <div class="inner"></div>
-                                                        <div class="bullet"></div>
-                                                    </label>
-                                               </span>
+                       <span class="stat">
+                           <label class="check-1">
+                            <input 
+                                type="checkbox"
+                                class="statusBox"
+                                name="user_status" 
+                                {{#ifCond this.status 0}}
+                                    checked
+                                    value="0"
+                                {{else}}
+                                    unchecked
+                                    value="1"
+                                {{/ifCond}}
+                                data-userid={{ this._id }}
+                                />
+                                <div class="inner"></div>
+                                <div class="bullet"></div>
+                            </label>
+                       </span>
 
-                                            </td>
-                                            <td>
-                                                <span class="statt">
-                                                   <label class="check-1">
-                                                    <input 
-                                                        class="siteBox"
-                                                        type="checkbox" 
-                                                        name="site_status" 
-                                                        {{#ifCond this.site_1 1}}
-                                                            checked
-                                                            value="0"
-                                                        {{else}}
-                                                            unchecked
-                                                            value="1"
-                                                        {{/ifCond}}
-                                                        data-userid={{ this._id }}
-                                                        />
-                                                        <div class="inner"></div>
-                                                        <div class="bullet"></div>
-                                                    </label>
-                                               </span>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-
-                                     {{/each}}
-                                </table>
-                            </div>
-
+                    </td>
+                    <td>
+                      <span class="statt">
+                       <label class="check-1">
+                        <input 
+                            class="siteBox"
+                            type="checkbox" 
+                            name="site_status" 
+                            {{#ifCond this.site_1 1}}
+                                checked
+                                value="0"
                             {{else}}
-                                <p>No users at the moment.</p>
-                            {{/if}}
-                        </div>
-                    </div>
-                </div>
+                                unchecked
+                                value="1"
+                            {{/ifCond}}
+                            data-userid={{ this._id }}
+                            />
+                            <div class="inner"></div>
+                            <div class="bullet"></div>
+                        </label>
+                     </span>
+                    </td>
+                  </tr>
+                </tbody>
+
+                   {{/each}}
+              </table>
             </div>
+
+            {{else}}
+                <p>No users at the moment.</p>
+            {{/if}}
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 

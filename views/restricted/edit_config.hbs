@@ -2,51 +2,50 @@
     <div class="col-md-6 order-md-2 mb-4">
 
     </div>
-        <div class="col-md-6 order-md-1">
-            <h4 class="mb-3">Edit Config Site</h4>
-                <hr class="mb-4">
-                
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-                    <label for="type">Type</label>
-                        <input type="hidden" id="popValue" name="pop_value" value="{{ config.rtype }}">
-                        <select name="populated_List" class="form-control" required id="popList">
-                            <option value="">Select Type</option>
-                            <option value="button">button</option>
-                            <option value="text">text</option>
-                            <option value="image">image</option>
-                            <option value="video">video</option>
-                            <option value="feedback">feedback</option>
-                            <option value="grid">grid</option>
-                            <option value="order">order</option>
-                        </select>
-                    
-                    </div>
-
-                    <div class="col-md-12 mb-3">
-                    <label for="req">Req</label>
-                    <input type="text" class="form-control" id="req" placeholder="" value="{{ config.req }}" required name="req">
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12 mb-3">
-                    <label for="pageToken">Response</label>
-                    <textarea cols="30" rows="5" class="form-control" name="response" id="response" required> {{ config.response }} </textarea>
-                    
-                    </div>
-
-                    <div class="col-md-12 mb-3">
-                    </div>
-
-                </div>
-
-
-            <hr class="mb-4">
-            <button class="btn btn-primary btn-lg btn-block" type="submit">Save Changes</button>
-
+    <div class="col-md-6 order-md-1">
+      <h4 class="mb-3">Edit Config Site</h4>
+      <hr class="mb-4">
+      
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label for="type">Type</label>
+          <input type="hidden" id="popValue" name="pop_value" value="{{ config.rtype }}">
+          <select name="populated_List" class="form-control" required id="popList">
+            <option value="">Select Type</option>
+            <option value="button">button</option>
+            <option value="text">text</option>
+            <option value="image">image</option>
+            <option value="video">video</option>
+            <option value="feedback">feedback</option>
+            <option value="grid">grid</option>
+            <option value="order">order</option>
+          </select>
         </div>
+
+        <div class="col-md-12 mb-3">
+          <label for="req">Req</label>
+          <input type="text" class="form-control" id="req" placeholder="" value="{{ config.req }}" required name="req">
+        </div>
+
+      </div>
+
+      <div class="row">
+        <div class="col-md-12 mb-3">
+          <label for="pageToken">Response</label>
+          <textarea cols="30" rows="5" class="form-control" name="response" id="response" required> {{ config.response }} </textarea>
+        
+        </div>
+
+        <div class="col-md-12 mb-3">
+        </div>
+
+      </div>
+
+
+      <hr class="mb-4">
+      <button class="btn btn-primary btn-lg btn-block" type="submit">Save Changes</button>
+
+    </div>
 </form>
 
 <script
