@@ -14,6 +14,7 @@ const {decodedToken} = require('../config/utils')
 
 router.get('/', siteController.home)
 router.get('/logged-in', isLoggedIn, siteController.loggedIn)
+router.get('/guidance', isLoggedIn, siteController.guidance)
 router.get('/edit/:id', isLoggedIn, siteController.edit)
 router.post('/edit/:id', isLoggedIn, async (req, res) => {
     const filter = { uid: req.params.id };

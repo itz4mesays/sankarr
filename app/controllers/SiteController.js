@@ -29,6 +29,30 @@ module.exports = {
       name
     })
   },
+  guidance: async (req, res) => {
+    // localStorage.setItem('storedEmail', req.user.email);
+    User.findOne({ email: req.user.email }).lean().then(user => {
+
+      try{
+        // window.localStorage.setItem('storedUid', user._id)
+        UserEnv.findOne({ uid: user._id }).lean()
+          .then(data => {   
+            return res.render('restricted/guidance', {
+              layout: 'main_layout',
+              page_title: 'Guidance',
+              user,
+              userenv: data,
+              email: req.user.email,
+              name: user.name
+            })
+
+        });  
+      }catch(err) {
+        res.sendStatus(404)
+      } 
+
+    }).catch(err => res.sendStatus(404))
+  },
   loggedIn: async (req, res) => {
     localStorage.setItem('storedEmail', req.user.email);
     User.findOne({ email: req.user.email }).lean().then(user => {
@@ -52,7 +76,7 @@ module.exports = {
       } 
 
     }).catch(err => res.sendStatus(404))
-  },
+  },  
   edit: async (req, res) => {
 
     // const userenv = await UserEnv.findOne({ uid: req.params.id }).lean();

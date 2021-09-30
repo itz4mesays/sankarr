@@ -1,0 +1,80 @@
+<div class="row">
+      
+    <div class="col-md-12 order-md-2 mb-4">
+        <h4 class="mb-3">Facebook Welcome Screen settings</h4>
+        
+        <div class="row">
+            <div class="col-md-12 mb-3">
+                <label for="set_env">To set the Welcome Screen</label>
+                <textarea cols="30" rows="5" class="form-control" name="set_env" id="profileApiKey" readonly> 
+                  curl -X POST -H "Content-Type: application/json" -d '{
+                   "get_started":{
+                     "payload":"GET_STARTED"
+                   },
+                  "greeting": [
+                    {
+                      "locale":"default",
+                      "text":"Hello {{user_first_name}}! Thanks for joining the conversation."
+                    }
+                   ],
+                   "persistent_menu": [
+                        {
+                            "locale": "default",
+                            "composer_input_disabled": false,
+                            "call_to_actions": [
+                                {
+                                    "type": "postback",
+                                    "title": "Start Again",
+                                    "payload": "welcome"
+                                },
+                                {
+                                    "type": "web_url",
+                                    "title": "Book an Appointment",
+                                    "url": "https://sankarprakash.com/appointment-with-me",
+                                    "webview_height_ratio": "full"
+                                },
+                                {
+                                    "type": "web_url",
+                                    "title": "Visit My Blog",
+                                    "url": "https://sankarprakash.com/",
+                                    "webview_height_ratio": "full"
+                                }
+                            ]
+                        }
+                    ]
+                 }' "https://graph.facebook.com/v12.0/me/messenger_profile?access_token=<PAGETOKEN>"
+                </textarea>
+            </div>
+            <div class="col-md-12 mb-3">
+                <label for="delete_info">To Delete variables</label>
+                <textarea cols="30" rows="5" class="form-control" name="delete_info" id="profileApiKey" readonly> 
+                  curl -X DELETE -H "Content-Type: application/json" -d '{
+                    "fields": [
+                      "greeting",
+                      "get_started",
+                    ]
+                  }' "https://graph.facebook.com/v12.0/me/messenger_profile?access_token=<PAGETOKEN>"
+                </textarea>
+            </div>
+            <div class="col-md-12 mb-3">
+                <label for="get_info">To Get the Welcome Screen variable</label>
+                <textarea cols="30" rows="2" class="form-control" name="get_info" id="profileApiKey" readonly> 
+                  curl -X GET "https://graph.facebook.com/v12.0/me/messenger_profile?fields=whitelisted_domains,greeting&access_token=<PAGETOKEN>"
+                </textarea>
+            </div>
+            <div class="col-md-12 mb-3">
+                <label for="user_info">To Get to know the user information</label>
+                <textarea cols="30" rows="3" class="form-control" name="user_info" id="profileApiKey" readonly> 
+                  curl -X GET "https://graph.facebook.com/<SENDERID>?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=<PAGETOKEN>"
+                </textarea>
+            </div>            
+        </div>
+    </div>
+
+</div>
+
+
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
