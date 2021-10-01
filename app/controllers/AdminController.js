@@ -108,7 +108,7 @@ module.exports = {
         // Check if the event is a message or postback and
         // pass the event to the appropriate handler function
         if (event.message) {
-            // console.log(event.message)
+            console.log(event.message)
         } else if (event.postback) {
             // console.log(event.postback)
             // Get the payload for the postback
@@ -128,14 +128,7 @@ module.exports = {
                 // return res.json({statusCode: 400, message: err})
                 console.log("Postback ERROR - Catch Exception"+ err)
             })
-        }        
-
-        // if(event.postback.payload === 'GET_STARTED'){
-        //   console.log(event.postback.payload)
-        //   console.log("Done")
-        //   event.message.text = "Get Started"
-        //   // sendTextMessage(sender, token, "Hello {{user_first_name}}!")
-        // }        
+        }      
         if (event.message && event.message.text) {
           requestData = event.message.text
           ConfigSite.findOne({uid: user_env.uid, req: event.message.text}).lean().then(configSite => {
