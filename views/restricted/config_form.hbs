@@ -5,9 +5,9 @@
       <div class="text-right">
         <span>
           <i class="fa fa-question-circle red-tooltip text-tooltip" data-toggle="tooltip" data-html="true" title="It will render as conversation plain text"></i>
-          <i class="fa fa-question-circle red-tooltip yesno-tooltip" data-toggle="tooltip" data-html="true" title="It will render as yes or no type widget"></i>
-          <i class="fa fa-question-circle red-tooltip email-tooltip" data-toggle="tooltip" data-html="true" title="Captured email only will be passed when user allow it by clicking/tapping on it"></i>
-          <i class="fa fa-question-circle red-tooltip phone-tooltip" data-toggle="tooltip" data-html="true" title="Captured Phone number only will be passed when user allow it by clicking/tapping on it"></i>
+          <i class="fa fa-question-circle red-tooltip yesno-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/yesno.png' alt='image' width='150'/>"></i>
+          <i class="fa fa-question-circle red-tooltip email-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/email.png' alt='image' width='150'/>"></i>
+          <i class="fa fa-question-circle red-tooltip phone-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/phone.png' alt='image' width='150'/>"></i>
           <i class="fa fa-question-circle red-tooltip image-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/image.png' alt='image' width='150'/>"></i>
           <i class="fa fa-question-circle red-tooltip video-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/video.png' alt='image' width='150'/>"></i>
           <i class="fa fa-question-circle red-tooltip button-tooltip" data-toggle="tooltip" data-html="true" title="<img src='../../assets/images/tooltip/button.png' alt='image' width='150'/>"></i>
@@ -39,7 +39,7 @@
                 <!-- <option value="order">Order</option> -->
               </select>
               <div class="pad5">
-                <input type="text" required id="Reqq" name="Reqq[]" class="form-control" placeholder="Source"/>
+                <input type="text" required id="Reqq" name="Reqq[]" class="form-control" placeholder="Source Identifier"/>
               </div>
             </td>
             <!--<td width="100"><input type="text" name="Reqq[]" class="form-control" placeholder="Req"/></td>-->
@@ -83,22 +83,22 @@
                             <input type="text" name="title_yes" class="form-control title_yes" placeholder="Title"/>
                           </div>
                           <div class="pad5">
-                            <input type="text" name="payload_yes" class="form-control payload_yes" placeholder="Target text"/> 
+                            <input type="text" name="payload_yes" class="form-control payload_yes" placeholder="Target Identifier"/> 
                           </div>
-                          <div class="pad5">
+                          <!-- <div class="pad5">
                             <input type="text" name="img_url_yes" class="form-control img_url_yes" placeholder="Icon Url placement beside text"/>
-                          </div>
+                          </div> -->
                         </div>
                         <div class="col-md-6" style="float: left;">
                           <div class="pad5">
                             <input type="text" name="title_no" class="form-control title_no" placeholder="Title"/>
                           </div>
                           <div class="pad5">
-                            <input type="text" name="payload_no" class="form-control payload_no" placeholder="Target text"/> 
+                            <input type="text" name="payload_no" class="form-control payload_no" placeholder="Target Identifier"/> 
                           </div>
-                          <div class="pad5">
+                          <!-- <div class="pad5">
                             <input type="text" name="img_url_no" class="form-control img_url_no" placeholder="Icon Url placement beside text"/>
-                          </div>
+                          </div> -->
                         </div>
                       </td>
                     </tr>
@@ -482,18 +482,38 @@
           if(x=='yes_no'){
             $('.yesno-tooltip').show();
             $('#freetext').show();
-            $('.show_addl').show();            
+            $('.show_addl').show();
             $('#show_yes_no').show();
+            $('.title_yes').show();
+            $('.img_url_yes').show();
+            $('.payload_yes').show(); 
+            $('.title_no').show();
+            $('.img_url_no').show();
+            $('.payload_no').show();            
             $('.freetext').attr('placeholder', 'Provide description for yes or no type.');
           }
           if(x=='email'){
             $('.email-tooltip').show();
             $('#freetext').show();
+            $('.show_addl').show();
+            $('#show_yes_no').show();
+            $('.title_yes').hide();
+            $('.img_url_yes').hide();
+            $('.title_no').hide();
+            // $('.img_url_no').hide();
+            $('.payload_no').hide();
             $('.freetext').attr('placeholder', 'Ask user to tap the displayed email to get it in your webhook');
           }  
           if(x=='phone'){
             $('.phone-tooltip').show();
             $('#freetext').show();
+            $('.show_addl').show();
+            $('#show_yes_no').show();
+            $('.title_yes').hide();
+            $('.img_url_yes').hide();            
+            $('.title_no').hide();
+            // $('.img_url_no').hide();
+            $('.payload_no').hide();            
             $('.freetext').attr('placeholder', 'Ask user to tap the displayed phone number to get it in your webhook');
           }  
           if(x=='button'){
@@ -541,6 +561,24 @@
               })
           }
       })
+      $('#show_button #buttontype').on('change', function(){
+        var btn_type = $(this).val();
+        if(btn_type=='web_url'){
+          $('#show_button .btn_url').attr('placeholder','Redirect URL')
+        }
+        if(btn_type=='postback'){
+          $('#show_button .btn_url').attr('placeholder','Target Identifier')
+        }
+      });
+      $('#gridbuttontype').on('change', function(){
+        var btn_type = $(this).val();
+        if(btn_type=='web_url'){
+          $('.gridbtn_url').attr('placeholder','Redirect URL')
+        }
+        if(btn_type=='postback'){
+          $('.gridbtn_url').attr('placeholder','Target Identifier')
+        }
+      });      
       // Custom Form Submit
       const form = document.querySelector("#config-form");
       form.addEventListener("submit", function (event) {
@@ -574,30 +612,70 @@
           messageData = JSON.stringify(messageData);
           $('#output').val(messageData);
         }
-        if(msgType == 'yes_no'){
+        // if((msgType == 'email') || (msgType == 'phone')){  
+        //   if(msgType == 'email'){content_type="user_email"} 
+        //   if(msgType == 'phone'){content_type="user_phone_number"}       
+        //   messageData = {
+        //     "text": msgFreetext,
+        //     "quick_replies":[
+        //       {
+        //         "content_type":content_type
+        //       }
+        //     ]
+        //   }
+        //   messageData = JSON.stringify(messageData);
+        //   $('#output').val(messageData);
+        // }
+        if((msgType == 'email') || (msgType == 'phone') || (msgType == 'yes_no')){  
+          var base_url = window.location.origin;
+          if(msgType == 'yes_no'){content_type="text"}
+          if(msgType == 'email'){
+            content_type="user_email"
+            var img_email_phone = base_url+"/assets/images/email.png"
+          } 
+          if(msgType == 'phone'){
+            content_type="user_phone_number"
+            var img_email_phone = base_url+"/assets/images/phone.png"
+          }             
           var title_yes =  $(".title_yes").val();
           var payload_yes =  $(".payload_yes").val();
-          var img_url_yes =  $(".img_url_yes").val();
+          // var img_url_yes =  $(".img_url_yes").val();
 
           var title_no =  $(".title_no").val();
           var payload_no =  $(".payload_no").val();
-          var img_url_no =  $(".img_url_no").val();          
-          messageData = {
-            "text": msgFreetext,
-            "quick_replies":[
-              {
-                "content_type":"text",
-                "title":title_yes,
-                "payload":payload_yes,
-                "image_url":img_url_yes
-              },{
-                "content_type":"text",
-                "title":title_no,
-                "payload":payload_no,
-                "image_url":img_url_no
-              }
-            ]
+          // var img_url_no =  $(".img_url_no").val();
+          
+          // console.log(base_url)
+          if(msgType == 'yes_no'){      
+            messageData = {
+              "text": msgFreetext,
+              "quick_replies":[
+                {
+                  "content_type":content_type,
+                  "title":title_yes,
+                  "payload":payload_yes,
+                  "image_url":base_url+"/assets/images/yes.png"
+                },{
+                  "content_type":content_type,
+                  "title":title_no,
+                  "payload":payload_no,
+                  "image_url":base_url+"/assets/images/no.png"
+                }
+              ]
+            }
           }
+          if((msgType == 'email') || (msgType == 'phone')){      
+            messageData = {
+              "text": msgFreetext,
+              "quick_replies":[
+                {
+                  "content_type":content_type,
+                  "payload":payload_yes,
+                  "image_url":img_email_phone
+                }
+              ]
+            }
+          }          
           messageData = JSON.stringify(messageData);
           $('#output').val(messageData);
         }        
@@ -738,7 +816,7 @@
         if(msgType == 'order'){
           // $('#output').val(msgFreetext);
         }
-        form.submit();
+        // form.submit();
       }); 
       $('#show_feedback #buttontype').on('change', function(){
         var type = $(this).val();
@@ -772,9 +850,9 @@
         $('.feedback-tooltip').hide();
         $('.order-tooltip').hide();
         $('.button-tooltip').hide();
-        $('.yesno-tooltip').show();
-        $('.email-tooltip').show();
-        $('.phone-tooltip').show();
+        $('.yesno-tooltip').hide();
+        $('.email-tooltip').hide();
+        $('.phone-tooltip').hide();
 
         $('.show_addl').hide();
         $('#show_button').hide();
