@@ -149,6 +149,10 @@ module.exports = {
                 sendButtonMessage(sender, token, responseData)
                 // continue
             }
+            if ((requestType === 'email') || (requestType === 'phone') || (requestType === 'yes_no')){
+                sendQuickReplyMessage(sender, token, responseData)
+                // continue
+            }
             if (requestType === 'image') {
                 sendImageMessage(sender, token, responseData)
                 // continue

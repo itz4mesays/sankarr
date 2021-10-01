@@ -19,9 +19,28 @@ const sendActionTyping = (sender, token, data) => {
       if (error) {
           console.log('Error sending messages: ', error)
       } else if (response.body.error) {
-          console.log('Error: ', response.body.error)
+          console.log('Error: in sendActionTyping ', response.body.error)
       }
   })  
+}
+const sendQuickReplyMessage = (sender, token, data) => {
+  messageData = {
+    recipient: {id:sender},
+    messaging_type: "RESPONSE",
+    message:data
+  }
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: messageData
+  }, function(error, response, body) {
+      if (error) {
+          console.log('Error sending messages: ', error)
+      } else if (response.body.error) {
+          console.log('Error: in sendQuickReplyMessage ', response.body.error)
+      }
+  })
 }
 const sendPostbackResponse = (sender, token, data) => {
   sendAutoMessage(sender, token, data)
