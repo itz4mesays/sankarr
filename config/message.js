@@ -99,7 +99,7 @@ module.exports = {
     sendFeedbackMessage,
     sendGenericMessage,
     sendOrderMessage,
-    sendQuickReplyMessage
+    sendQuickReplyMessage,
     sendAutoMessage
 }
 // module.exports.adminLogged = adminLogged
