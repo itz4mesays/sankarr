@@ -1,5 +1,8 @@
 var request = require('request')
-
+if (typeof localStorage === "undefined" || localStorage === null) {
+  var LocalStorage = require('node-localstorage').LocalStorage;
+  localStorage = new LocalStorage('./scratch');
+}
 const sendTextMessage = (sender, token, data) => {
   // messageData = {
   //     text:data
@@ -22,6 +25,16 @@ const sendActionTyping = (sender, token, data) => {
           console.log('Error: in sendActionTyping ', response.body.error)
       }
   })  
+}
+const getUserInfo = (sender, token) => {
+  request({
+    method:"GET",
+    url:req.clientParam.url
+  }).then(function (response) {
+    localStorage.setItem('storedUserInfo', response.body);
+    console.log("User Details "+response.body)
+    return response.body;
+  }) 
 }
 const sendQuickReplyMessage = (sender, token, data) => {
   messageData = {
@@ -91,6 +104,7 @@ const sendAutoMessage = (sender, token, messageData) => {
 }
 module.exports = {
     sendTextMessage,
+    getUserInfo,
     sendPostbackResponse,
     sendActionTyping,
     sendButtonMessage,

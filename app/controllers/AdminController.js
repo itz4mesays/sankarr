@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const UserEnv = require('../models/user_env')
 const ConfigSite = require('../models/config_site')
-const { sendQuickReplyMessage, sendActionTyping, sendPostbackResponse, sendTextMessage, sendButtonMessage, sendImageMessage, sendVideoMessage, sendFeedbackMessage, sendGenericMessage, sendOrderMessage } = require('../../config/message');
+const { getUserInfo, sendQuickReplyMessage, sendActionTyping, sendPostbackResponse, sendTextMessage, sendButtonMessage, sendImageMessage, sendVideoMessage, sendFeedbackMessage, sendGenericMessage, sendOrderMessage } = require('../../config/message');
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
   localStorage = new LocalStorage('./scratch');
@@ -116,6 +116,7 @@ module.exports = {
             postback_data = payload
             if(payload === 'GET_STARTED'){
               postback_data = 'welcome'
+              getUserInfo(sender, token)
             }
             ConfigSite.findOne({uid: user_env.uid, req: postback_data}).lean().then(configSite => {
               responseData = configSite.response
