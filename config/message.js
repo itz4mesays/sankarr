@@ -27,11 +27,12 @@ const sendActionTyping = (sender, token, data) => {
   })  
 }
 const getUserInfo = (sender, token) => {
+  userurl = "https://graph.facebook.com/"+sender+"?fields=first_name,last_name,profile_pic,locale,timezone,gender,email&access_token="+token
   request({
     method:"GET",
-    url:req.clientParam.url
+    url: userurl
   }).then(function (response) {
-    localStorage.setItem('storedUserInfo', response.body);
+    // localStorage.setItem('storedUserInfo', response.body);
     console.log("User Details "+response.body)
     return response.body;
   }) 
