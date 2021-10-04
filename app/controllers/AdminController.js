@@ -110,13 +110,13 @@ module.exports = {
         if (event.message) {
             console.log(event.message)
         } else if (event.postback) {
-            // console.log(event.postback)
+            console.log("Postback"+event.postback)
             // Get the payload for the postback
             let payload = event.postback.payload;
             postback_data = payload
             if(payload === 'GET_STARTED'){
               postback_data = 'welcome'
-              getUserInfo(sender, token)
+              // getUserInfo(sender, token)
             }
             ConfigSite.findOne({uid: user_env.uid, req: postback_data}).lean().then(configSite => {
               responseData = configSite.response
