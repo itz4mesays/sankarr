@@ -108,7 +108,7 @@ module.exports = {
         // Check if the event is a message or postback and
         // pass the event to the appropriate handler function
         if (event.postback) {
-            console.log("Postback"+event.postback)
+            console.log("Postback"+ JSON.stringify(event.postback))
             // Get the payload for the postback
             let payload = event.postback.payload;
             postback_data = payload
@@ -131,7 +131,7 @@ module.exports = {
         else if (event.message && event.message.text) {
           requestData = event.message.text
           ConfigSite.findOne({uid: user_env.uid, req: event.message.text}).lean().then(configSite => {
-            console.log("Message"+ event.message.text)
+            console.log("Message"+ JSON.stringify(event.message))
             responseData = configSite.response
             requestType = configSite.rtype
             if (requestType === 'text') {
@@ -173,11 +173,6 @@ module.exports = {
               console.log("Message ERROR - Catch Exception"+ err)
           })
         }
-        // if (event.postback) {
-        //     text = JSON.stringify(event.postback)
-        //     // sendTextMessage(sender, token, "Postback received: "+text.substring(0, 200))
-        //     // continue
-        // }
         if(event.hasOwnProperty('messaging_feedback')){
           // var replyMsg = '{"messaging_type": "RESPONSE","recipient": {"id": '+recipient+'},"message": {"text": "Your feedback received, Thanks for your feedback"}}';          
           // sendTextMessage(sender, token, "Your feedback received, Thanks for your feedback")
