@@ -67,7 +67,44 @@
         <textarea cols="30" rows="3" class="form-control" name="user_info" id="profileApiKey" readonly> 
           curl -X GET "https://graph.facebook.com/<SENDERID>?fields=first_name,last_name,profile_pic,locale,timezone,gender&access_token=<PAGETOKEN>"
         </textarea>
-      </div>            
+      </div>
+      <div class="col-md-12 mb-3" style="display:none">
+
+        <label for="user_info">Grid</label>
+        <textarea cols="30" rows="3" class="form-control" name="user_info" id="profileApiKey" readonly> 
+          { "attachment": { "type": "template", "payload": { "template_type": "generic", "elements": [{ "title": "What is Sankar - Clickfunnels? And How Does it Work?", "subtitle": "Communities to Follow", "image_url": "https://sankarprakash.com/wp-content/uploads/2021/06/The_Purchase_Funnel-1024x839.jpg", "buttons": [{ "type": "web_url", "url": "https://sankarprakash.com/clickfunnel-works/", "title": "Read More" }, { "type": "web_url", "url": "https://sankarprakash.com/recommends/ofa/", "title": "Try ClickFunnel" },{ "type": "web_url", "url": "https://sankarprakash.com/recommends/5daychallenge/", "title": "Want to try 5 Days Lead Challenge" }], }, { "title": "How I make money online", "subtitle": "Passive income Lifestyle", "image_url": "http://www.brandknewmag.com/wp-content/uploads/2015/12/cortana.jpg", "buttons": [{ "type": "postback", "title": "Checkout Artificial Intelligence Mark Up Language. Its easier than you think!", "payload": "AIML", }], }] } } }
+        </textarea>
+
+        <label for="user_info">Buttons</label>
+        <textarea cols="30" rows="3" class="form-control" name="user_info" id="profileApiKey" readonly> 
+          { "attachment":{ "type":"template", "payload":{ "template_type":"button", "text":"What do you want to do next?", "buttons":[ { "type":"web_url", "url":"https://www.messenger.com", "title":"Visit Messenger" }, { "type":"web_url", "url":"https://www.messenger.com", "title":"Test Messenger" } ] } } }
+        </textarea>
+
+        <label for="user_info">Order</label>
+        <textarea cols="30" rows="3" class="form-control" name="user_info" id="profileApiKey" readonly> 
+          { "attachment":{ "type":"template", "payload":{ "template_type":"receipt", "recipient_name":"Stephane Crozatier", "order_number":"12345678902", "currency":"USD", "payment_method":"Visa 2345", "order_url":"http://petersapparel.parseapp.com/order?order_id=123456", "timestamp":"1428444852", "address":{ "street_1":"1 Hacker Way", "street_2":"", "city":"Menlo Park", "postal_code":"94025", "state":"CA", "country":"US" }, "summary":{ "subtotal":75.00, "shipping_cost":4.95, "total_tax":6.19, "total_cost":56.14 }, "adjustments":[ { "name":"New Customer Discount", "amount":20 }, { "name":"$10 Off Coupon", "amount":10 } ], "elements":[ { "title":"Classic White T-Shirt", "subtitle":"100% Soft and Luxurious Cotton", "quantity":2, "price":50, "currency":"USD", "image_url":"http://petersapparel.parseapp.com/img/whiteshirt.png" }, { "title":"Classic Gray T-Shirt", "subtitle":"100% Soft and Luxurious Cotton", "quantity":1, "price":25, "currency":"USD", "image_url":"http://petersapparel.parseapp.com/img/grayshirt.png" } ] } } }
+        </textarea>
+
+        <label for="user_info">image</label>
+        <textarea cols="30" rows="3" class="form-control" name="user_info" id="profileApiKey" readonly> 
+          { "attachment":{ "type":"template", "payload":{ "template_type": "media", "elements": [ { "media_type": "image", "url": "https://www.facebook.com/AffiliateSalesInsider/photos/a.136964738618355/136964711951691/" } ] } } }
+        </textarea>  
+
+        <label for="user_info">Video</label>
+        <textarea cols="30" rows="3" class="form-control" name="user_info" id="profileApiKey" readonly> 
+          { "attachment":{ "type":"template", "payload":{ "template_type": "media", "elements": [ { "media_type": "video", "url": "https://www.facebook.com/AffiliateSalesInsider/videos/385927946210470/" } ] } } }
+        </textarea>   
+
+        <label for="user_info">Appointment</label>
+        <textarea cols="30" rows="3" class="form-control" name="user_info" id="profileApiKey" readonly> 
+          {"attachment":{"type":"template","payload":{"template_type":"generic","elements":[{"title":"Book you appointment by clicking the below button","image_url":"https://sankarprakash.com/wp-content/uploads/2021/08/FingerPointingTransparent_grayed_1.png","subtitle":"Get clarify all your doubts, in terms of your lead generation.","buttons":[{"type":"web_url","url":"https://sankarprakash.com/appointment-with-me","title":"BOOK AN APPOINTMENT"},{"type":"postback","payload":"end","title":"END CONVERSATION"}]}]}}}
+        </textarea>   
+
+        <label for="user_info">Mixed</label>
+        <textarea cols="30" rows="3" class="form-control" name="user_info" id="profileApiKey" readonly> 
+          {"attachment":{"type":"template","payload":{"template_type":"generic","elements":[{"title":"Join My Facebook Group Community","image_url":"https://sankarprakash.com/wp-content/uploads/2021/08/todd-quackenbush-700-copy.png","subtitle":"We are discussing about the Market trends along with like minded people","buttons":[{"type":"web_url","url":"https://www.facebook.com/groups/992228061612461/","title":"JOIN FACEBOOK COMMUNITY"}]},{"title":"One Funnel Away Challenge going to be life changing program for you","image_url":"https://sankarprakash.com/wp-content/uploads/2021/06/OFA_Affiliate_1200x630A-min-1024x538.png","subtitle":"Want to grow your business 10X values I recommend you to join this challenge.","buttons":[{"type":"web_url","url":"https://sankarprakash.com/ofa-challenge/","title":"YES! I AM READY TO 30 DAYS CHALLENGE"}]},{"title":"Do you need more clarification?","image_url":"https://sankarprakash.com/wp-content/uploads/2021/08/casual_portrait_grey.png","subtitle":"Would like to increase your revenue 10X value, or you want to make money in your online business and you struggling with your online business then attend the free 121 consultation call.","buttons":[{"type":"postback","payload":"appointment","title":"YES! I WANT TO BOOK AN APPOINTMENT"},{"type":"postback","payload":"end","title":"END CONVERSATION"}]}]}}}
+        </textarea>                              
+      </div> 
     </div>
   </div>
 
