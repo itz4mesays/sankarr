@@ -129,7 +129,12 @@ module.exports = {
             })
         }      
         else if (event.message && event.message.text) {
-          requestData = event.message.text
+          if (event.message.quick_reply){
+            requestData = event.message.quick_reply.payload
+          }
+          else{
+            requestData = event.message.text
+          }
           ConfigSite.findOne({uid: user_env.uid, req: event.message.text}).lean().then(configSite => {
             console.log("Message"+ JSON.stringify(event.message))
             responseData = configSite.response
