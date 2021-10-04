@@ -107,9 +107,7 @@ module.exports = {
         recipient = event.recipient.id
         // Check if the event is a message or postback and
         // pass the event to the appropriate handler function
-        if (event.message) {
-            console.log(event.message)
-        } else if (event.postback) {
+        if (event.postback) {
             console.log("Postback"+event.postback)
             // Get the payload for the postback
             let payload = event.postback.payload;
@@ -130,7 +128,7 @@ module.exports = {
                 console.log("Postback ERROR - Catch Exception"+ err)
             })
         }      
-        if (event.message && event.message.text) {
+        else if (event.message && event.message.text) {
           requestData = event.message.text
           ConfigSite.findOne({uid: user_env.uid, req: event.message.text}).lean().then(configSite => {
             console.log("Message"+ event.message.text)
