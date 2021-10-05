@@ -130,14 +130,18 @@ module.exports = {
         }      
         else if (event.message && event.message.text && (!event.message.is_echo)) {
             if (event.message.quick_reply){   
+              if (event.message.nlp){
+                console.log("NLP Data "+ JSON.stringify(event.message.nlp))
+              }
               if (event.message.nlp.phone_number || event.message.nlp.email ){
+                console.log("NLP Fall ")
                 if (event.message.nlp.phone_number){ requestData="next_to_phone"}
-                  if (event.message.nlp.email){ requestData="next_to_email"}
+                if (event.message.nlp.email){ requestData="next_to_email"}
               }
               else{    
                 requestData = event.message.quick_reply.payload
+                console.log("Quick reply")
               }
-              console.log("Quick reply")
             }
             else{
               requestData = event.message.text
