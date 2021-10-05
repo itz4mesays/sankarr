@@ -129,20 +129,20 @@ module.exports = {
             })
         }      
         else if (event.message && event.message.text && (!event.message.is_echo)) {
-          if (event.message.nlp.phone_number || event.message.nlp.email ){
-            if (event.message.nlp.phone_number){ requestData="next_to_phone"}
-              if (event.message.nlp.email){ requestData="next_to_email"}
-          }
-          else{
-            if (event.message.quick_reply){            
-              requestData = event.message.quick_reply.payload
+            if (event.message.quick_reply){   
+              if (event.message.nlp.phone_number || event.message.nlp.email ){
+                if (event.message.nlp.phone_number){ requestData="next_to_phone"}
+                  if (event.message.nlp.email){ requestData="next_to_email"}
+              }
+              else{    
+                requestData = event.message.quick_reply.payload
+              }
               console.log("Quick reply")
             }
             else{
               requestData = event.message.text
               console.log("Normal reply")
             }
-          }
           console.log("requestData : "+ requestData)
           ConfigSite.findOne({uid: user_env.uid, req: requestData}).lean().then(configSite => {
             console.log("Message"+ JSON.stringify(event.message))
