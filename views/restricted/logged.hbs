@@ -20,7 +20,10 @@
           <label for="profileapi_key">Profileapi Key</label>
           <textarea cols="30" rows="5" class="form-control" name="profileapi_key" id="profileApiKey" readonly> {{ userenv.profileapi_key }} </textarea>          
       </div>
-
+      <div class="col-md-12 mb-3">
+          <label for="custom_webhook">Custom Webhook</label>
+          <textarea cols="30" rows="3" class="form-control" name="custom_webhook" id="custom_webhook" readonly> {{ userenv.custom_webhook }} </textarea>          
+      </div>
       <div class="col-md-12 mb-3">
           <label for="accessToken">Access Token</label>
           <input type="text" class="form-control" id="accessToken" placeholder="" value="{{ userenv.access_token }}" readonly>
