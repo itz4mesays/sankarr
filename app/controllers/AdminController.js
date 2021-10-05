@@ -100,7 +100,7 @@ module.exports = {
     // })
     UserEnv.findOne({profileapi_key: req.params.profileapi_key}).lean().then(user_env => {
       token = user_env.page_token
-      custom_webhook = user_env.custom_webhook ? trim(user_env.custom_webhook) : null
+      // custom_webhook = user_env.custom_webhook ? trim(user_env.custom_webhook) : null
       messaging_events = req.body.entry[0].messaging
       for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
@@ -205,12 +205,12 @@ module.exports = {
           responseData = {
               text:"Your feedback received, Thanks for your feedback"
           }
-          feedback = [];
-          feedback['qn_type']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.type
-          feedback['rating']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.payload
-          feedback['type']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.type
-          feedback['feedback_msg']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.payload
-          sendPostbackResponse(sender, token, responseData, custom_webhook, feedback)
+          // feedback = [];
+          // feedback['qn_type']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.type
+          // feedback['rating']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.payload
+          // feedback['type']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.type
+          // feedback['feedback_msg']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.payload
+          // sendPostbackResponse(sender, token, responseData, custom_webhook, feedback)
           // console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.type);
           // console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.payload);
           // console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.type);
