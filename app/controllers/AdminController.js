@@ -209,7 +209,7 @@ module.exports = {
           responseData = {
               text:"Your feedback received, Thanks for your feedback"
           }
-          feedback = [];
+          // feedback = [];
           feedback['qn_type']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.type
           feedback['rating']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.payload
           feedback['type']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.type
