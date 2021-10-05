@@ -209,12 +209,13 @@ module.exports = {
           responseData = {
               text:"Your feedback received, Thanks for your feedback"
           }
-          // feedback = [];
+          var feedback_collection= [];
           feedback['qn_type']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.type
           feedback['rating']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.payload
           feedback['type']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.type
           feedback['feedback_msg']=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.payload
-          sendPostbackResponse(sender, token, responseData, custom_webhook, feedback)
+          feedback_collection.push(feedback)
+          sendPostbackResponse(sender, token, responseData, custom_webhook, feedback_collection)
           // console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.type);
           // console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.payload);
           // console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.type);
