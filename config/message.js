@@ -39,6 +39,8 @@ const getUserInfo = (sender, token) => {
           console.log('Error: in sendQuickReplyMessage ', response.body.error)
       }
       console.log(JSON.stringify(response.body))
+      console.log(response.body)
+      console.log(response.body[0].first_name)
       // console.log(response.body.first_name+" - "+response.body.last_name+" - "+response.body.locale+" - "+response.body.timezone+" - "+response.body.gender+" - "+response.body.id+" - "+response.body.profile_pic)
       // localStorage.setItem('first_name', response.body.first_name);
       // localStorage.setItem('last_name', response.body.last_name);
