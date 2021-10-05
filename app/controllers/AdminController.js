@@ -103,7 +103,7 @@ module.exports = {
       custom_webhook = null
       if(user_env.custom_webhook){
         console.log("YEs Custom hook available")
-        custom_webhook = trim(user_env.custom_webhook) 
+        custom_webhook = user_env.custom_webhook
       }
       messaging_events = req.body.entry[0].messaging
       for (i = 0; i < messaging_events.length; i++) {
