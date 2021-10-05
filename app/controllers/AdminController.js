@@ -108,7 +108,7 @@ module.exports = {
         // Check if the event is a message or postback and
         // pass the event to the appropriate handler function
         if (event.postback) {
-            console.log("Postback"+ JSON.stringify(event.postback))
+            // console.log("Postback"+ JSON.stringify(event.postback))
             // Get the payload for the postback
             let payload = event.postback.payload;
             postback_data = payload
@@ -131,25 +131,25 @@ module.exports = {
         else if (event.message && event.message.text && (!event.message.is_echo)) {
             if (event.message.quick_reply){   
               if (event.message.nlp){
-                console.log("NLP Data "+ JSON.stringify(event.message.nlp))
+                // console.log("NLP Data "+ JSON.stringify(event.message.nlp))
               }
               if (event.message.nlp.entities.phone_number || event.message.nlp.entities.email ){
-                console.log("NLP Fall ")
+                // console.log("NLP Fall ")
                 if (event.message.nlp.entities.phone_number){ requestData="next_to_phone"}
                 if (event.message.nlp.entities.email){ requestData="next_to_email"}
               }
               else{    
                 requestData = event.message.quick_reply.payload
-                console.log("Quick reply")
+                // console.log("Quick reply")
               }
             }
             else{
               requestData = event.message.text
-              console.log("Normal reply")
+              // console.log("Normal reply")
             }
-          console.log("requestData : "+ requestData)
+          // console.log("requestData : "+ requestData)
           ConfigSite.findOne({uid: user_env.uid, req: requestData}).lean().then(configSite => {
-            console.log("Message"+ JSON.stringify(event.message))
+            // console.log("Message"+ JSON.stringify(event.message))
             responseData = configSite.response
             requestType = configSite.rtype
             if (requestType === 'text') {
@@ -189,7 +189,11 @@ module.exports = {
           }).catch(err => {
               // return res.json({statusCode: 400, message: err})
               console.log("Message ERROR - Catch Exception"+ err)
-          })
+              responseData = {
+                  text:"Your message is not able to handle, please start the discussion again from bottom right menu."
+              }
+              sendPostbackResponse(sender, token, responseData)              
+              })
         }
         if(event.hasOwnProperty('messaging_feedback')){
           // var replyMsg = '{"messaging_type": "RESPONSE","recipient": {"id": '+recipient+'},"message": {"text": "Your feedback received, Thanks for your feedback"}}';          

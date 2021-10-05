@@ -57,7 +57,24 @@ const sendQuickReplyMessage = (sender, token, data) => {
   })
 }
 const sendPostbackResponse = (sender, token, data) => {
-  sendAutoMessage(sender, token, data)
+  messageData = {
+    recipient: {id:sender},
+    messaging_type: "RESPONSE",
+    message:data
+  }
+  request({
+    url: 'https://graph.facebook.com/v2.6/me/messages',
+    qs: {access_token:token},
+    method: 'POST',
+    json: messageData
+  }, function(error, response, body) {
+      if (error) {
+          console.log('Error sending messages: ', error)
+      } else if (response.body.error) {
+          console.log('Error: in sendQuickReplyMessage ', response.body.error)
+      }
+  })  
+  // sendAutoMessage(sender, token, data)
 }
 const sendButtonMessage = (sender, token, data) => {
     sendAutoMessage(sender, token, data)
