@@ -68,7 +68,7 @@ const sendQuickReplyMessage = (sender, token, data) => {
       }
   })
 }
-const sendPostbackResponse = (sender, token, data) => {
+const sendPostbackResponse = (sender, token, data, custom_webhook) => {
   messageData = {
     recipient: {id:sender},
     messaging_type: "RESPONSE",
@@ -86,43 +86,45 @@ const sendPostbackResponse = (sender, token, data) => {
           console.log('Error: in sendQuickReplyMessage ', response.body.error)
       }
   })  
-  // Reading LocalStorage
-  const first_name = localStorage.getItem('first_name')
-  const last_name = localStorage.getItem('last_name')
-  const locale = localStorage.getItem('locale')
-  const timezone = localStorage.getItem('timezone')
-  const gender = localStorage.getItem('gender')
-  const id = localStorage.getItem('id')
-  const profile_pic = localStorage.getItem('profile_pic')
-  const email = localStorage.getItem('email')
-  const phone = localStorage.getItem('phone')
-  messageData = {
-    recipient: {id:sender},
-    messaging_type: "RESPONSE",
-    message:{
-      first_name:first_name,
-      last_name:last_name,
-      locale:locale,
-      timezone:timezone,
-      gender:gender,
-      id:id,
-      profile_pic:profile_pic,
-      email:email,
-      phone:phone
+  if(custom_webhook){
+    // Reading LocalStorage
+    const first_name = localStorage.getItem('first_name')
+    const last_name = localStorage.getItem('last_name')
+    const locale = localStorage.getItem('locale')
+    const timezone = localStorage.getItem('timezone')
+    const gender = localStorage.getItem('gender')
+    const id = localStorage.getItem('id')
+    const profile_pic = localStorage.getItem('profile_pic')
+    const email = localStorage.getItem('email')
+    const phone = localStorage.getItem('phone')
+    messageData = {
+      recipient: {id:sender},
+      messaging_type: "RESPONSE",
+      message:{
+        first_name:first_name,
+        last_name:last_name,
+        locale:locale,
+        timezone:timezone,
+        gender:gender,
+        id:id,
+        profile_pic:profile_pic,
+        email:email,
+        phone:phone
+      }
     }
-  }
-  if(email){
-    request({
-      url: 'https://api.encharge.io/v1/hooks/e889d6f2-5eb7-4581-a6e3-280a0585aad0',
-      method: 'POST',
-      json: messageData
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending messages: ', error)
-        } else if (response.body.error) {
-            console.log('Error: in sendQuickReplyMessage ', response.body.error)
-        }
-    })    
+    if(email){
+      request({
+        url: 'https://api.encharge.io/v1/hooks/e889d6f2-5eb7-4581-a6e3-280a0585aad0',
+        method: 'POST',
+        json: messageData
+      }, function(error, response, body) {
+          if (error) {
+              console.log('Error sending messages: ', error)
+          } else if (response.body.error) {
+              console.log('Error: in sendQuickReplyMessage ', response.body.error)
+          }
+      })    
+    }
   }
   // sendAutoMessage(sender, token, data)
 }
