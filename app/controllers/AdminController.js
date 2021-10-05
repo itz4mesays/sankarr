@@ -114,12 +114,12 @@ module.exports = {
             postback_data = payload
             if(payload === 'GET_STARTED'){
               postback_data = 'welcome'
-              getUserInfo(sender, token)
             }
             ConfigSite.findOne({uid: user_env.uid, req: postback_data}).lean().then(configSite => {
               responseData = configSite.response
               requestType = configSite.rtype   
               // console.log(responseData)
+              getUserInfo(sender, token)
               sendActionTyping(sender, token, "typing_on")
               sendPostbackResponse(sender, token, responseData)
               sendActionTyping(sender, token, "typing_off")

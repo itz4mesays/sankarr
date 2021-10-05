@@ -32,11 +32,14 @@ const getUserInfo = (sender, token) => {
   request({
     method:"GET",
     url: userurl
-  }).then(function (response) {
-    // localStorage.setItem('storedUserInfo', response.body);
-    console.log("User Details "+response.body)
-    // return response.body;
-  }) 
+  }, function(error, response, body) {
+      if (error) {
+          console.log('Error sending messages: ', error)
+      } else if (response.body.error) {
+          console.log('Error: in sendQuickReplyMessage ', response.body.error)
+        console.log(response)
+      }
+  })
 }
 const sendQuickReplyMessage = (sender, token, data) => {
   messageData = {
