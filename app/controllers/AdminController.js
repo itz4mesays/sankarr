@@ -133,10 +133,10 @@ module.exports = {
               if (event.message.nlp){
                 console.log("NLP Data "+ JSON.stringify(event.message.nlp))
               }
-              if (event.message.nlp.phone_number || event.message.nlp.email ){
+              if (event.message.nlp.entities.phone_number || event.message.nlp.entities.email ){
                 console.log("NLP Fall ")
-                if (event.message.nlp.phone_number){ requestData="next_to_phone"}
-                if (event.message.nlp.email){ requestData="next_to_email"}
+                if (event.message.nlp.entities.phone_number){ requestData="next_to_phone"}
+                if (event.message.nlp.entities.email){ requestData="next_to_email"}
               }
               else{    
                 requestData = event.message.quick_reply.payload
