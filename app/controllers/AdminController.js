@@ -135,7 +135,7 @@ module.exports = {
           }
           else{
             requestData = event.message.text
-            console.log("Normal reply"
+            console.log("Normal reply")
           }
           ConfigSite.findOne({uid: user_env.uid, req: requestData}).lean().then(configSite => {
             console.log("Message"+ JSON.stringify(event.message))
