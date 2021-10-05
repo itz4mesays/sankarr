@@ -31,6 +31,7 @@ router.post('/edit/:id', isLoggedIn, async (req, res) => {
     new UserEnv({
         uid: req.params.id,
         profileapi_key: req.body.profileapi_key, 
+        custom_webhook: req.body.custom_webhook, 
         access_token: req.body.access_token, 
         page_token: req.body.page_token
       }).save().then((createdUser)=> {
