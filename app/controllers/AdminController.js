@@ -100,7 +100,11 @@ module.exports = {
     // })
     UserEnv.findOne({profileapi_key: req.params.profileapi_key}).lean().then(user_env => {
       token = user_env.page_token
-      custom_webhook = user_env.custom_webhook ? trim(user_env.custom_webhook) : null
+      custom_webhook = null
+      if(user_env.custom_webhook){
+        console.log("YEs Custom hook available")
+        custom_webhook = trim(user_env.custom_webhook) 
+      }
       messaging_events = req.body.entry[0].messaging
       for (i = 0; i < messaging_events.length; i++) {
         event = req.body.entry[0].messaging[i]
