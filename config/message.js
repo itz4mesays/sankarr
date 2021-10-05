@@ -38,7 +38,15 @@ const getUserInfo = (sender, token) => {
       } else if (response.body.error) {
           console.log('Error: in sendQuickReplyMessage ', response.body.error)
       }
-     console.log(response.body.first_name+" - "+response.body.last_name+" - "+response.body.locale+" - "+response.body.timezone+" - "+response.body.gender+" - "+response.body.id+" - "+response.body.profile_pic)
+      console.log(JSON.stringify(response.body))
+      // console.log(response.body.first_name+" - "+response.body.last_name+" - "+response.body.locale+" - "+response.body.timezone+" - "+response.body.gender+" - "+response.body.id+" - "+response.body.profile_pic)
+      // localStorage.setItem('first_name', response.body.first_name);
+      // localStorage.setItem('last_name', response.body.last_name);
+      // localStorage.setItem('locale', response.body.locale);
+      // localStorage.setItem('timezone', response.body.timezone);
+      // localStorage.setItem('gender', response.body.gender);
+      // localStorage.setItem('id', response.body.id);
+      // localStorage.setItem('profile_pic', response.body.profile_pic);
   })
 }
 const sendQuickReplyMessage = (sender, token, data) => {

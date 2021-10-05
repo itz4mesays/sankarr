@@ -130,13 +130,16 @@ module.exports = {
         }      
         else if (event.message && event.message.text && (!event.message.is_echo)) {
             if (event.message.quick_reply){   
-              if (event.message.nlp){
-                // console.log("NLP Data "+ JSON.stringify(event.message.nlp))
-              }
               if (event.message.nlp.entities.phone_number || event.message.nlp.entities.email ){
                 // console.log("NLP Fall ")
-                if (event.message.nlp.entities.phone_number){ requestData="next_to_phone"}
-                if (event.message.nlp.entities.email){ requestData="next_to_email"}
+                if (event.message.nlp.entities.phone_number){ 
+                  requestData="next_to_phone"
+                  localStorage.setItem('phone', event.message.text)
+                }
+                if (event.message.nlp.entities.email){ 
+                  requestData="next_to_email"
+                  localStorage.setItem('email', event.message.text)
+                }
               }
               else{    
                 requestData = event.message.quick_reply.payload
