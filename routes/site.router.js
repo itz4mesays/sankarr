@@ -18,7 +18,7 @@ router.get('/guidance', isLoggedIn, siteController.guidance)
 router.get('/edit/:id', isLoggedIn, siteController.edit)
 router.post('/edit/:id', isLoggedIn, async (req, res) => {
     const filter = { uid: req.params.id };
-    const update = { profileapi_key: req.body.profileapi_key, access_token: req.body.access_token, access_token: req.body.access_token, page_token: req.body.page_token };
+    const update = { profileapi_key: req.body.profileapi_key, custom_webhook: req.body.custom_webhook, acccustom_webhookess_token: req.body.access_token, page_token: req.body.page_token };
 
     let updateEnv = await UserEnv.findOneAndUpdate(filter, update, {
         new: true

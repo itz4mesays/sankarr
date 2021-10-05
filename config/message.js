@@ -111,17 +111,19 @@ const sendPostbackResponse = (sender, token, data) => {
       phone:phone
     }
   }
-  request({
-    url: 'https://api.encharge.io/v1/hooks/e889d6f2-5eb7-4581-a6e3-280a0585aad0',
-    method: 'POST',
-    json: messageData
-  }, function(error, response, body) {
-      if (error) {
-          console.log('Error sending messages: ', error)
-      } else if (response.body.error) {
-          console.log('Error: in sendQuickReplyMessage ', response.body.error)
-      }
-  })    
+  if(email){
+    request({
+      url: 'https://api.encharge.io/v1/hooks/e889d6f2-5eb7-4581-a6e3-280a0585aad0',
+      method: 'POST',
+      json: messageData
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending messages: ', error)
+        } else if (response.body.error) {
+            console.log('Error: in sendQuickReplyMessage ', response.body.error)
+        }
+    })    
+  }
   // sendAutoMessage(sender, token, data)
 }
 const sendButtonMessage = (sender, token, data) => {
