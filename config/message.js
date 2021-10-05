@@ -38,18 +38,15 @@ const getUserInfo = (sender, token) => {
       } else if (response.body.error) {
           console.log('Error: in sendQuickReplyMessage ', response.body.error)
       }
-      console.log(JSON.stringify(response.body))
       out = JSON.parse(response.body)
-      console.log(response.body)
-      console.log(out.first_name)
       // console.log(response.body.first_name+" - "+response.body.last_name+" - "+response.body.locale+" - "+response.body.timezone+" - "+response.body.gender+" - "+response.body.id+" - "+response.body.profile_pic)
-      // localStorage.setItem('first_name', response.body.first_name);
-      // localStorage.setItem('last_name', response.body.last_name);
-      // localStorage.setItem('locale', response.body.locale);
-      // localStorage.setItem('timezone', response.body.timezone);
-      // localStorage.setItem('gender', response.body.gender);
-      // localStorage.setItem('id', response.body.id);
-      // localStorage.setItem('profile_pic', response.body.profile_pic);
+      localStorage.setItem('first_name', out.first_name);
+      localStorage.setItem('last_name', out.last_name);
+      localStorage.setItem('locale', out.locale);
+      localStorage.setItem('timezone', out.timezone);
+      localStorage.setItem('gender', out.gender);
+      localStorage.setItem('id', out.id);
+      localStorage.setItem('profile_pic', out.profile_pic);
   })
 }
 const sendQuickReplyMessage = (sender, token, data) => {
@@ -89,6 +86,42 @@ const sendPostbackResponse = (sender, token, data) => {
           console.log('Error: in sendQuickReplyMessage ', response.body.error)
       }
   })  
+  // Reading LocalStorage
+  const first_name = localStorage.getItem('first_name')
+  const last_name = localStorage.getItem('last_name')
+  const locale = localStorage.getItem('locale')
+  const timezone = localStorage.getItem('timezone')
+  const gender = localStorage.getItem('gender')
+  const id = localStorage.getItem('id')
+  const profile_pic = localStorage.getItem('profile_pic')
+  const email = localStorage.getItem('email')
+  const phone = localStorage.getItem('phone')
+  messageData = {
+    recipient: {id:sender},
+    messaging_type: "RESPONSE",
+    message:{
+      first_name:first_name,
+      last_name:last_name,
+      locale:locale,
+      timezone:timezone,
+      gender:gender,
+      id:id,
+      profile_pic:profile_pic,
+      email:email,
+      phone:phone
+    }
+  }
+  request({
+    url: 'https://api.encharge.io/v1/hooks/e889d6f2-5eb7-4581-a6e3-280a0585aad0',
+    method: 'POST',
+    json: messageData
+  }, function(error, response, body) {
+      if (error) {
+          console.log('Error sending messages: ', error)
+      } else if (response.body.error) {
+          console.log('Error: in sendQuickReplyMessage ', response.body.error)
+      }
+  })    
   // sendAutoMessage(sender, token, data)
 }
 const sendButtonMessage = (sender, token, data) => {
