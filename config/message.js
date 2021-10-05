@@ -27,6 +27,7 @@ const sendActionTyping = (sender, token, data) => {
   })  
 }
 const getUserInfo = (sender, token) => {
+  console.log("User Details call")
   userurl = "https://graph.facebook.com/"+sender+"?fields=first_name,last_name,profile_pic,locale,timezone,gender,email&access_token="+token
   request({
     method:"GET",
@@ -34,7 +35,7 @@ const getUserInfo = (sender, token) => {
   }).then(function (response) {
     // localStorage.setItem('storedUserInfo', response.body);
     console.log("User Details "+response.body)
-    return response.body;
+    // return response.body;
   }) 
 }
 const sendQuickReplyMessage = (sender, token, data) => {

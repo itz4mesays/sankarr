@@ -114,7 +114,7 @@ module.exports = {
             postback_data = payload
             if(payload === 'GET_STARTED'){
               postback_data = 'welcome'
-              result = getUserInfo(sender, token)
+              getUserInfo(sender, token)
             }
             ConfigSite.findOne({uid: user_env.uid, req: postback_data}).lean().then(configSite => {
               responseData = configSite.response
