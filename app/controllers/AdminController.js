@@ -150,8 +150,8 @@ module.exports = {
                 // continue
             }
             if ((requestType === 'email') || (requestType === 'phone') || (requestType === 'yes_no')){
-                console.log(event.message.quick_reply.payload)
-                console.log(event.message.text)
+                // console.log(event.message.quick_reply.payload)
+                // console.log(event.message.text)
                 sendQuickReplyMessage(sender, token, responseData)
                 // continue
             }
