@@ -68,7 +68,7 @@ const sendQuickReplyMessage = (sender, token, data) => {
       }
   })
 }
-const sendPostbackResponse = (sender, token, data, custom_webhook, feedback) => {
+const sendPostbackResponse = (sender, token, data, custom_webhook, qn_type, rating, type, feedback_msg) => {
   messageData = {
     recipient: {id:sender},
     messaging_type: "RESPONSE",
@@ -110,7 +110,12 @@ const sendPostbackResponse = (sender, token, data, custom_webhook, feedback) => 
         profile_pic:profile_pic,
         email:email,
         phone:phone,
-        feedback: feedback
+        feedback: {
+          qn_type: qn_type, 
+          rating: rating, 
+          type: type, 
+          feedback_msg: feedback_msg
+        }
       }
     }
     if(email){
