@@ -68,7 +68,7 @@ const sendQuickReplyMessage = (sender, token, data) => {
       }
   })
 }
-const sendPostbackResponse = (sender, token, data, custom_webhook) => {
+const sendPostbackResponse = (sender, token, data, custom_webhook, feedback) => {
   messageData = {
     recipient: {id:sender},
     messaging_type: "RESPONSE",
@@ -109,12 +109,13 @@ const sendPostbackResponse = (sender, token, data, custom_webhook) => {
         id:id,
         profile_pic:profile_pic,
         email:email,
-        phone:phone
+        phone:phone,
+        feedback: feedback
       }
     }
     if(email){
       request({
-        url: 'https://api.encharge.io/v1/hooks/e889d6f2-5eb7-4581-a6e3-280a0585aad0',
+        url: custom_webhook,
         method: 'POST',
         json: messageData
       }, function(error, response, body) {
