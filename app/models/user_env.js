@@ -10,6 +10,11 @@ const UserEnvSchema = new mongoose.Schema({
         type: String,
         required: true,
         trim: true
+    },    
+    custom_webhook: {
+        type: String,
+        required: true,
+        trim: true
     },
     access_token: {
         type: String,

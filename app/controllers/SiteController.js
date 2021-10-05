@@ -96,6 +96,7 @@ module.exports = {
             if(!data){
               userEnv = {
                 profileapi_key: token,
+                custom_webhook: null,
                 access_token: null,
                 page_token: null,
                 status: 0
@@ -103,6 +104,7 @@ module.exports = {
             }else{
               userEnv = {
                 profileapi_key: data.profileapi_key,
+                custom_webhook: data.custom_webhook,
                 access_token: data.access_token,
                 page_token: data.page_token,
                 status: data.status
