@@ -37,8 +37,8 @@ const getUserInfo = (sender, token) => {
           console.log('Error sending messages: ', error)
       } else if (response.body.error) {
           console.log('Error: in sendQuickReplyMessage ', response.body.error)
-        console.log(response)
       }
+     console.log(response)
   })
 }
 const sendQuickReplyMessage = (sender, token, data) => {
