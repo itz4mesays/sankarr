@@ -38,7 +38,7 @@ const getUserInfo = (sender, token) => {
       } else if (response.body.error) {
           console.log('Error: in sendQuickReplyMessage ', response.body.error)
       }
-     console.log(response)
+     console.log(response.body.first_name+" - "+response.body.last_name+" - "+response.body.locale+" - "+response.body.timezone+" - "+response.body.gender+" - "+response.body.id+" - "+response.body.profile_pic)
   })
 }
 const sendQuickReplyMessage = (sender, token, data) => {
