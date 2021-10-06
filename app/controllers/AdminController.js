@@ -197,10 +197,10 @@ module.exports = {
           }).catch(err => {
               // return res.json({statusCode: 400, message: err})
               console.log("Message ERROR - Catch Exception"+ err)
-              responseData = {
-                  text:"Your message is not able to handle, please start the discussion again from bottom right menu."
-              }
-              sendPostbackResponse(sender, token, responseData)              
+              // responseData = {
+              //     text:"Your message is not able to handle, please start the discussion again from bottom right menu."
+              // }
+              // sendPostbackResponse(sender, token, responseData)              
               })
         }
         if(event.hasOwnProperty('messaging_feedback')){
