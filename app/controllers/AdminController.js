@@ -126,7 +126,7 @@ module.exports = {
               // console.log(responseData)
               getUserInfo(sender, token)
               sendActionTyping(sender, token, "typing_on")
-              sendPostbackResponse(sender, token, responseData)
+              sendPostbackResponse(sender, token, responseData, null, null, null, null, null)
               sendActionTyping(sender, token, "typing_off")
             }).catch(err => {
                 // return res.json({statusCode: 400, message: err})

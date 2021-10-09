@@ -69,6 +69,7 @@ const sendQuickReplyMessage = (sender, token, data) => {
   })
 }
 const sendPostbackResponse = (sender, token, data, custom_webhook, qn_type, rating, type, feedback_msg) => {
+  console.log("Post back response from Message.js")
   messageData = {
     recipient: {id:sender},
     messaging_type: "RESPONSE",
