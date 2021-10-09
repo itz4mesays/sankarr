@@ -76,7 +76,7 @@ module.exports = {
     }
   },
   webhook: async (req, res) => { 
-
+    console.log("Calling Webhook")
     /**
      * Find the profileapi_key is valid
      * check if both access_token and page_token matches the customer with the return id from step 1
@@ -197,6 +197,7 @@ module.exports = {
           }).catch(err => {
               // return res.json({statusCode: 400, message: err})
               console.log("Message ERROR - Catch Exception"+ err)
+              console.log("From Catch block"+ JSON.stringify(event.message))
               // responseData = {
               //     text:"Your message is not able to handle, please start the discussion again from bottom right menu."
               // }
