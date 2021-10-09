@@ -227,7 +227,7 @@ module.exports = {
     }).catch(err => {
         return res.json({statusCode: 400, message: err})
     })
-    return res.json({statusCode: 200})
+    // return res.json({statusCode: 200})
   },
   getwebhook: async (req, res) => {
     /**
