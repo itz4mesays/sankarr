@@ -102,7 +102,7 @@ module.exports = {
       token = user_env.page_token
       custom_webhook = null
       if(user_env.custom_webhook){
-        console.log("YEs Custom hook available")
+        // console.log("YEs Custom hook available")
         custom_webhook = user_env.custom_webhook.trim()
       }
       messaging_events = req.body.entry[0].messaging
