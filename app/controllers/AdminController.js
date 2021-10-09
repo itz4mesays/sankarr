@@ -133,95 +133,95 @@ module.exports = {
                 console.log("Postback ERROR - Catch Exception"+ err)
             })
         }      
-        else if (event.message && event.message.text && (!event.message.is_echo)) {
-            if (event.message.quick_reply){   
-              if (event.message.nlp.entities.phone_number || event.message.nlp.entities.email ){
-                // console.log("NLP Fall ")
-                if (event.message.nlp.entities.phone_number){ 
-                  requestData="next_to_phone"
-                  localStorage.setItem('phone', event.message.text)
-                }
-                if (event.message.nlp.entities.email){ 
-                  requestData="next_to_email"
-                  localStorage.setItem('email', event.message.text)
-                }
-              }
-              else{    
-                requestData = event.message.quick_reply.payload
-                // console.log("Quick reply")
-              }
-            }
-            else{
-              requestData = event.message.text
-              // console.log("Normal reply")
-            }
-          // console.log("requestData : "+ requestData)
-          ConfigSite.findOne({uid: user_env.uid, req: requestData}).lean().then(configSite => {
-            // console.log("Message"+ JSON.stringify(event.message))
-            responseData = configSite.response
-            requestType = configSite.rtype
-            if (requestType === 'text') {
-                sendTextMessage(sender, token, responseData.substring(0, 200))
-                // continue
-            }
-            if (requestType === 'button') {
-                sendButtonMessage(sender, token, responseData)
-                // continue
-            }
-            if ((requestType === 'email') || (requestType === 'phone') || (requestType === 'yes_no')){
-                // console.log(event.message.quick_reply.payload)
-                // console.log(event.message.text)
-                sendQuickReplyMessage(sender, token, responseData)
-                // continue
-            }
-            if (requestType === 'image') {
-                sendImageMessage(sender, token, responseData)
-                // continue
-            }
-            if (requestType === 'video') {
-                sendVideoMessage(sender, token, responseData)
-                // continue
-            }
-            if (requestType === 'feedback') {
-                sendFeedbackMessage(sender, token, responseData)
-                // continue
-            }
-            if (requestType === 'grid') {
-                sendGenericMessage(sender, token, responseData)
-                // continue
-            }
-            if (requestType === 'order') {
-                sendOrderMessage(sender, token, responseData)
-                // continue
-            }
-          }).catch(err => {
-              // return res.json({statusCode: 400, message: err})
-              console.log("Message ERROR - Catch Exception"+ err)
-              console.log("From Catch block"+ JSON.stringify(event.message))
-              // responseData = {
-              //     text:"Your message is not able to handle, please start the discussion again from bottom right menu."
-              // }
-              // sendPostbackResponse(sender, token, responseData)              
-              })
-        }
-        if(event.hasOwnProperty('messaging_feedback')){
-          // var replyMsg = '{"messaging_type": "RESPONSE","recipient": {"id": '+recipient+'},"message": {"text": "Your feedback received, Thanks for your feedback"}}';          
-          // sendTextMessage(sender, token, "Your feedback received, Thanks for your feedback")
-          responseData = {
-              text:"Your feedback received, Thanks for your feedback"
-          }
-          var feedback_collection= [];
-          qn_type=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.type
-          rating=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.payload
-          type=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.type
-          feedback_msg=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.payload
-          // feedback_collection.push(feedback)
-          sendPostbackResponse(sender, token, responseData, custom_webhook, qn_type, rating, type, feedback_msg)
-          // console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.type);
-          // console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.payload);
-          // console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.type);
-          // console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.payload);
-        }
+        // else if (event.message && event.message.text && (!event.message.is_echo)) {
+        //     if (event.message.quick_reply){   
+        //       if (event.message.nlp.entities.phone_number || event.message.nlp.entities.email ){
+        //         // console.log("NLP Fall ")
+        //         if (event.message.nlp.entities.phone_number){ 
+        //           requestData="next_to_phone"
+        //           localStorage.setItem('phone', event.message.text)
+        //         }
+        //         if (event.message.nlp.entities.email){ 
+        //           requestData="next_to_email"
+        //           localStorage.setItem('email', event.message.text)
+        //         }
+        //       }
+        //       else{    
+        //         requestData = event.message.quick_reply.payload
+        //         // console.log("Quick reply")
+        //       }
+        //     }
+        //     else{
+        //       requestData = event.message.text
+        //       // console.log("Normal reply")
+        //     }
+        //   // console.log("requestData : "+ requestData)
+        //   ConfigSite.findOne({uid: user_env.uid, req: requestData}).lean().then(configSite => {
+        //     // console.log("Message"+ JSON.stringify(event.message))
+        //     responseData = configSite.response
+        //     requestType = configSite.rtype
+        //     if (requestType === 'text') {
+        //         sendTextMessage(sender, token, responseData.substring(0, 200))
+        //         // continue
+        //     }
+        //     if (requestType === 'button') {
+        //         sendButtonMessage(sender, token, responseData)
+        //         // continue
+        //     }
+        //     if ((requestType === 'email') || (requestType === 'phone') || (requestType === 'yes_no')){
+        //         // console.log(event.message.quick_reply.payload)
+        //         // console.log(event.message.text)
+        //         sendQuickReplyMessage(sender, token, responseData)
+        //         // continue
+        //     }
+        //     if (requestType === 'image') {
+        //         sendImageMessage(sender, token, responseData)
+        //         // continue
+        //     }
+        //     if (requestType === 'video') {
+        //         sendVideoMessage(sender, token, responseData)
+        //         // continue
+        //     }
+        //     if (requestType === 'feedback') {
+        //         sendFeedbackMessage(sender, token, responseData)
+        //         // continue
+        //     }
+        //     if (requestType === 'grid') {
+        //         sendGenericMessage(sender, token, responseData)
+        //         // continue
+        //     }
+        //     if (requestType === 'order') {
+        //         sendOrderMessage(sender, token, responseData)
+        //         // continue
+        //     }
+        //   }).catch(err => {
+        //       // return res.json({statusCode: 400, message: err})
+        //       console.log("Message ERROR - Catch Exception"+ err)
+        //       console.log("From Catch block"+ JSON.stringify(event.message))
+        //       // responseData = {
+        //       //     text:"Your message is not able to handle, please start the discussion again from bottom right menu."
+        //       // }
+        //       // sendPostbackResponse(sender, token, responseData)              
+        //       })
+        // }
+        // if(event.hasOwnProperty('messaging_feedback')){
+        //   // var replyMsg = '{"messaging_type": "RESPONSE","recipient": {"id": '+recipient+'},"message": {"text": "Your feedback received, Thanks for your feedback"}}';          
+        //   // sendTextMessage(sender, token, "Your feedback received, Thanks for your feedback")
+        //   responseData = {
+        //       text:"Your feedback received, Thanks for your feedback"
+        //   }
+        //   var feedback_collection= [];
+        //   qn_type=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.type
+        //   rating=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.payload
+        //   type=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.type
+        //   feedback_msg=event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.payload
+        //   // feedback_collection.push(feedback)
+        //   sendPostbackResponse(sender, token, responseData, custom_webhook, qn_type, rating, type, feedback_msg)
+        //   // console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.type);
+        //   // console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.payload);
+        //   // console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.type);
+        //   // console.log(event.messaging_feedback.feedback_screens[0].questions.hauydmns8.follow_up.payload);
+        // }
       }
       res.sendStatus(200)            
     }).catch(err => {
