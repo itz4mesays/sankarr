@@ -135,13 +135,13 @@ module.exports = {
         }      
         else if (event.message && event.message.text && (!event.message.is_echo)) {
             if (event.message.quick_reply){   
-              if (event.message.nlp.entities.phone_number || event.message.nlp.entities.email || event.message.nlp.entities.wit$phone_number:phone_number || event.message.nlp.entities.wit$email:email){
+              if (event.message.nlp.entities.phone_number || event.message.nlp.entities.email || event.message.nlp.entities['wit$phone_number:phone_number'] || event.message.nlp.entities['wit$email:email']){
                 console.log("NLP Fall ")
-                if (event.message.nlp.entities.phone_number || event.message.nlp.entities.wit$phone_number:phone_number){ 
+                if (event.message.nlp.entities.phone_number || event.message.nlp.entities['wit$phone_number:phone_number']){ 
                   requestData="next_to_phone"
                   localStorage.setItem('phone', event.message.text)
                 }
-                if (event.message.nlp.entities.email || event.message.nlp.entities.wit$email:email){ 
+                if (event.message.nlp.entities.email || event.message.nlp.entities['wit$email:email']){ 
                   requestData="next_to_email"
                   localStorage.setItem('email', event.message.text)
                 }
