@@ -149,6 +149,7 @@ module.exports = {
               else{    
                 requestData = event.message.quick_reply.payload
                 console.log("Quick reply")
+                console.log("Message"+ JSON.stringify(event.message))
               }
             }
             else{
