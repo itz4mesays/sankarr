@@ -112,6 +112,8 @@ module.exports = {
         recipient = event.recipient.id
         // Check if the event is a message or postback and
         // pass the event to the appropriate handler function
+        console.log(JSON.stringify(event))
+        console.log(JSON.stringify(event.message))
         if (event.postback) {
             // console.log("Postback"+ JSON.stringify(event.postback))
             // Get the payload for the postback
