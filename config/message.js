@@ -158,6 +158,17 @@ const isEmailValid =(email) => {
 
     return true;
 }
+const isPhoneValid =(phone) => {
+    var phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+    if (!phone)
+        return false;
+
+    var valid = phoneRegex.test(phone);
+    if(!valid)
+        return false;
+
+    return true;
+}
 const sendButtonMessage = (sender, token, data) => {
     sendAutoMessage(sender, token, data)
 }
@@ -215,6 +226,7 @@ module.exports = {
     sendOrderMessage,
     sendQuickReplyMessage,
     sendAutoMessage,
-    isEmailValid
+    isEmailValid,
+    isPhoneValid
 }
 // module.exports.adminLogged = adminLogged

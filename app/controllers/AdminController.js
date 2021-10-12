@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const UserEnv = require('../models/user_env')
 const ConfigSite = require('../models/config_site')
-const { isEmailValid, getUserInfo, sendQuickReplyMessage, sendActionTyping, sendPostbackResponse, sendTextMessage, sendButtonMessage, sendImageMessage, sendVideoMessage, sendFeedbackMessage, sendGenericMessage, sendOrderMessage } = require('../../config/message');
+const { isPhoneValid, isEmailValid, getUserInfo, sendQuickReplyMessage, sendActionTyping, sendPostbackResponse, sendTextMessage, sendButtonMessage, sendImageMessage, sendVideoMessage, sendFeedbackMessage, sendGenericMessage, sendOrderMessage } = require('../../config/message');
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
   localStorage = new LocalStorage('./scratch');
@@ -162,7 +162,13 @@ module.exports = {
                 console.log("Valid Email")
               }
               else{
-                console.log("Not a Valid Email")
+                validPhone = isPhoneValid(requestData)
+                if(validPhone){
+                  console.log("Valid Phone")
+                }
+                else{
+                  console.log("Not a Valid phone")
+                }
               }
               console.log("Normal reply")
             }
