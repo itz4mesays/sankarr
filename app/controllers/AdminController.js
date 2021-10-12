@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const User = require('../models/user')
 const UserEnv = require('../models/user_env')
 const ConfigSite = require('../models/config_site')
-const { getUserInfo, sendQuickReplyMessage, sendActionTyping, sendPostbackResponse, sendTextMessage, sendButtonMessage, sendImageMessage, sendVideoMessage, sendFeedbackMessage, sendGenericMessage, sendOrderMessage } = require('../../config/message');
+const { isEmailValid, getUserInfo, sendQuickReplyMessage, sendActionTyping, sendPostbackResponse, sendTextMessage, sendButtonMessage, sendImageMessage, sendVideoMessage, sendFeedbackMessage, sendGenericMessage, sendOrderMessage } = require('../../config/message');
 if (typeof localStorage === "undefined" || localStorage === null) {
   var LocalStorage = require('node-localstorage').LocalStorage;
   localStorage = new LocalStorage('./scratch');
@@ -153,7 +153,15 @@ module.exports = {
               }
             }
             else{
+              // var emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
               requestData = event.message.text
+              validEmail = isEmailValid(requestData)
+              if(validEmail){
+                console.log("Valid Email")
+              }
+              else{
+                console.log("Not a Valid Email")
+              }
               console.log("Normal reply")
             }
           console.log("requestData : "+ requestData)
