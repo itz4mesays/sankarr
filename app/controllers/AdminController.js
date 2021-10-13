@@ -160,14 +160,14 @@ module.exports = {
               validEmail = isEmailValid(requestData)
               if(validEmail){
                 // console.log("Valid Email")
-                requestData="next_to_email"
                 localStorage.setItem('email', requestData)
+                requestData="next_to_email"
               }
               else{
                 validPhone = isPhoneValid(requestData)
                 if(validPhone){
-                  requestData="next_to_phone"
                   localStorage.setItem('phone', requestData)
+                  requestData="next_to_phone"
                   // console.log("Valid Phone")
                 }
                 // else{
