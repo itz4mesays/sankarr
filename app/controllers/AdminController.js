@@ -159,16 +159,20 @@ module.exports = {
               requestData = event.message.text
               validEmail = isEmailValid(requestData)
               if(validEmail){
-                console.log("Valid Email")
+                // console.log("Valid Email")
+                requestData="next_to_email"
+                localStorage.setItem('email', requestData)
               }
               else{
                 validPhone = isPhoneValid(requestData)
                 if(validPhone){
-                  console.log("Valid Phone")
+                  requestData="next_to_phone"
+                  localStorage.setItem('phone', requestData)
+                  // console.log("Valid Phone")
                 }
-                else{
-                  console.log("Not a Valid phone")
-                }
+                // else{
+                //   console.log("Not a Valid phone")
+                // }
               }
               console.log("Normal reply")
             }
