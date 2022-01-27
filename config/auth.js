@@ -7,7 +7,8 @@ const User = require('../app/models/user')
 
 // callbackURL: 'http://localhost:5000/google/callback',
 // callbackURL: 'https://shanapps.herokuapp.com/google/callback',
-
+// Old Gooleclientid : 519677727794-a8on9qhfu4p6t04kpp0jghsv9162qi1h.apps.googleusercontent.com
+// Old Goole Secret: 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
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET,
